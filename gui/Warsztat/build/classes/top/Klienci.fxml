@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab text="Umów na diagnozę">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextArea layoutX="236.0" layoutY="145.0" prefHeight="200.0" prefWidth="200.0" />
+                  <DatePicker layoutX="236.0" layoutY="370.0" prefHeight="25.0" prefWidth="200.0" />
+                  <ComboBox layoutX="236.0" layoutY="97.0" prefHeight="25.0" prefWidth="200.0" />
+                  <Label layoutX="285.0" layoutY="80.0" text="Wybierz samochód" />
+                  <Label layoutX="297.0" layoutY="128.0" text="Opisz problem" />
+                  <Label layoutX="301.0" layoutY="353.0" text="Wybierz date" />
+                  <Button layoutX="310.0" layoutY="408.0" mnemonicParsing="false" text="Umów" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Umów na przegląd / usługę">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ComboBox layoutX="100.0" layoutY="135.0" prefWidth="150.0" />
+                  <Label layoutX="149.0" layoutY="70.0" text="Przeglądy" />
+                  <Label layoutX="508.0" layoutY="70.0" text="Usługi" />
+                  <ComboBox layoutX="450.0" layoutY="135.0" prefWidth="150.0" />
+                  <ComboBox layoutX="450.0" layoutY="184.0" prefWidth="150.0" />
+                  <DatePicker layoutX="450.0" layoutY="236.0" prefHeight="25.0" prefWidth="150.0" />
+                  <DatePicker layoutX="100.0" layoutY="184.0" prefHeight="25.0" prefWidth="150.0" />
+                  <Label layoutX="124.0" layoutY="118.0" text="Wybierz samochód" />
+                  <Label layoutX="140.0" layoutY="167.0" text="Wybierz date" />
+                  <Label layoutX="474.0" layoutY="118.0" text="Wybierz samochód" />
+                  <Label layoutX="484.0" layoutY="167.0" text="Wybierz usługę" />
+                  <Label layoutX="490.0" layoutY="219.0" text="Wybierz datę" />
+                  <Button layoutX="149.0" layoutY="224.0" mnemonicParsing="false" text="Umów" />
+                  <Button layoutX="499.0" layoutY="276.0" mnemonicParsing="false" text="Umów" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Dodaj samochód">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField layoutX="276.0" layoutY="125.0" />
+                  <TextField layoutX="276.0" layoutY="170.0" />
+                  <TextField layoutX="276.0" layoutY="215.0" />
+                  <TextField layoutX="276.0" layoutY="260.0" />
+                  <Label layoutX="235.0" layoutY="129.0" text="Marka" />
+                  <Label layoutX="235.0" layoutY="174.0" text="Model" />
+                  <Label layoutX="175.0" layoutY="219.0" text="Pojemność silnika" />
+                  <Label layoutX="242.0" layoutY="264.0" text="Rok" />
+                  <Button layoutX="373.0" layoutY="305.0" mnemonicParsing="false" text="Dodaj" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Historia">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="14.0" layoutY="31.0" prefHeight="115.0" prefWidth="672.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <TableView layoutX="14.0" layoutY="178.0" prefHeight="115.0" prefWidth="672.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <TableView layoutX="14.0" layoutY="323.0" prefHeight="115.0" prefWidth="672.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="325.0" layoutY="14.0" text="Diagnozy" />
+                  <Label layoutX="324.0" layoutY="161.0" text="Przeglądy" />
+                  <Label layoutX="333.0" layoutY="306.0" text="Usługi" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Edytuj dane">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField layoutX="72.0" layoutY="115.0" />
+                  <TextField layoutX="72.0" layoutY="165.0" />
+                  <TextField layoutX="72.0" layoutY="215.0" />
+                  <TextField layoutX="463.0" layoutY="165.0" />
+                  <TextField layoutX="463.0" layoutY="215.0" />
+                  <TextField layoutX="463.0" layoutY="265.0" />
+                  <TextField layoutX="463.0" layoutY="315.0" />
+                  <ComboBox layoutX="463.0" layoutY="115.0" prefWidth="150.0" />
+                  <Label layoutX="89.0" layoutY="56.0" text="Zmień dane osobowe" />
+                  <Label layoutX="135.0" layoutY="98.0" text="Imię" />
+                  <Label layoutX="121.0" layoutY="148.0" text="Nazwisko" />
+                  <Label layoutX="105.0" layoutY="198.0" text="Numer telefonu" />
+                  <Label layoutX="469.0" layoutY="56.0" text="Zmień dane samochodów" />
+                  <Label layoutX="521.0" layoutY="148.0" text="Marka" />
+                  <Label layoutX="520.0" layoutY="198.0" text="Model" />
+                  <Label layoutX="492.0" layoutY="248.0" text="Pojemność silnika" />
+                  <Label layoutX="529.0" layoutY="298.0" text="Rok" />
+                  <Button layoutX="121.0" layoutY="257.0" mnemonicParsing="false" text="Zmień" />
+                  <Button layoutX="514.0" layoutY="354.0" mnemonicParsing="false" text="Zmień" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Wyloguj">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
