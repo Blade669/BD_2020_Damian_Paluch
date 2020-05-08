@@ -12,7 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.KlienciController">
   <tabs>
     <Tab text="Umów na diagnozę">
       <content>
@@ -70,27 +70,33 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="31.0" prefHeight="115.0" prefWidth="672.0">
+                  <TableView fx:id="diagnozy" layoutX="14.0" layoutY="14.0" prefHeight="140.0" prefWidth="672.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="markaD" prefWidth="110.0" text="Marka" />
+                      <TableColumn fx:id="modelD" prefWidth="120.0" text="Model" />
+                        <TableColumn fx:id="uwagiD" prefWidth="185.0" text="Uwagi" />
+                        <TableColumn fx:id="uwagiMechD" prefWidth="185.0" text="Uwagi mechanika" />
+                        <TableColumn fx:id="dataD" prefWidth="70.0" text="Data" />
                     </columns>
                   </TableView>
-                  <TableView layoutX="14.0" layoutY="178.0" prefHeight="115.0" prefWidth="672.0">
+                  <TableView fx:id="uslugi" layoutX="14.0" layoutY="317.0" prefHeight="140.0" prefWidth="672.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="markaU" prefWidth="120.0" text="Marka" />
+                        <TableColumn fx:id="modelU" prefWidth="140.0" text="Model" />
+                        <TableColumn fx:id="uslugaU" prefWidth="339.0" text="Nazwa usługi" />
+                        <TableColumn fx:id="dataU" prefWidth="71.0" text="Data" />
                     </columns>
                   </TableView>
-                  <TableView layoutX="14.0" layoutY="323.0" prefHeight="115.0" prefWidth="672.0">
+                  <TableView fx:id="przeglady" layoutX="14.0" layoutY="166.0" prefHeight="140.0" prefWidth="672.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="markaP" prefWidth="110.0" text="Marka" />
+                      <TableColumn fx:id="modelP" prefWidth="120.0" text="Model" />
+                        <TableColumn fx:id="wynikP" prefWidth="75.0" text="Wynik" />
+                        <TableColumn fx:id="dataP" prefWidth="70.0" text="Data" />
+                        <TableColumn fx:id="waznoscP" prefWidth="70.0" text="Ważność" />
+                        <TableColumn fx:id="uwagiP" prefWidth="225.0" text="Uwagi" />
                     </columns>
                   </TableView>
-                  <Label layoutX="325.0" layoutY="14.0" text="Diagnozy" />
-                  <Label layoutX="324.0" layoutY="161.0" text="Przeglądy" />
-                  <Label layoutX="333.0" layoutY="306.0" text="Usługi" />
                </children></AnchorPane>
         </content>
       </Tab>
@@ -101,11 +107,11 @@
                   <TextField layoutX="72.0" layoutY="115.0" />
                   <TextField layoutX="72.0" layoutY="165.0" />
                   <TextField layoutX="72.0" layoutY="215.0" />
-                  <TextField layoutX="463.0" layoutY="165.0" />
-                  <TextField layoutX="463.0" layoutY="215.0" />
-                  <TextField layoutX="463.0" layoutY="265.0" />
-                  <TextField layoutX="463.0" layoutY="315.0" />
-                  <ComboBox layoutX="463.0" layoutY="115.0" prefWidth="150.0" />
+                  <TextField fx:id="markaE" layoutX="463.0" layoutY="165.0" />
+                  <TextField fx:id="modelE" layoutX="463.0" layoutY="215.0" />
+                  <TextField fx:id="pojSilnikaE" layoutX="463.0" layoutY="265.0" />
+                  <TextField fx:id="rokE" layoutX="463.0" layoutY="315.0" />
+                  <ComboBox fx:id="wybierzModel" layoutX="463.0" layoutY="115.0" onAction="#actionModel" prefWidth="150.0" />
                   <Label layoutX="89.0" layoutY="56.0" text="Zmień dane osobowe" />
                   <Label layoutX="135.0" layoutY="98.0" text="Imię" />
                   <Label layoutX="121.0" layoutY="148.0" text="Nazwisko" />
@@ -117,10 +123,11 @@
                   <Label layoutX="529.0" layoutY="298.0" text="Rok" />
                   <Button layoutX="121.0" layoutY="257.0" mnemonicParsing="false" text="Zmień" />
                   <Button layoutX="514.0" layoutY="354.0" mnemonicParsing="false" text="Zmień" />
+                  <ComboBox fx:id="wybierzMarke" layoutX="463.0" layoutY="86.0" onAction="#actionMarka" prefWidth="150.0" />
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="Wyloguj">
+      <Tab fx:id="wyloguj" text="Wyloguj">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>

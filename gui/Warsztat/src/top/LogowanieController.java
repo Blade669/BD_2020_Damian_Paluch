@@ -6,10 +6,9 @@ import java.text.ParseException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -19,17 +18,40 @@ import javafx.scene.control.Button;
 public class LogowanieController implements Initializable 
 {
     @FXML
-    private Button registerButton;
-@FXML
+    private Button registerButton, loginButton;
+    @FXML
+    private ComboBox logAs;
+    @FXML
     private void actionRejestracja(ActionEvent event) throws ParseException, IOException
     {
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("RejestracjaKlienta.fxml"));
-        Parent root1 = (Parent)fxmlloader.load();
+        SceneMenager.renderScene("rejestracja");
+    }
+    @FXML
+    private void actionZaloguj(ActionEvent event) throws ParseException, IOException
+    {
+        int id = logAs.getSelectionModel().getSelectedIndex();
+        if(id == 0)
+        {
+            SceneMenager.renderScene("klienci");
+        }
+        
+        else if(id == 1)
+        {
+            SceneMenager.renderScene("mechanicy");
+        }
+        
+        else
+        {
+            SceneMenager.renderScene("administratorzy");
+        }
     }
     
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        logAs.getItems().addAll("Klient","Mechanik","Administrator");
+        logAs.getSelectionModel().selectFirst();
     }    
     
 }

@@ -7,7 +7,10 @@ package top;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tab;
 
 /**
  * FXML Controller class
@@ -16,12 +19,16 @@ import javafx.fxml.Initializable;
  */
 public class AdministratorzyController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private ComboBox comboDiagnozy, comboPrzeglady, comboUslugi;
+    @FXML
+    private Tab edytujDane;
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        comboDiagnozy.getItems().add("gg");
+        comboDiagnozy.getSelectionModel().selectFirst();
     }    
     
 }

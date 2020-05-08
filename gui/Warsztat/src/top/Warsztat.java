@@ -5,6 +5,8 @@
  */
 package top;
 
+import java.io.IOException;
+import java.sql.Connection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,14 +22,17 @@ public class Warsztat extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("Logowanie.fxml"));
-
         
-        Scene scene = new Scene(root);
+        SceneMenager.setStage(primaryStage);
+        SceneMenager.addScene("logowanie", "/top/Logowanie.fxml");
+        SceneMenager.addScene("rejestracja", "/top/RejestracjaKlienta.fxml");
+        SceneMenager.addScene("klienci", "/top/Klienci.fxml");
+        SceneMenager.addScene("mechanicy", "/top/Mechanicy.fxml");
+        SceneMenager.addScene("administratorzy", "/top/Administratorzy.fxml");
+        SceneMenager.addScene("diagnozy", "/top/Diagnozy.fxml");
         
-        primaryStage.setTitle("Warsztat - logowanie");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        SceneMenager.renderScene("logowanie");
+    
     }
 
     public static void main(String[] args) {

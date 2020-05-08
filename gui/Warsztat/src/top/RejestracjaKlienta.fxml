@@ -8,15 +8,21 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.RejestracjaKlientaController">
    <children>
-      <TextField fx:id="loginField" layoutX="276.0" layoutY="178.0" />
-      <PasswordField fx:id="passwordField" layoutX="276.0" layoutY="218.0" />
-      <PasswordField fx:id="passwordField1" layoutX="276.0" layoutY="258.0" />
-      <Label fx:id="passwordError" layoutX="434.0" layoutY="262.0" text="Hasła są różne!" />
-      <Button fx:id="registerButton" layoutX="363.0" layoutY="298.0" mnemonicParsing="false" text="Rejestruj" />
-      <Label layoutX="241.0" layoutY="182.0" text="Login" />
-      <Label layoutX="241.0" layoutY="222.0" text="Hasło" />
-      <Label layoutX="196.0" layoutY="262.0" text="Powtórz hasło" />
-      <Label fx:id="loginError" layoutX="431.0" layoutY="182.0" text="Login jest zajęty" />
-      <Button fx:id="goBack" layoutX="14.0" layoutY="461.0" mnemonicParsing="false" text="Powrót" />
+      <TextField fx:id="loginField" layoutX="276.0" layoutY="100.0" />
+      <PasswordField fx:id="passwordField1" layoutX="276.0" layoutY="140.0" />
+      <PasswordField fx:id="passwordField2" layoutX="276.0" layoutY="180.0" />
+      <Label fx:id="passwordError" layoutX="435.0" layoutY="182.0" text="Hasła są różne!" textFill="RED" />
+      <Button fx:id="registerButton" layoutX="363.0" layoutY="380.0" mnemonicParsing="false" text="Rejestruj" />
+      <Label layoutX="242.0" layoutY="104.0" text="Login" />
+      <Label layoutX="242.0" layoutY="144.0" text="Hasło" />
+      <Label layoutX="197.0" layoutY="182.0" text="Powtórz hasło" />
+      <Label fx:id="loginError" layoutX="432.0" layoutY="104.0" text="Login jest zajęty" textFill="RED" />
+      <Button layoutX="14.0" layoutY="461.0" mnemonicParsing="false" onAction="#actionPowrot" text="Powrót" />
+      <TextField fx:id="nrField" layoutX="276.0" layoutY="340.0" />
+      <TextField fx:id="imieField" layoutX="276.0" layoutY="260.0" />
+      <TextField fx:id="nazwiskoField" layoutX="276.0" layoutY="300.0" />
+      <Label layoutX="246.0" layoutY="264.0" text="Imię" />
+      <Label layoutX="221.0" layoutY="304.0" text="Nazwisko" />
+      <Label layoutX="185.0" layoutY="344.0" text="Numer telefonu" />
    </children>
 </AnchorPane>
