@@ -1,0 +1,11 @@
+Do panelu klienta:
+1)klient
+  klient
+2)klient2
+  klient2
+
+Do pozostałych przechodzi bez loginu i hasła
+
+Do bazy:
+C##Warsztat
+admin

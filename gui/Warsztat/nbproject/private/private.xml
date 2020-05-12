@@ -5,10 +5,9 @@
         <group>
             <file>file:/C:/Users/h/Documents/NetBeansProjects/Warsztat/src/top/LogowanieController.java</file>
             <file>file:/C:/Users/h/Documents/NetBeansProjects/Warsztat/src/top/KlienciController.java</file>
-            <file>file:/C:/Users/h/Documents/NetBeansProjects/Warsztat/src/top/Warsztat.java</file>
             <file>file:/C:/Users/h/Documents/NetBeansProjects/Warsztat/src/entity/Samochody.java</file>
-            <file>file:/C:/Users/h/Documents/NetBeansProjects/Warsztat/src/top/MechanicyController.java</file>
-            <file>file:/C:/Users/h/Documents/NetBeansProjects/Warsztat/src/top/SceneMenager.java</file>
+            <file>file:/C:/Users/h/Documents/NetBeansProjects/Warsztat/src/entity/Klienci_uzytkownicy.java</file>
+            <file>file:/C:/Users/h/Documents/NetBeansProjects/Warsztat/src/entity/Klienci.java</file>
         </group>
     </open-files>
 </project-private>

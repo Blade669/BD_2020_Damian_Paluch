@@ -18,13 +18,12 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea layoutX="236.0" layoutY="145.0" prefHeight="200.0" prefWidth="200.0" />
-                  <DatePicker layoutX="236.0" layoutY="370.0" prefHeight="25.0" prefWidth="200.0" />
-                  <ComboBox layoutX="236.0" layoutY="97.0" prefHeight="25.0" prefWidth="200.0" />
-                  <Label layoutX="285.0" layoutY="80.0" text="Wybierz samochód" />
+                  <TextArea fx:id="uwagiKlienta" layoutX="136.0" layoutY="145.0" prefHeight="200.0" prefWidth="400.0" />
+                  <DatePicker fx:id="wybierzDateD" layoutX="236.0" layoutY="370.0" prefHeight="25.0" prefWidth="200.0" />
+                  <ComboBox fx:id="wybierzSamochodD" layoutX="236.0" layoutY="97.0" onAction="#actionIdSamochoduD" prefHeight="25.0" prefWidth="200.0" />
                   <Label layoutX="297.0" layoutY="128.0" text="Opisz problem" />
                   <Label layoutX="301.0" layoutY="353.0" text="Wybierz date" />
-                  <Button layoutX="310.0" layoutY="408.0" mnemonicParsing="false" text="Umów" />
+                  <Button layoutX="310.0" layoutY="408.0" mnemonicParsing="false" onAction="#actionDodajDiagnoze" text="Umów" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -32,20 +31,18 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ComboBox layoutX="100.0" layoutY="135.0" prefWidth="150.0" />
+                  <ComboBox fx:id="wybierzSamochodP" layoutX="100.0" layoutY="135.0" onAction="#actionIdSamochoduP" prefWidth="150.0" />
                   <Label layoutX="149.0" layoutY="70.0" text="Przeglądy" />
                   <Label layoutX="508.0" layoutY="70.0" text="Usługi" />
-                  <ComboBox layoutX="450.0" layoutY="135.0" prefWidth="150.0" />
-                  <ComboBox layoutX="450.0" layoutY="184.0" prefWidth="150.0" />
-                  <DatePicker layoutX="450.0" layoutY="236.0" prefHeight="25.0" prefWidth="150.0" />
-                  <DatePicker layoutX="100.0" layoutY="184.0" prefHeight="25.0" prefWidth="150.0" />
-                  <Label layoutX="124.0" layoutY="118.0" text="Wybierz samochód" />
+                  <ComboBox fx:id="wybierzSamochodU" layoutX="450.0" layoutY="135.0" onAction="#actionIdSamochoduU" prefWidth="150.0" />
+                  <ComboBox fx:id="wybierzUsluge" layoutX="450.0" layoutY="184.0" onAction="#actionIdUslugiU" prefWidth="150.0" />
+                  <DatePicker fx:id="wybierzDateU" layoutX="450.0" layoutY="236.0" prefHeight="25.0" prefWidth="150.0" />
+                  <DatePicker fx:id="wybierzDateP" layoutX="100.0" layoutY="184.0" prefHeight="25.0" prefWidth="150.0" />
                   <Label layoutX="140.0" layoutY="167.0" text="Wybierz date" />
-                  <Label layoutX="474.0" layoutY="118.0" text="Wybierz samochód" />
                   <Label layoutX="484.0" layoutY="167.0" text="Wybierz usługę" />
                   <Label layoutX="490.0" layoutY="219.0" text="Wybierz datę" />
-                  <Button layoutX="149.0" layoutY="224.0" mnemonicParsing="false" text="Umów" />
-                  <Button layoutX="499.0" layoutY="276.0" mnemonicParsing="false" text="Umów" />
+                  <Button layoutX="149.0" layoutY="224.0" mnemonicParsing="false" onAction="#actionDodajPrzeglad" text="Umów" />
+                  <Button layoutX="499.0" layoutY="276.0" mnemonicParsing="false" onAction="#actionDodajUsluge" text="Umów" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -53,15 +50,15 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField layoutX="276.0" layoutY="125.0" />
-                  <TextField layoutX="276.0" layoutY="170.0" />
-                  <TextField layoutX="276.0" layoutY="215.0" />
-                  <TextField layoutX="276.0" layoutY="260.0" />
+                  <TextField fx:id="markaDod" layoutX="276.0" layoutY="125.0" />
+                  <TextField fx:id="modelDod" layoutX="276.0" layoutY="170.0" />
+                  <TextField fx:id="pojSilnikaDod" layoutX="276.0" layoutY="215.0" />
+                  <TextField fx:id="rokDod" layoutX="276.0" layoutY="260.0" />
                   <Label layoutX="235.0" layoutY="129.0" text="Marka" />
                   <Label layoutX="235.0" layoutY="174.0" text="Model" />
                   <Label layoutX="175.0" layoutY="219.0" text="Pojemność silnika" />
                   <Label layoutX="242.0" layoutY="264.0" text="Rok" />
-                  <Button layoutX="373.0" layoutY="305.0" mnemonicParsing="false" text="Dodaj" />
+                  <Button layoutX="373.0" layoutY="305.0" mnemonicParsing="false" onAction="#actionDodajSamochod" text="Dodaj" />
                </children>
             </AnchorPane>
         </content>
@@ -100,13 +97,13 @@
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="Edytuj dane">
+      <Tab fx:id="edytujDane" text="Edytuj dane">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane fx:id="edytujDane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField layoutX="72.0" layoutY="115.0" />
-                  <TextField layoutX="72.0" layoutY="165.0" />
-                  <TextField layoutX="72.0" layoutY="215.0" />
+                  <TextField fx:id="imieE" editable="false" layoutX="72.0" layoutY="115.0" />
+                  <TextField fx:id="nazwiskoE" editable="false" layoutX="72.0" layoutY="165.0" />
+                  <TextField fx:id="nrTelE" editable="false" layoutX="72.0" layoutY="215.0" />
                   <TextField fx:id="markaE" layoutX="463.0" layoutY="165.0" />
                   <TextField fx:id="modelE" layoutX="463.0" layoutY="215.0" />
                   <TextField fx:id="pojSilnikaE" layoutX="463.0" layoutY="265.0" />
@@ -121,9 +118,11 @@
                   <Label layoutX="520.0" layoutY="198.0" text="Model" />
                   <Label layoutX="492.0" layoutY="248.0" text="Pojemność silnika" />
                   <Label layoutX="529.0" layoutY="298.0" text="Rok" />
-                  <Button layoutX="121.0" layoutY="257.0" mnemonicParsing="false" text="Zmień" />
-                  <Button layoutX="514.0" layoutY="354.0" mnemonicParsing="false" text="Zmień" />
+                  <Button layoutX="172.0" layoutY="253.0" mnemonicParsing="false" onAction="#actionEdytujDane" text="Zapisz" />
+                  <Button layoutX="561.0" layoutY="354.0" mnemonicParsing="false" onAction="#actionEdytujSamochod" text="Zmień" />
                   <ComboBox fx:id="wybierzMarke" layoutX="463.0" layoutY="86.0" onAction="#actionMarka" prefWidth="150.0" />
+                  <Button layoutX="72.0" layoutY="253.0" mnemonicParsing="false" onAction="#actionOdblokujDane" text="Edytuj" />
+                  <Button layoutX="463.0" layoutY="354.0" mnemonicParsing="false" onAction="#actionUsunSamochod" text="Usuń" />
                </children></AnchorPane>
         </content>
       </Tab>

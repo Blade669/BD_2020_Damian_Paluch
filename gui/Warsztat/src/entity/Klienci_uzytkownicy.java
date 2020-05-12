@@ -9,11 +9,14 @@ package entity;
  *
  * @author h
  */
-public class Klienci_uzytkownicy 
-{
-    private int id;
+public class Klienci_uzytkownicy {
+
+    private static int id;
     private String login;
     private String haslo;
+
+    public Klienci_uzytkownicy() {
+    }
 
     public Klienci_uzytkownicy(int id, String login, String haslo) {
         this.id = id;
@@ -21,6 +24,7 @@ public class Klienci_uzytkownicy
         this.haslo = haslo;
     }
 
+    
     public String getHaslo() {
         return haslo;
     }
@@ -29,7 +33,7 @@ public class Klienci_uzytkownicy
         this.haslo = haslo;
     }
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 
@@ -44,5 +48,5 @@ public class Klienci_uzytkownicy
     public void setLogin(String login) {
         this.login = login;
     }
-    
+
 }

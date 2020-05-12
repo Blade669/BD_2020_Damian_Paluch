@@ -11,7 +11,7 @@ package entity;
  */
 public class Samochody {
 
-    private int id;
+    private static int id;
     private String marka;
     private String model;
     private int poj_silnika;
@@ -20,6 +20,10 @@ public class Samochody {
     private String imie;
     private String nazwisko;
 
+    public Samochody()
+    {
+        
+    }
     public Samochody(int id, String marka, String model, int poj_silnika, int rok, int id_klienta, String imie, String nazwisko) {
         this.id = id;
         this.marka = marka;
@@ -31,7 +35,7 @@ public class Samochody {
         this.nazwisko = nazwisko;
     }
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 
