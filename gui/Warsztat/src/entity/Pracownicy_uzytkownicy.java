@@ -11,7 +11,7 @@ package entity;
  */
 public class Pracownicy_uzytkownicy 
 {
-    private int id;
+    private static int id;
     private String login;
     private String haslo;
     private int id_funkcji;
@@ -31,7 +31,7 @@ public class Pracownicy_uzytkownicy
         this.id_funkcji = id_funkcji;
     }
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 

@@ -1,11 +1,11 @@
 --------------------------------------------------------
---  File created - wtorek-maja-12-2020   
+--  File created - œroda-maja-13-2020   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence DIAGNOZY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."DIAGNOZY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."DIAGNOZY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence FUNKCJA_SEQ
 --------------------------------------------------------
@@ -15,12 +15,12 @@
 --  DDL for Sequence KLIENCI_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."KLIENCI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."KLIENCI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence KLIENCI_UZYTKOWNICY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."KLIENCI_UZYTKOWNICY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."KLIENCI_UZYTKOWNICY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence PRACOWNICY_SEQ
 --------------------------------------------------------
@@ -35,17 +35,17 @@
 --  DDL for Sequence PRZEGLADY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."PRZEGLADY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."PRZEGLADY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 27 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence SAMOCHODY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence SAMOCHODY_USLUGI_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence USLUGI_SEQ
 --------------------------------------------------------
@@ -143,7 +143,7 @@
    (	"ID" NUMBER, 
 	"LOGIN" VARCHAR2(30 BYTE), 
 	"HASLO" VARCHAR2(30 BYTE), 
-	"ID_FUKCJI" NUMBER
+	"ID_FUNKCJI" NUMBER
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
  NOCOMPRESS LOGGING
@@ -161,7 +161,7 @@
 	"DATA" DATE, 
 	"DATA_WAZNOSCI" DATE, 
 	"ID_MECHANIKA" NUMBER, 
-	"CZY_POZYTYWNY" NUMBER(1,0), 
+	"WYNIK" VARCHAR2(9 BYTE), 
 	"UWAGI" VARCHAR2(50 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
@@ -222,7 +222,7 @@
   TABLESPACE "USERS" ;
 REM INSERTING into C##WARSZTAT.DIAGNOZY
 SET DEFINE OFF;
-Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('1','1','Na przegladzie stwierdzono uszkodzony amortyzator: lewy tylny do wymiany.',null,null,to_date('20/03/13','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('29','24','cff',null,null,to_date('20/05/01','RR/MM/DD'));
 REM INSERTING into C##WARSZTAT.FUNKCJA
 SET DEFINE OFF;
 Insert into C##WARSZTAT.FUNKCJA (ID,NAZWA) values ('1','Mechanik');
@@ -235,20 +235,22 @@ REM INSERTING into C##WARSZTAT.KLIENCI_UZYTKOWNICY
 SET DEFINE OFF;
 Insert into C##WARSZTAT.KLIENCI_UZYTKOWNICY (ID,LOGIN,HASLO) values ('1','klient','klient');
 Insert into C##WARSZTAT.KLIENCI_UZYTKOWNICY (ID,LOGIN,HASLO) values ('2','klient2','klient2');
+Insert into C##WARSZTAT.KLIENCI_UZYTKOWNICY (ID,LOGIN,HASLO) values ('25','fff','ffff');
 REM INSERTING into C##WARSZTAT.PRACOWNICY
 SET DEFINE OFF;
 Insert into C##WARSZTAT.PRACOWNICY (ID,IMIE,NAZWISKO,NR_TEL,ADRES,ID_UZYTKOWNIKA) values ('1','Wojciech','Skrzypek','756473846','Rzeszow Podwislocze 12','1');
 Insert into C##WARSZTAT.PRACOWNICY (ID,IMIE,NAZWISKO,NR_TEL,ADRES,ID_UZYTKOWNIKA) values ('2','Karolina','Szpila','657483759','Lezajsk Rynek 4','2');
 REM INSERTING into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY
 SET DEFINE OFF;
-Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUKCJI) values ('1','mechanik','mechanik','1');
-Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUKCJI) values ('2','administrator','administrator','2');
+Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUNKCJI) values ('1','m','m','1');
+Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUNKCJI) values ('2','administrator','administrator','2');
 REM INSERTING into C##WARSZTAT.PRZEGLADY
 SET DEFINE OFF;
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,CZY_POZYTYWNY,UWAGI) values ('1','2',to_date('20/05/02','RR/MM/DD'),to_date('21/05/06','RR/MM/DD'),'1','1',null);
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,CZY_POZYTYWNY,UWAGI) values ('2','1',to_date('20/01/18','RR/MM/DD'),null,'1','0','Wyciek z amortyzatora');
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,CZY_POZYTYWNY,UWAGI) values ('3','2',to_date('44/04/04','RR/MM/DD'),null,null,null,null);
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,CZY_POZYTYWNY,UWAGI) values ('4','24',to_date('20/05/22','RR/MM/DD'),null,null,null,null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('8','2',to_date('20/05/08','RR/MM/DD'),to_date('25/05/23','RR/MM/DD'),'1',null,null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('10','2',to_date('06/05/25','RR/MM/DD'),null,null,null,null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('9','24',to_date('20/05/14','RR/MM/DD'),to_date('15/05/14','RR/MM/DD'),'1',null,'fwsefsd');
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('12','2',to_date('06/05/25','RR/MM/DD'),null,null,null,null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('7','2',to_date('55/11/11','RR/MM/DD'),null,null,null,null);
 REM INSERTING into C##WARSZTAT.SAMOCHODY
 SET DEFINE OFF;
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('1','LEXUS','IS 200','1988','1998','1');
@@ -263,6 +265,10 @@ SET DEFINE OFF;
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('2','2','1','1',to_date('20/05/01','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('1','1','1','1',to_date('20/05/05','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('3','2','2','1',to_date('20/04/24','RR/MM/DD'));
+Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('23','1','2','1',to_date('20/04/29','RR/MM/DD'));
+Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('21','2','23',null,to_date('30/05/11','RR/MM/DD'));
+Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('24','1','23',null,to_date('20/04/29','RR/MM/DD'));
+Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('25','2','23',null,to_date('20/05/05','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('13','1','25',null,to_date('17/05/20','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('14','1','2',null,to_date('04/05/13','RR/MM/DD'));
 REM INSERTING into C##WARSZTAT.USLUGI
@@ -504,9 +510,7 @@ FOR EACH ROW
 BEGIN
   <<COLUMN_SEQUENCES>>
   BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT PRACOWNICY_UZYTKOWNICY_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
+    NULL;
   END COLUMN_SEQUENCES;
 END;
 /
@@ -521,13 +525,28 @@ FOR EACH ROW
 BEGIN
   <<COLUMN_SEQUENCES>>
   BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "C##WARSZTAT"."PRZEGLADY_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PRZEGLADY_TRG1
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."PRZEGLADY_TRG1" 
+BEFORE INSERT ON PRZEGLADY 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
     IF INSERTING AND :NEW.ID IS NULL THEN
       SELECT PRZEGLADY_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
     END IF;
   END COLUMN_SEQUENCES;
 END;
 /
-ALTER TRIGGER "C##WARSZTAT"."PRZEGLADY_TRG" ENABLE;
+ALTER TRIGGER "C##WARSZTAT"."PRZEGLADY_TRG1" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger SAMOCHODY_TRG
 --------------------------------------------------------
@@ -639,12 +658,16 @@ END edytuj_dane;
 --  DDL for Package KLIENT_REJESTRACJA
 --------------------------------------------------------
 
-  CREATE OR REPLACE EDITIONABLE PACKAGE "C##WARSZTAT"."KLIENT_REJESTRACJA" AS 
+  CREATE OR REPLACE EDITIONABLE PACKAGE "C##WARSZTAT"."KLIENT_REJESTRACJA" AS
+    PROCEDURE rejestruj_klienta (
+        ku_login    IN  klienci_uzytkownicy.login%TYPE,
+        ku_haslo    IN  klienci_uzytkownicy.haslo%TYPE,
+        k_imie      IN  klienci.imie%TYPE,
+        k_nazwisko  IN  klienci.nazwisko%TYPE,
+        k_nr_tel    IN  klienci.nr_tel%TYPE
+    );
 
-  PROCEDURE REJESTRUJ_KLIENTA(K_IMIE IN KLIENCI.IMIE%TYPE, K_NAZWISKO IN KLIENCI.NAZWISKO%TYPE,  
-    K_NR_TEL IN KLIENCI.NR_TEL%TYPE, K_ID_UZYTKOWNIKA IN KLIENCI.ID_UZYTKOWNIKA%TYPE);
-
-END KLIENT_REJESTRACJA;
+END klient_rejestracja;
 
 /
 --------------------------------------------------------
@@ -652,13 +675,45 @@ END KLIENT_REJESTRACJA;
 --------------------------------------------------------
 
   CREATE OR REPLACE EDITIONABLE PACKAGE "C##WARSZTAT"."LOGOWANIE" AS
-    PROCEDURE sprawdz_dane (
+    PROCEDURE klient_logowanie (
         k_login  IN  klienci_uzytkownicy.login%TYPE,
         k_haslo  IN  klienci_uzytkownicy.haslo%TYPE
+    );
+    
+    PROCEDURE mechanik_logowanie (
+        m_login  IN  pracownicy_uzytkownicy.login%TYPE,
+        m_haslo  IN  pracownicy_uzytkownicy.haslo%TYPE
     );
 
 
 END logowanie;
+
+/
+--------------------------------------------------------
+--  DDL for Package OBSLUZ_DANE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE PACKAGE "C##WARSZTAT"."OBSLUZ_DANE" AS
+    PROCEDURE obsluz_diagnoze (
+        d_id            IN  diagnozy.id%TYPE,
+        d_uwagi         IN  diagnozy.uwagi_mechanika%TYPE,
+        d_id_mechanika  IN  diagnozy.id_mechanika%TYPE
+    );
+
+    PROCEDURE obsluz_przeglad (
+        p_id             IN  przeglady.id%TYPE,
+        p_data_waznosci  IN  przeglady.data_waznosci%TYPE,
+        p_id_mechanika   IN  przeglady.id_mechanika%TYPE,
+        p_wynik          IN  przeglady.wynik%TYPE,
+        p_uwagi          IN  przeglady.uwagi%TYPE
+    );
+
+    PROCEDURE obsluz_usluge (
+        u_id            IN  samochody_uslugi.id%TYPE,
+        u_id_mechanika  IN  samochody_uslugi.id_mechanika%TYPE
+    );
+
+END obsluz_dane;
 
 /
 --------------------------------------------------------
@@ -751,7 +806,7 @@ END usun_dane;
             data
         ) VALUES (
             d_id_samochodu,
-            d_uwagi_klienta,
+            upper(d_uwagi_klienta),
             to_char(d_data, 'YYYY-MM-DD')
         );
 
@@ -777,8 +832,8 @@ END dodaj_dane;
     BEGIN
         UPDATE samochody
         SET
-            samochody.marka = s_marka,
-            samochody.model = s_model,
+            samochody.marka = upper(s_marka),
+            samochody.model = upper(s_model),
             samochody.poj_silnika = s_poj_silnika,
             samochody.rok = s_rok
         WHERE
@@ -796,9 +851,9 @@ END dodaj_dane;
     BEGIN
         UPDATE klienci
         SET
-            klienci.imie = k_imie,
-            klienci.nazwisko = k_nazwisko,
-            klienci.nr_tel = k_nr_tel
+            klienci.imie = upper(k_imie),
+            klienci.nazwisko = upper(k_nazwisko),
+            klienci.nr_tel = upper(k_nr_tel)
         WHERE
             klienci.id = k_id;
 
@@ -812,16 +867,46 @@ END edytuj_dane;
 --  DDL for Package Body KLIENT_REJESTRACJA
 --------------------------------------------------------
 
-  CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."KLIENT_REJESTRACJA" AS
+  CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."KLIENT_REJESTRACJA" AS PROCEDURE rejestruj_klienta (
+    ku_login    IN  klienci_uzytkownicy.login%TYPE,
+    ku_haslo    IN  klienci_uzytkownicy.haslo%TYPE,
+    k_imie      IN  klienci.imie%TYPE,
+    k_nazwisko  IN  klienci.nazwisko%TYPE,
+    k_nr_tel    IN  klienci.nr_tel%TYPE
+) IS 
+    zmienna NUMBER;
+BEGIN
+    INSERT INTO klienci_uzytkownicy (
+        login,
+        haslo
+    ) VALUES (
+        ku_login,
+        ku_haslo
+    );
 
-  PROCEDURE REJESTRUJ_KLIENTA(K_IMIE IN KLIENCI.IMIE%TYPE, K_NAZWISKO IN KLIENCI.NAZWISKO%TYPE,  
-    K_NR_TEL IN KLIENCI.NR_TEL%TYPE, K_ID_UZYTKOWNIKA IN KLIENCI.ID_UZYTKOWNIKA%TYPE) AS
-  BEGIN
-    INSERT INTO KLIENCI (IMIE,NAZWISKO,NR_TEL,ID_UZYTKOWNIKA) VALUES (UPPER(K_IMIE), UPPER(K_NAZWISKO), K_NR_TEL, K_ID_UZYTKOWNIKA);
+    SELECT
+        id
+    INTO zmienna
+    FROM
+        klienci_uzytkownicy
+        where login = ku_login and haslo = ku_haslo;
+
+    INSERT INTO klienci (
+        imie,
+        nazwisko,
+        nr_tel,
+        id_uzytkownika
+    ) VALUES (
+        k_imie,
+        k_nazwisko,
+        k_nr_tel,
+        zmienna
+    );
+
+    COMMIT;
     NULL;
-  END REJESTRUJ_KLIENTA;
-
-END KLIENT_REJESTRACJA;
+END rejestruj_klienta;
+END klient_rejestracja;
 
 /
 --------------------------------------------------------
@@ -829,15 +914,16 @@ END KLIENT_REJESTRACJA;
 --------------------------------------------------------
 
   CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."LOGOWANIE" AS
-    PROCEDURE sprawdz_dane (
+
+    PROCEDURE klient_logowanie (
         k_login  IN  klienci_uzytkownicy.login%TYPE,
         k_haslo  IN  klienci_uzytkownicy.haslo%TYPE
     ) AS
-   zmienna varchar2(1);
+        zmienna VARCHAR2(1);
     BEGIN
-        SELECT '1'
-            into zmienna
-
+        SELECT
+            '1'
+        INTO zmienna
         FROM
             klienci_uzytkownicy
         WHERE
@@ -847,10 +933,89 @@ END KLIENT_REJESTRACJA;
     EXCEPTION
         WHEN no_data_found THEN
             raise_application_error(-20000, 'Bledne dane!');
-    END sprawdz_dane;
+    END klient_logowanie;
 
+    PROCEDURE mechanik_logowanie (
+        m_login  IN  pracownicy_uzytkownicy.login%TYPE,
+        m_haslo  IN  pracownicy_uzytkownicy.haslo%TYPE
+    ) AS
+        zmienna VARCHAR2(1);
+    BEGIN
+        SELECT
+            '1'
+        INTO zmienna
+        FROM
+            pracownicy_uzytkownicy
+        WHERE
+                pracownicy_uzytkownicy.login = m_login
+            AND pracownicy_uzytkownicy.haslo = m_haslo
+            AND id_funkcji = 1;
+
+    EXCEPTION
+        WHEN no_data_found THEN
+            raise_application_error(-20000, 'Bledne dane!');
+    END mechanik_logowanie;
 
 END logowanie;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body OBSLUZ_DANE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."OBSLUZ_DANE" AS
+
+    PROCEDURE obsluz_diagnoze (
+        d_id            IN  diagnozy.id%TYPE,
+        d_uwagi         IN  diagnozy.uwagi_mechanika%TYPE,
+        d_id_mechanika  IN  diagnozy.id_mechanika%TYPE
+    ) AS
+    BEGIN
+        UPDATE diagnozy
+        SET
+            uwagi_mechanika = upper(d_uwagi),
+            id_mechanika = d_id_mechanika
+        WHERE
+            diagnozy.id = d_id;
+
+        NULL;
+    END obsluz_diagnoze;
+
+    PROCEDURE obsluz_przeglad (
+        p_id             IN  przeglady.id%TYPE,
+        p_data_waznosci  IN  przeglady.data_waznosci%TYPE,
+        p_id_mechanika   IN  przeglady.id_mechanika%TYPE,
+        p_wynik          IN  przeglady.wynik%TYPE,
+        p_uwagi          IN  przeglady.uwagi%TYPE
+    ) AS
+    BEGIN
+        UPDATE przeglady
+        SET
+            data_waznosci = p_data_waznosci,
+            id_mechanika = p_id_mechanika,
+            wynik = upper(p_wynik),
+            uwagi = upper(p_uwagi)
+        WHERE
+            przeglady.id = p_id;
+
+        NULL;
+    END obsluz_przeglad;
+
+    PROCEDURE obsluz_usluge (
+        u_id            IN  samochody_uslugi.id%TYPE,
+        u_id_mechanika  IN  samochody_uslugi.id_mechanika%TYPE
+    ) AS
+    BEGIN
+        UPDATE samochody_uslugi
+        SET
+            id_mechanika = u_id_mechanika
+        WHERE
+            samochody_uslugi.id = u_id;
+
+        NULL;
+    END obsluz_usluge;
+
+END obsluz_dane;
 
 /
 --------------------------------------------------------
@@ -890,7 +1055,7 @@ END usun_dane;
 --  Constraints for Table PRACOWNICY_UZYTKOWNICY
 --------------------------------------------------------
 
-  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("ID_FUKCJI" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("ID_FUNKCJI" NOT NULL ENABLE);
   ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("ID" NOT NULL ENABLE);
   ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("LOGIN" NOT NULL ENABLE);
   ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("HASLO" NOT NULL ENABLE);
@@ -1029,7 +1194,6 @@ END usun_dane;
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS"  ENABLE;
-  ALTER TABLE "C##WARSZTAT"."KLIENCI" MODIFY ("ID_UZYTKOWNIKA" NOT NULL ENABLE);
   ALTER TABLE "C##WARSZTAT"."KLIENCI" ADD CONSTRAINT "KLIENCI_UK1" UNIQUE ("ID_UZYTKOWNIKA")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -1060,7 +1224,7 @@ END usun_dane;
 --  Ref Constraints for Table PRACOWNICY_UZYTKOWNICY
 --------------------------------------------------------
 
-  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" ADD CONSTRAINT "PRACOWNICY_UZYTKOWNICY_FK1" FOREIGN KEY ("ID_FUKCJI")
+  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" ADD CONSTRAINT "PRACOWNICY_UZYTKOWNICY_FK1" FOREIGN KEY ("ID_FUNKCJI")
 	  REFERENCES "C##WARSZTAT"."FUNKCJA" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table PRZEGLADY

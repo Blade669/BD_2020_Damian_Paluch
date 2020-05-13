@@ -20,6 +20,7 @@ public class SceneMenager {
     private static Stage stage;
     private static Hashtable<String,String> view = new Hashtable<>();
     
+    
     public static void addScene(String name,String path)throws IOException{
         view.put(name,path);
     }
@@ -34,6 +35,8 @@ public class SceneMenager {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+            stage.setResizable(false);
+            stage.setTitle("Warsztat");
         } catch (IOException ex) {
             System.err.println("Nie znaleziono pliku XML");
         }catch(RuntimeException ex){

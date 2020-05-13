@@ -18,18 +18,18 @@ public class Przeglady
     private Date data;
     private Date data_waznosci;
     private int id_mechanika;
-    private int czy_pozytywny;
+    private String wynik;
     private String uwagi;
     private String marka;
     private String model;
 
-    public Przeglady(int id, int id_samochodu, Date data, Date data_waznosci, int id_mechanika, int czy_pozytywny, String uwagi, String marka, String model) {
+    public Przeglady(int id, int id_samochodu, Date data, Date data_waznosci, int id_mechanika, String wynik, String uwagi, String marka, String model) {
         this.id = id;
         this.id_samochodu = id_samochodu;
         this.data = data;
         this.data_waznosci = data_waznosci;
         this.id_mechanika = id_mechanika;
-        this.czy_pozytywny = czy_pozytywny;
+        this.wynik = wynik;
         this.uwagi = uwagi;
         this.marka = marka;
         this.model = model;
@@ -75,12 +75,12 @@ public class Przeglady
         this.id_mechanika = id_mechanika;
     }
 
-    public int getCzy_pozytywny() {
-        return czy_pozytywny;
+    public String getWynik() {
+        return wynik;
     }
 
-    public void setCzy_pozytywny(int czy_pozytywny) {
-        this.czy_pozytywny = czy_pozytywny;
+    public void setWynik(String wynik) {
+        this.wynik = wynik;
     }
 
     public String getUwagi() {

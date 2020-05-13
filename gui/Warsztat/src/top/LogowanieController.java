@@ -1,6 +1,7 @@
 package top;
 
 import entity.Klienci_uzytkownicy;
+import entity.Pracownicy_uzytkownicy;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.CallableStatement;
@@ -44,7 +45,7 @@ public class LogowanieController implements Initializable {
             try {
                 Connection con = getConnection();
 
-                CallableStatement cstmt = con.prepareCall("call logowanie.sprawdz_dane(?,?)");
+                CallableStatement cstmt = con.prepareCall("call logowanie.klient_logowanie(?,?)");
 
                 cstmt.setString(1, login.getText());
                 cstmt.setString(2, haslo.getText());
@@ -74,7 +75,38 @@ public class LogowanieController implements Initializable {
 
             }
         } else if (id == 1) {
-            SceneMenager.renderScene("mechanicy");
+            try {
+                Connection con = getConnection();
+
+                CallableStatement cstmt = con.prepareCall("call logowanie.mechanik_logowanie(?,?)");
+
+                cstmt.setString(1, login.getText());
+                cstmt.setString(2, haslo.getText());
+
+                cstmt.executeUpdate();
+
+                cstmt = con.prepareCall("select * from pracownicy_uzytkownicy\n"
+                        + "where login = ?\n"
+                        + "and haslo = ?");
+                cstmt.setString(1, login.getText());
+                cstmt.setString(2, haslo.getText());
+                ResultSet rs = cstmt.executeQuery();
+                Pracownicy_uzytkownicy mechanik = null;
+                while (rs.next()) {
+                    mechanik = new Pracownicy_uzytkownicy(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+                    mechanik.setId(rs.getInt(1));
+                }
+
+                SceneMenager.renderScene("mechanicy");
+            } catch (SQLException ex) {
+                if (ex.getErrorCode() == 20000) {
+                    Alert bad = new Alert(Alert.AlertType.INFORMATION);
+                    bad.setTitle("Błąd logowania");
+                    bad.setHeaderText("Podałeś niepoprawne dane");
+                    bad.showAndWait();
+                }
+
+            }
         } else {
             SceneMenager.renderScene("administratorzy");
         }

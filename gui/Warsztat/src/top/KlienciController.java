@@ -281,32 +281,34 @@ public class KlienciController implements Initializable {
 
     @FXML
     private void actionEdytujSamochod(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_samochod(?,?,?,?,?)");
-            cstmt.setInt(1, idSamochodu);
-            cstmt.setString(2, markaE.getText());
-            cstmt.setString(3, modelE.getText());
-            cstmt.setString(4, pojSilnikaE.getText());
-            cstmt.setString(5, rokE.getText());
-            cstmt.executeQuery();
+        if (!markaE.getText().isEmpty() && !modelE.getText().isEmpty() && !pojSilnikaE.getText().isEmpty() && !rokE.getText().isEmpty()) {
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_samochod(?,?,?,?,?)");
+                cstmt.setInt(1, idSamochodu);
+                cstmt.setString(2, markaE.getText());
+                cstmt.setString(3, modelE.getText());
+                cstmt.setString(4, pojSilnikaE.getText());
+                cstmt.setString(5, rokE.getText());
+                cstmt.executeQuery();
 
-            wybierzMarke.setValue("Wybierz marke");
-            wybierzModel.getItems().clear();
-            markaE.clear();
-            modelE.clear();
-            pojSilnikaE.clear();
-            rokE.clear();
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Zmiana danych");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                wybierzMarke.setValue("Wybierz marke");
+                wybierzModel.getItems().clear();
+                markaE.clear();
+                modelE.clear();
+                pojSilnikaE.clear();
+                rokE.clear();
+                Alert good = new Alert(Alert.AlertType.INFORMATION);
+                good.setTitle("Zmiana danych");
+                good.setHeaderText("Operacja powiodła się");
+                good.showAndWait();
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Zmiana danych");
-            bad.setHeaderText("Operacja nie powiodła się");
-            bad.showAndWait();
+            } catch (SQLException ex) {
+                Alert bad = new Alert(Alert.AlertType.INFORMATION);
+                bad.setTitle("Zmiana danych");
+                bad.setHeaderText("Operacja nie powiodła się");
+                bad.showAndWait();
+            }
         }
     }
 
@@ -318,7 +320,6 @@ public class KlienciController implements Initializable {
             cstmt.setInt(1, idSamochodu);
             cstmt.executeQuery();
 
-            
             wybierzModel.getItems().clear();
             markaE.clear();
             modelE.clear();
@@ -348,86 +349,91 @@ public class KlienciController implements Initializable {
             bad.showAndWait();
         }
 
-
     }
 
     @FXML
     private void actionDodajSamochod(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_samochod(?,?,?,?,?)");
-            cstmt.setString(1, markaDod.getText());
-            cstmt.setString(2, modelDod.getText());
-            cstmt.setInt(3, Integer.parseInt(pojSilnikaDod.getText()));
-            cstmt.setInt(4, Integer.parseInt(rokDod.getText()));
-            cstmt.setInt(5, idKlienta);
-            cstmt.executeQuery();
-            con.close();
+        if (!markaDod.getText().isEmpty() && !modelDod.getText().isEmpty() && !pojSilnikaDod.getText().isEmpty() && !rokDod.getText().isEmpty()) {
+            if (pojSilnikaDod.getText().matches("^[0-9]+$") && rokDod.getText().matches("^[0-9]+$")) {
+                try {
+                    Connection con = getConnection();
+                    CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_samochod(?,?,?,?,?)");
+                    cstmt.setString(1, markaDod.getText());
+                    cstmt.setString(2, modelDod.getText());
+                    cstmt.setInt(3, Integer.parseInt(pojSilnikaDod.getText()));
+                    cstmt.setInt(4, Integer.parseInt(rokDod.getText()));
+                    cstmt.setInt(5, idKlienta);
+                    cstmt.executeQuery();
 
-            markaDod.clear();
-            modelDod.clear();
-            pojSilnikaDod.clear();
-            rokDod.clear();
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Dodawanie samochodu");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                    markaDod.clear();
+                    modelDod.clear();
+                    pojSilnikaDod.clear();
+                    rokDod.clear();
+                    Alert good = new Alert(Alert.AlertType.INFORMATION);
+                    good.setTitle("Dodawanie samochodu");
+                    good.setHeaderText("Operacja powiodła się");
+                    good.showAndWait();
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Dodawanie samochodu");
-            bad.setHeaderText("Operacja nie powiodła się");
-            bad.showAndWait();
-        }
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("select marka, model from samochody where id_klienta = ?");
-            cstmt.setInt(1, idKlienta);
-            ResultSet rs = cstmt.executeQuery();
-            wybierzMarke.getItems().clear();
-            wybierzSamochodP.getItems().clear();
-            wybierzSamochodU.getItems().clear();
-            wybierzSamochodD.getItems().clear();
-            while (rs.next()) {
+                } catch (SQLException ex) {
 
-                if (!wybierzMarke.getItems().contains(rs.getString("marka"))) {
-                    wybierzMarke.getItems().add(rs.getString("marka"));
+                    Alert bad = new Alert(Alert.AlertType.INFORMATION);
+                    bad.setTitle("Dodawanie samochodu");
+                    bad.setHeaderText("Operacja nie powiodła się");
+                    bad.showAndWait();
                 }
-                wybierzMarke.setValue("Wybierz marke");
-                wybierzSamochodP.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
-                wybierzSamochodP.setValue("Wybierz samochód");
-                wybierzSamochodU.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
-                wybierzSamochodU.setValue("Wybierz samochód");
-                wybierzSamochodD.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
-                wybierzSamochodD.setValue("Wybierz samochód");
+                try {
+                    Connection con = getConnection();
+                    CallableStatement cstmt = con.prepareCall("select marka, model from samochody where id_klienta = ?");
+                    cstmt.setInt(1, idKlienta);
+                    ResultSet rs = cstmt.executeQuery();
+                    wybierzMarke.getItems().clear();
+                    wybierzSamochodP.getItems().clear();
+                    wybierzSamochodU.getItems().clear();
+                    wybierzSamochodD.getItems().clear();
+                    while (rs.next()) {
 
+                        if (!wybierzMarke.getItems().contains(rs.getString("marka"))) {
+                            wybierzMarke.getItems().add(rs.getString("marka"));
+                        }
+                        wybierzMarke.setValue("Wybierz marke");
+                        wybierzSamochodP.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                        wybierzSamochodP.setValue("Wybierz samochód");
+                        wybierzSamochodU.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                        wybierzSamochodU.setValue("Wybierz samochód");
+                        wybierzSamochodD.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                        wybierzSamochodD.setValue("Wybierz samochód");
+
+                    }
+                } catch (SQLException ed) {
+                    ed.printStackTrace();
+                }
             }
-        } catch (SQLException ed) {
-            ed.printStackTrace();
         }
     }
 
     @FXML
     private void actionEdytujDane(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_dane_klienta(?,?,?,?)");
-            cstmt.setInt(1, idKlienta);
-            cstmt.setString(2, imieE.getText());
-            cstmt.setString(3, nazwiskoE.getText());
-            cstmt.setString(4, nrTelE.getText());
-            cstmt.executeQuery();
+        if (!imieE.getText().isEmpty() && !nazwiskoE.getText().isEmpty() && !nrTelE.getText().isEmpty()) {
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_dane_klienta(?,?,?,?)");
+                cstmt.setInt(1, idKlienta);
+                cstmt.setString(2, imieE.getText());
+                cstmt.setString(3, nazwiskoE.getText());
+                cstmt.setString(4, nrTelE.getText());
+                cstmt.executeQuery();
 
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Zmiana danych");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                Alert good = new Alert(Alert.AlertType.INFORMATION);
+                good.setTitle("Zmiana danych");
+                good.setHeaderText("Operacja powiodła się");
+                good.showAndWait();
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Zmiana danych");
-            bad.setHeaderText("Wprowadzono błędne dane");
-            bad.showAndWait();
+            } catch (SQLException ex) {
+                Alert bad = new Alert(Alert.AlertType.INFORMATION);
+                bad.setTitle("Zmiana danych");
+                bad.setHeaderText("Wprowadzono błędne dane");
+                bad.showAndWait();
+            }
         }
     }
 
@@ -440,72 +446,135 @@ public class KlienciController implements Initializable {
 
     @FXML
     private void actionDodajUsluge(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_usluge(?,?,?)");
-            cstmt.setInt(1, idUslugi);
-            cstmt.setInt(2, idSamochoduU);
-            cstmt.setString(3, wybierzDateU.getValue().toString());
-            cstmt.executeQuery();
+        if (!wybierzSamochodU.getSelectionModel().isEmpty() && !wybierzUsluge.getSelectionModel().isEmpty() && wybierzDateU.getValue() != null) {
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_usluge(?,?,?)");
+                cstmt.setInt(1, idUslugi);
+                cstmt.setInt(2, idSamochoduU);
+                cstmt.setString(3, wybierzDateU.getValue().toString());
+                cstmt.executeQuery();
 
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Dodaj usługę");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                Alert good = new Alert(Alert.AlertType.INFORMATION);
+                good.setTitle("Dodaj usługę");
+                good.setHeaderText("Operacja powiodła się");
+                good.showAndWait();
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Dodaj usługę");
-            bad.setHeaderText("Wprowadzono błędne dane");
-            bad.showAndWait();
+            } catch (SQLException ex) {
+                Alert bad = new Alert(Alert.AlertType.INFORMATION);
+                bad.setTitle("Dodaj usługę");
+                bad.setHeaderText("Wprowadzono błędne dane");
+                bad.showAndWait();
+            }
+
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("select su.*, s.marka, s.model, u.nazwa\n"
+                        + "from samochody s, samochody_uslugi su, uslugi u\n"
+                        + "where s.id_klienta = ? and s.id = su.id_samochodu and u.id = su.id_uslugi and rownum = 1\n"
+                        + "order by su.id desc");
+                cstmt.setInt(1, idKlienta);
+
+                ResultSet rs = cstmt.executeQuery();
+                while (rs.next()) {
+                    Samochody_uslugi nowa = new Samochody_uslugi(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                    uslugi.getItems().add(nowa);
+                }
+
+                con.close();
+
+            } catch (SQLException ed) {
+                ed.printStackTrace();
+            }
         }
     }
 
     @FXML
     private void actionDodajPrzeglad(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_przeglad(?,?)");
-            cstmt.setInt(1, idSamochoduP);
-            cstmt.setString(2, wybierzDateP.getValue().toString());
-            cstmt.executeQuery();
+        if (!wybierzSamochodP.getSelectionModel().isEmpty() && wybierzDateP.getValue() != null) {
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_przeglad(?,?)");
+                cstmt.setInt(1, idSamochoduP);
+                cstmt.setString(2, wybierzDateP.getValue().toString());
+                cstmt.executeQuery();
 
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Dodaj przegląd");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                Alert good = new Alert(Alert.AlertType.INFORMATION);
+                good.setTitle("Dodaj przegląd");
+                good.setHeaderText("Operacja powiodła się");
+                good.showAndWait();
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Dodaj przegląd");
-            bad.setHeaderText("Wprowadzono błędne dane");
-            bad.showAndWait();
+            } catch (SQLException ex) {
+                Alert bad = new Alert(Alert.AlertType.INFORMATION);
+                bad.setTitle("Dodaj przegląd");
+                bad.setHeaderText("Wprowadzono błędne dane");
+                bad.showAndWait();
+            }
+
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("select p.*, s.marka, s.model\n"
+                        + "from samochody s, przeglady p\n"
+                        + "where s.id = p.id_samochodu and s.id_klienta = ? and rownum = 1\n"
+                        + "order by p.id desc");
+                cstmt.setInt(1, idKlienta);
+                ResultSet rs = cstmt.executeQuery();
+
+                while (rs.next()) {
+                    Przeglady nowa = new Przeglady(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                    przeglady.getItems().add(nowa);
+                }
+
+                con.close();
+
+            } catch (SQLException ed) {
+                ed.printStackTrace();
+            }
         }
     }
 
     @FXML
     private void actionDodajDiagnoze(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_diagnoze(?,?,?)");
-            cstmt.setInt(1, idSamochoduD);
-            System.out.println(idSamochoduD);
-            cstmt.setString(2, uwagiKlienta.getText());
-            System.out.println(uwagiKlienta.getText());
-            cstmt.setString(3, wybierzDateD.getValue().toString());
-            System.out.println(wybierzDateD.getValue().toString());
-            cstmt.executeQuery();
+        if (!wybierzSamochodD.getSelectionModel().isEmpty() && wybierzDateD.getValue() != null) {
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_diagnoze(?,?,?)");
+                cstmt.setInt(1, idSamochoduD);
+                cstmt.setString(2, uwagiKlienta.getText());
+                cstmt.setString(3, wybierzDateD.getValue().toString());
+                cstmt.executeQuery();
 
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Dodaj diagnoze");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                Alert good = new Alert(Alert.AlertType.INFORMATION);
+                good.setTitle("Dodaj diagnoze");
+                good.setHeaderText("Operacja powiodła się");
+                good.showAndWait();
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Dodaj diagnoze");
-            bad.setHeaderText("Wprowadzono błędne dane");
-            bad.showAndWait();
+            } catch (SQLException ex) {
+                Alert bad = new Alert(Alert.AlertType.INFORMATION);
+                bad.setTitle("Dodaj diagnoze");
+                bad.setHeaderText("Wprowadzono błędne dane");
+                bad.showAndWait();
+            }
+
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("select d.*, s.marka, s.model\n"
+                        + "from diagnozy d, samochody s\n"
+                        + "where s.id = d.id_samochodu\n"
+                        + "and s.id_klienta = ? and rownum = 1\n"
+                        + "order by d.id desc");
+                cstmt.setInt(1, idKlienta);
+                ResultSet rs = cstmt.executeQuery();
+                while (rs.next()) {
+                    Diagnozy nowa = new Diagnozy(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8));
+                    diagnozy.getItems().add(nowa);
+                }
+
+                con.close();
+
+            } catch (SQLException ed) {
+                ed.printStackTrace();
+            }
         }
     }
 
@@ -513,7 +582,6 @@ public class KlienciController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         idKlienta = Klienci_uzytkownicy.getId();
-        System.out.println(idKlienta);
 
         wyloguj.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
@@ -563,7 +631,7 @@ public class KlienciController implements Initializable {
 
         markaP.setCellValueFactory(new PropertyValueFactory<>("marka"));
         modelP.setCellValueFactory(new PropertyValueFactory<>("model"));
-        wynikP.setCellValueFactory(new PropertyValueFactory<>("czy_pozytywny"));
+        wynikP.setCellValueFactory(new PropertyValueFactory<>("wynik"));
         dataP.setCellValueFactory(new PropertyValueFactory<>("data"));
         waznoscP.setCellValueFactory(new PropertyValueFactory<>("data_waznosci"));
         uwagiP.setCellValueFactory(new PropertyValueFactory<>("uwagi"));
@@ -577,7 +645,7 @@ public class KlienciController implements Initializable {
             ResultSet rs = cstmt.executeQuery();
             ObservableList<Przeglady> przeglad = FXCollections.observableArrayList();
             while (rs.next()) {
-                Przeglady nowa = new Przeglady(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                Przeglady nowa = new Przeglady(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
                 przeglad.add(nowa);
             }
             przeglady.setItems(przeglad);

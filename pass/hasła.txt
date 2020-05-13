@@ -4,7 +4,11 @@ Do panelu klienta:
 2)klient2
   klient2
 
-Do pozostałych przechodzi bez loginu i hasła
+Do panelu mechanika:
+1)m
+m
+
+Do panelu administratora przechodzi bez hasła
 
 Do bazy:
 C##Warsztat
