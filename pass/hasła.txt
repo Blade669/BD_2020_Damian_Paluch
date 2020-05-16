@@ -8,7 +8,9 @@ Do panelu mechanika:
 1)m
 m
 
-Do panelu administratora przechodzi bez hasła
+Do panelu administratora:
+administrator
+administrator
 
 Do bazy:
 C##Warsztat

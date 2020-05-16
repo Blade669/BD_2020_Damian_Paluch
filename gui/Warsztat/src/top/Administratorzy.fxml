@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -11,67 +10,31 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.AdministratorzyController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.AdministratorzyController">
   <tabs>
-    <Tab fx:id="edytujDane" text="Edytuj dane">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="123.0" prefWidth="514.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
-                  <TableView layoutX="14.0" layoutY="161.0" prefHeight="136.0" prefWidth="515.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
-                  <TableView layoutX="13.0" layoutY="335.0" prefHeight="122.0" prefWidth="516.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
-                  <ComboBox fx:id="comboDiagnozy" layoutX="539.0" layoutY="14.0" prefWidth="150.0" />
-                  <TextField layoutX="540.0" layoutY="63.0" />
-                  <Button layoutX="540.0" layoutY="112.0" mnemonicParsing="false" text="Szukaj" />
-                  <Button layoutX="634.0" layoutY="112.0" mnemonicParsing="false" text="Edytuj" />
-                  <Button layoutX="539.0" layoutY="272.0" mnemonicParsing="false" text="Szukaj" />
-                  <Button layoutX="633.0" layoutY="272.0" mnemonicParsing="false" text="Edytuj" />
-                  <Button layoutX="539.0" layoutY="432.0" mnemonicParsing="false" text="Szukaj" />
-                  <Button layoutX="633.0" layoutY="432.0" mnemonicParsing="false" text="Edytuj" />
-                  <ComboBox fx:id="comboUslugi" layoutX="539.0" layoutY="335.0" prefWidth="150.0" />
-                  <ComboBox fx:id="comboPrzeglady" layoutX="539.0" layoutY="161.0" prefWidth="150.0" />
-                  <TextField layoutX="540.0" layoutY="223.0" />
-                  <TextField layoutX="540.0" layoutY="384.0" />
-               </children></AnchorPane>
-        </content>
-      </Tab>
       <Tab text="Zarządzanie usługami">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="673.0">
+                  <TableView fx:id="edycjaUslug" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="673.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="nazwaU" prefWidth="241.0" text="Nazwa" />
+                      <TableColumn fx:id="opisU" minWidth="0.0" prefWidth="430.0" text="Opis" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="14.0" layoutY="223.0" />
-                  <Button layoutX="196.0" layoutY="223.0" mnemonicParsing="false" text="Szukaj" />
-                  <TextField layoutX="14.0" layoutY="291.0" prefHeight="25.0" prefWidth="200.0" />
+                  <TextField fx:id="szukajEdycjiUslugi" layoutX="14.0" layoutY="223.0" />
+                  <Button layoutX="196.0" layoutY="223.0" mnemonicParsing="false" onAction="#actionSzukajEdycjiUslugi" text="Szukaj" />
+                  <TextField fx:id="nazwaD" layoutX="14.0" layoutY="291.0" prefHeight="25.0" prefWidth="200.0" />
                   <Label layoutX="96.0" layoutY="274.0" text="Nazwa" />
-                  <Button layoutX="166.0" layoutY="432.0" mnemonicParsing="false" text="Dodaj" />
-                  <TextField layoutX="487.0" layoutY="291.0" prefHeight="25.0" prefWidth="200.0" />
-                  <TextArea layoutX="487.0" layoutY="344.0" prefHeight="75.0" prefWidth="200.0" />
-                  <TextArea layoutX="14.0" layoutY="344.0" prefHeight="75.0" prefWidth="200.0" />
+                  <Button layoutX="166.0" layoutY="432.0" mnemonicParsing="false" onAction="#actionDodajUsluge" text="Dodaj" />
+                  <TextField fx:id="nazwaE" layoutX="487.0" layoutY="291.0" prefHeight="25.0" prefWidth="200.0" />
+                  <TextArea fx:id="opisE" layoutX="487.0" layoutY="344.0" prefHeight="75.0" prefWidth="200.0" wrapText="true" />
+                  <TextArea fx:id="opisD" layoutX="14.0" layoutY="344.0" prefHeight="75.0" prefWidth="200.0" />
                   <Label layoutX="569.0" layoutY="274.0" text="Nazwa" />
                   <Label layoutX="575.0" layoutY="327.0" text="Opis" />
                   <Label layoutX="102.0" layoutY="327.0" text="Opis" />
-                  <Button layoutX="635.0" layoutY="432.0" mnemonicParsing="false" text="Zapisz" />
+                  <Button layoutX="635.0" layoutY="432.0" mnemonicParsing="false" onAction="#actionZapiszUsluge" text="Zapisz" />
+                  <Button layoutX="325.0" layoutY="223.0" mnemonicParsing="false" onAction="#actionEdytujUsluge" text="Edytuj" />
                </children>
             </AnchorPane>
         </content>
@@ -80,33 +43,26 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="116.0" prefWidth="672.0">
+                  <TableView fx:id="pracownicy" layoutX="14.0" layoutY="14.0" prefHeight="244.0" prefWidth="672.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="imie" prefWidth="130.0" text="Imię" />
+                      <TableColumn fx:id="nazwisko" prefWidth="180.0" text="Nazwisko" />
+                        <TableColumn fx:id="nrTel" prefWidth="73.0" text="Nr. telefonu" />
+                        <TableColumn fx:id="adres" prefWidth="287.0" text="Adres" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="17.0" layoutY="145.0" />
-                  <Button layoutX="181.0" layoutY="145.0" mnemonicParsing="false" text="Szukaj" />
-                  <TextField layoutX="32.0" layoutY="225.0" />
-                  <TextField layoutX="32.0" layoutY="275.0" />
-                  <TextField layoutX="32.0" layoutY="325.0" />
-                  <TextField layoutX="32.0" layoutY="375.0" />
-                  <Label layoutX="95.0" layoutY="208.0" text="Imię" />
-                  <Label layoutX="81.0" layoutY="260.0" text="Nazwisko" />
-                  <Label layoutX="65.0" layoutY="308.0" text="Numer telefonu" />
-                  <Label layoutX="91.0" layoutY="358.0" text="Adres" />
-                  <Button layoutX="132.0" layoutY="416.0" mnemonicParsing="false" text="Dodaj" />
-                  <Button layoutX="241.0" layoutY="145.0" mnemonicParsing="false" text="Edytuj" />
-                  <TextField layoutX="517.0" layoutY="225.0" />
-                  <TextField layoutX="517.0" layoutY="275.0" />
-                  <TextField layoutX="517.0" layoutY="325.0" />
-                  <TextField layoutX="517.0" layoutY="375.0" />
-                  <Button layoutX="614.0" layoutY="416.0" mnemonicParsing="false" text="Zapisz" />
-                  <Label layoutX="580.0" layoutY="208.0" text="Imię" />
-                  <Label layoutX="566.0" layoutY="260.0" text="Nazwisko" />
-                  <Label layoutX="550.0" layoutY="308.0" text="Numer telefonu" />
-                  <Label layoutX="576.0" layoutY="358.0" text="Adres" />
+                  <TextField fx:id="szukajPracownika" layoutX="14.0" layoutY="267.0" />
+                  <Button layoutX="176.0" layoutY="267.0" mnemonicParsing="false" onAction="#actionSzukajPracownika" text="Szukaj" />
+                  <Button layoutX="242.0" layoutY="267.0" mnemonicParsing="false" onAction="#actionEdytujPracownika" text="Edytuj" />
+                  <TextField fx:id="imieE" disable="true" layoutX="100.0" layoutY="338.0" prefHeight="25.0" prefWidth="200.0" />
+                  <TextField fx:id="nazwiskoE" disable="true" layoutX="398.0" layoutY="338.0" prefHeight="25.0" prefWidth="200.0" />
+                  <TextField fx:id="nrTelE" disable="true" layoutX="100.0" layoutY="388.0" prefHeight="25.0" prefWidth="200.0" />
+                  <TextField fx:id="adresE" disable="true" layoutX="399.0" layoutY="388.0" prefHeight="25.0" prefWidth="200.0" />
+                  <Button layoutX="325.0" layoutY="422.0" mnemonicParsing="false" onAction="#actionZapiszPracownika" text="Zapisz" />
+                  <Label layoutX="189.0" layoutY="322.0" text="Imię" />
+                  <Label layoutX="473.0" layoutY="322.0" text="Nazwisko" />
+                  <Label layoutX="158.0" layoutY="371.0" text="Numer telefonu" />
+                  <Label layoutX="483.0" layoutY="371.0" text="Adres" />
                </children>
             </AnchorPane>
         </content>
@@ -115,15 +71,17 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="671.0">
+                  <TableView fx:id="diagnozy" layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="671.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="markaD" text="Marka" />
+                      <TableColumn fx:id="modelD" prefWidth="100.0" text="Model" />
+                        <TableColumn fx:id="uwagiD" prefWidth="205.0" text="Uwagi klienta" />
+                        <TableColumn fx:id="uwagiMechD" prefWidth="205.0" text="Uwagi mechanika" />
+                        <TableColumn fx:id="dataD" prefWidth="70.0" text="Data" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="178.0" layoutY="410.0" />
-                  <Button layoutX="340.0" layoutY="410.0" mnemonicParsing="false" text="Szukaj" />
-                  <ComboBox layoutX="14.0" layoutY="410.0" prefWidth="150.0" />
+                  <TextField fx:id="szukajDiagnozy" layoutX="178.0" layoutY="410.0" />
+                  <Button layoutX="340.0" layoutY="410.0" mnemonicParsing="false" onAction="#actionSzukajDiagnozy" text="Szukaj" />
                </children>
             </AnchorPane>
         </content>
@@ -132,15 +90,18 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="671.0">
+                  <TableView fx:id="przeglady" layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="671.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="markaP" prefWidth="89.0" text="Marka" />
+                      <TableColumn fx:id="modelP" prefWidth="100.0" text="Model" />
+                        <TableColumn fx:id="wynikP" prefWidth="75.0" text="Wynik" />
+                        <TableColumn fx:id="dataWaznosciP" prefWidth="87.0" text="Data ważności" />
+                        <TableColumn fx:id="uwagiP" prefWidth="248.0" text="Uwagi" />
+                        <TableColumn fx:id="dataP" prefWidth="70.0" text="Data" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="178.0" layoutY="410.0" />
-                  <Button layoutX="340.0" layoutY="410.0" mnemonicParsing="false" text="Szukaj" />
-                  <ComboBox layoutX="14.0" layoutY="410.0" prefWidth="150.0" />
+                  <TextField fx:id="szukajPrzegladu" layoutX="178.0" layoutY="410.0" />
+                  <Button layoutX="340.0" layoutY="410.0" mnemonicParsing="false" onAction="#actionSzukajPrzegladu" text="Szukaj" />
                </children>
             </AnchorPane>
         </content>
@@ -149,20 +110,21 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="671.0">
+                  <TableView fx:id="uslugi" layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="671.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="markaU" prefWidth="110.0" text="Marka" />
+                      <TableColumn fx:id="modelU" prefWidth="130.0" text="Model" />
+                        <TableColumn fx:id="uslugaU" prefWidth="354.0" text="Usługa" />
+                        <TableColumn fx:id="dataU" prefWidth="75.0" text="Data" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="178.0" layoutY="410.0" />
-                  <Button layoutX="340.0" layoutY="410.0" mnemonicParsing="false" text="Szukaj" />
-                  <ComboBox layoutX="14.0" layoutY="410.0" prefWidth="150.0" />
+                  <TextField fx:id="szukajUslugi" layoutX="178.0" layoutY="410.0" />
+                  <Button layoutX="340.0" layoutY="410.0" mnemonicParsing="false" onAction="#actionSzukajUslugi" text="Szukaj" />
                </children>
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="Wyloguj">
+      <Tab fx:id="wyloguj" text="Wyloguj">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>

@@ -26,11 +26,14 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -39,6 +42,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import oracle.jdbc.OracleTypes;
 import static top.Polaczenie.getConnection;
 import static top.SceneMenager.renderScene;
 
@@ -54,6 +59,10 @@ public class MechanicyController implements Initializable {
     @FXML
     private TabPane tabPane;
     @FXML
+    private AnchorPane pierwsza;
+    @FXML
+    private AnchorPane druga;
+    @FXML
     private TableColumn<?, ?> markaD;
     @FXML
     private TableColumn<?, ?> modelD;
@@ -62,11 +71,29 @@ public class MechanicyController implements Initializable {
     @FXML
     private TableColumn<?, ?> dataD;
     @FXML
+    private TableColumn<?, ?> markaDE;
+    @FXML
+    private TableColumn<?, ?> modelDE;
+    @FXML
+    private TableColumn<?, ?> uwagiMechDE;
+    @FXML
+    private TableColumn<?, ?> dataDE;
+    @FXML
     private TableColumn<?, ?> markaP;
     @FXML
     private TableColumn<?, ?> modelP;
     @FXML
     private TableColumn<?, ?> dataP;
+    @FXML
+    private TableColumn<?, ?> markaPE;
+    @FXML
+    private TableColumn<?, ?> modelPE;
+    @FXML
+    private TableColumn<?, ?> dataPE;
+    @FXML
+    private TableColumn<?, ?> dataWaznosciPE;
+    @FXML
+    private TableColumn<?, ?> wynikPE;
     @FXML
     private TableColumn<?, ?> markaU;
     @FXML
@@ -74,11 +101,27 @@ public class MechanicyController implements Initializable {
     @FXML
     private TableColumn<?, ?> uslugaU;
     @FXML
+    private TableColumn<?, ?> dataU;
+    @FXML
+    private TableColumn<?, ?> markaUE;
+    @FXML
+    private TableColumn<?, ?> modelUE;
+    @FXML
+    private TableColumn<?, ?> uslugaUE;
+    @FXML
+    private TableColumn<?, ?> dataUE;
+    @FXML
     private TableView<Diagnozy> diagnozy;
+    @FXML
+    private TableView<Diagnozy> diagnozyE;
     @FXML
     private TableView<Przeglady> przeglady;
     @FXML
+    private TableView<Przeglady> przegladyE;
+    @FXML
     private TableView<Samochody_uslugi> uslugi;
+    @FXML
+    private TableView<Samochody_uslugi> uslugiE;
     @FXML
     private TextField wlascicielD;
     @FXML
@@ -105,22 +148,40 @@ public class MechanicyController implements Initializable {
     private RadioButton pozytywny;
     @FXML
     private RadioButton negatywny;
+    @FXML
+    private TextField szukajDiagnozy;
+    @FXML
+    private TextField szukajPrzegladu;
+    @FXML
+    private TextField szukajUslugi;
     private int idMechanika;
     private int idDiagnozy = -1;
     private int idUslugi = -1;
     private int idPrzegladu = -1;
     private String wynikP;
+    private static int licznik = 0;
 
     @FXML
     private void actionRadioPozytywny(ActionEvent event) throws ParseException, IOException {
-        if(pozytywny.isSelected()) wynikP = "pozytywny";
+        if (pozytywny.isSelected()) {
+            wynikP = "pozytywny";
+        }
     }
-    
+
     @FXML
     private void actionRadioNegatywny(ActionEvent event) throws ParseException, IOException {
-        if(negatywny.isSelected()) wynikP = "negatywny";
+        if (negatywny.isSelected()) {
+            wynikP = "negatywny";
+        }
     }
-    
+
+    @FXML
+    private void actionPrzejdzDiagnoza(ActionEvent event) throws ParseException, IOException {
+        Node newLoadedPane = FXMLLoader.load(getClass().getResource("/top/Diagnozy.fxml"));
+
+
+    }
+
     @FXML
     private void actionObsluzDiagnoze(ActionEvent event) throws ParseException, IOException {
 
@@ -268,6 +329,8 @@ public class MechanicyController implements Initializable {
                 samochodD.clear();
                 uwagiKlientaD.clear();
                 uwagiMechD.clear();
+                diagnozyE.getItems().clear();
+                uzupelnijDiagnozeE();
 
                 Alert good = new Alert(Alert.AlertType.INFORMATION);
                 good.setTitle("Zapisz diagnoze");
@@ -359,12 +422,181 @@ public class MechanicyController implements Initializable {
         }
     }
 
+    @FXML
+    private void actionSzukajDiagnozy(ActionEvent event) throws ParseException, IOException {
+
+        if (!szukajDiagnozy.getText().isEmpty()) {
+            CallableStatement stmt = null;
+
+            try {
+                Connection con = getConnection();
+                stmt = con.prepareCall("{call szukaj_danych.szukaj_diagnozy(?,?,?)}");
+                stmt.setString(1, szukajDiagnozy.getText());
+                stmt.setInt(2, idMechanika);
+                stmt.registerOutParameter(3, OracleTypes.CURSOR);
+
+                stmt.execute();
+                ResultSet rs = (ResultSet) stmt.getObject(3);
+                diagnozyE.getItems().clear();
+                while (rs.next()) {
+
+                    Diagnozy nowa = new Diagnozy(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8));
+                    diagnozyE.getItems().add(nowa);
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+    }
+
+    @FXML
+    private void actionSzukajPrzegladu(ActionEvent event) throws ParseException, IOException {
+
+        if (!szukajPrzegladu.getText().isEmpty()) {
+            CallableStatement stmt = null;
+
+            try {
+                Connection con = getConnection();
+                stmt = con.prepareCall("{call szukaj_danych.szukaj_przegladu(?,?,?)}");
+                stmt.setString(1, szukajPrzegladu.getText());
+                stmt.setInt(2, idMechanika);
+                stmt.registerOutParameter(3, OracleTypes.CURSOR);
+
+                stmt.execute();
+                ResultSet rs = (ResultSet) stmt.getObject(3);
+                przegladyE.getItems().clear();
+                while (rs.next()) {
+                    Przeglady nowa = new Przeglady(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                    przegladyE.getItems().add(nowa);
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+    }
+
+    @FXML
+    private void actionSzukajUslugi(ActionEvent event) throws ParseException, IOException {
+
+        if (!szukajUslugi.getText().isEmpty()) {
+            CallableStatement stmt = null;
+
+            try {
+                Connection con = getConnection();
+                stmt = con.prepareCall("{call szukaj_danych.szukaj_uslugi(?,?,?)}");
+                stmt.setString(1, szukajUslugi.getText());
+                stmt.setInt(2, idMechanika);
+                stmt.registerOutParameter(3, OracleTypes.CURSOR);
+
+                stmt.execute();
+                ResultSet rs = (ResultSet) stmt.getObject(3);
+                uslugiE.getItems().clear();
+                while (rs.next()) {
+                    Samochody_uslugi nowa = new Samochody_uslugi(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                    uslugiE.getItems().add(nowa);
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+    }
+
+    @FXML
+    private void actionZresetujDiagnozyE(ActionEvent event) throws ParseException, IOException {
+        uzupelnijDiagnozeE();
+    }
+
+    @FXML
+    private void actionZresetujPrzegladyE(ActionEvent event) throws ParseException, IOException {
+        uzupelnijPrzegladE();
+    }
+
+    @FXML
+    private void actionZresetujUslugiE(ActionEvent event) throws ParseException, IOException {
+        uzupelnijUslugeE();
+    }
+
+    private void uzupelnijDiagnozeE() {
+        try {
+            Connection con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement("select d.*, s.marka, s.model\n"
+                    + "from diagnozy d, samochody s\n"
+                    + "where d.id_samochodu = s.id\n"
+                    + "and d.id_mechanika = ?");
+            pstmt.setInt(1, idMechanika);
+            ResultSet rs = pstmt.executeQuery();
+            ObservableList<Diagnozy> diagnoza = FXCollections.observableArrayList();
+            while (rs.next()) {
+                Diagnozy nowa = new Diagnozy(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8));
+                diagnoza.add(nowa);
+            }
+            diagnozyE.getItems().clear();
+            diagnozyE.setItems(diagnoza);
+            con.close();
+
+        } catch (SQLException ed) {
+            ed.printStackTrace();
+        }
+    }
+
+    private void uzupelnijPrzegladE() {
+        try {
+            Connection con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement("select p.*, s.marka, s.model\n"
+                    + "from przeglady p, samochody s\n"
+                    + "where p.id_samochodu = s.id\n"
+                    + "and p.id_mechanika = ?");
+            pstmt.setInt(1, idMechanika);
+            ResultSet rs = pstmt.executeQuery();
+            ObservableList<Przeglady> przeglad = FXCollections.observableArrayList();
+            while (rs.next()) {
+                Przeglady nowa = new Przeglady(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                przeglad.add(nowa);
+            }
+            przegladyE.setItems(przeglad);
+            con.close();
+
+        } catch (SQLException ed) {
+            ed.printStackTrace();
+        }
+    }
+
+    private void uzupelnijUslugeE() {
+        try {
+            Connection con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement("select su.*, s.marka, s.model, u.nazwa\n"
+                    + "from samochody_uslugi su, samochody s, uslugi u\n"
+                    + "where su.id_samochodu = s.id and su.id_uslugi = u.id\n"
+                    + "and su.id_mechanika = ?");
+            pstmt.setInt(1, idMechanika);
+            ResultSet rs = pstmt.executeQuery();
+            ObservableList<Samochody_uslugi> usluga = FXCollections.observableArrayList();
+            while (rs.next()) {
+                Samochody_uslugi nowa = new Samochody_uslugi(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                usluga.add(nowa);
+            }
+            uslugiE.setItems(usluga);
+            con.close();
+
+        } catch (SQLException ed) {
+            ed.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+        if (licznik > 0) {
+            selectionModel.select(3);
+        }
         idMechanika = Pracownicy_uzytkownicy.getId();
         ToggleGroup toggleGroup = new ToggleGroup();
         pozytywny.setToggleGroup(toggleGroup);
         negatywny.setToggleGroup(toggleGroup);
+
+        uzupelnijDiagnozeE();
+        uzupelnijPrzegladE();
+        uzupelnijUslugeE();
 
         wyloguj.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
@@ -376,6 +608,7 @@ public class MechanicyController implements Initializable {
                         delete.setHeaderText("Na pewno?");
                         Optional<ButtonType> cos = delete.showAndWait();
                         if (cos.get() == ButtonType.OK) {
+                            licznik = 0;
                             renderScene("logowanie");
                         } else {
                             tabPane.getSelectionModel().selectFirst();
@@ -410,6 +643,11 @@ public class MechanicyController implements Initializable {
             ed.printStackTrace();
         }
 
+        markaDE.setCellValueFactory(new PropertyValueFactory<>("marka"));
+        modelDE.setCellValueFactory(new PropertyValueFactory<>("model"));
+        uwagiMechDE.setCellValueFactory(new PropertyValueFactory<>("uwagi_mechanika"));
+        dataDE.setCellValueFactory(new PropertyValueFactory<>("data"));
+
         markaP.setCellValueFactory(new PropertyValueFactory<>("marka"));
         modelP.setCellValueFactory(new PropertyValueFactory<>("model"));
         dataP.setCellValueFactory(new PropertyValueFactory<>("data"));
@@ -432,16 +670,23 @@ public class MechanicyController implements Initializable {
             ed.printStackTrace();
         }
 
+        markaPE.setCellValueFactory(new PropertyValueFactory<>("marka"));
+        modelPE.setCellValueFactory(new PropertyValueFactory<>("model"));
+        dataPE.setCellValueFactory(new PropertyValueFactory<>("data"));
+        dataWaznosciPE.setCellValueFactory(new PropertyValueFactory<>("data_waznosci"));
+        wynikPE.setCellValueFactory(new PropertyValueFactory<>("wynik"));
+
         markaU.setCellValueFactory(new PropertyValueFactory<>("marka"));
         modelU.setCellValueFactory(new PropertyValueFactory<>("model"));
         uslugaU.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
+        dataU.setCellValueFactory(new PropertyValueFactory<>("data"));
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select su.*, s.marka, s.model, u.nazwa\n"
                     + "from samochody_uslugi su, samochody s, uslugi u\n"
                     + "where su.id_samochodu = s.id and su.id_uslugi = u.id\n"
-                    + "and su.id_mechanika is null");
+                    + "and su.id_mechanika is NULL");
             ObservableList<Samochody_uslugi> usluga = FXCollections.observableArrayList();
             while (rs.next()) {
                 Samochody_uslugi nowa = new Samochody_uslugi(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8));
@@ -453,5 +698,11 @@ public class MechanicyController implements Initializable {
         } catch (SQLException ed) {
             ed.printStackTrace();
         }
+
+        markaUE.setCellValueFactory(new PropertyValueFactory<>("marka"));
+        modelUE.setCellValueFactory(new PropertyValueFactory<>("model"));
+        uslugaUE.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
+        dataUE.setCellValueFactory(new PropertyValueFactory<>("data"));
+
     }
 }

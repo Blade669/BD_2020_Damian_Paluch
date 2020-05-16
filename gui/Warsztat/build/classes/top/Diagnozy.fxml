@@ -6,17 +6,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="top.DiagnozyController">
+<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.DiagnozyController">
    <children>
-      <TextArea editable="false" layoutX="28.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextArea layoutX="368.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextField editable="false" layoutX="28.0" layoutY="78.0" prefHeight="25.0" prefWidth="200.0" />
-      <TextField editable="false" layoutX="28.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" />
-      <Button layoutX="527.0" layoutY="361.0" mnemonicParsing="false" text="Zapisz" />
-      <Label layoutX="102.0" layoutY="61.0" text="Właściciel" />
-      <Label layoutX="100.0" layoutY="113.0" text="Samochód" />
-      <Label layoutX="82.0" layoutY="164.0" text="Uwagi właściciela" />
-      <Label layoutX="452.0" layoutY="95.0" text="Uwagi" />
+      <TextArea editable="false" layoutX="28.0" layoutY="186.0" prefHeight="200.0" prefWidth="250.0" />
+      <TextArea layoutX="402.0" layoutY="143.0" prefHeight="200.0" prefWidth="250.0" />
+      <TextField editable="false" layoutX="28.0" layoutY="78.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField editable="false" layoutX="28.0" layoutY="130.0" prefHeight="25.0" prefWidth="250.0" />
+      <Button layoutX="504.0" layoutY="343.0" mnemonicParsing="false" text="Zapisz" />
+      <Label layoutX="127.0" layoutY="61.0" text="Właściciel" />
+      <Label layoutX="126.0" layoutY="113.0" text="Samochód" />
+      <Label layoutX="107.0" layoutY="169.0" text="Uwagi właściciela" />
+      <Label layoutX="512.0" layoutY="128.0" text="Uwagi" />
+      <Button layoutX="634.0" layoutY="432.0" mnemonicParsing="false" text="Powrót" />
    </children>
 </AnchorPane>

@@ -141,9 +141,9 @@ public class KlienciController implements Initializable {
         try {
             Connection con = getConnection();
             String tekst = wybierzSamochodU.getSelectionModel().getSelectedItem().toString();
-            int iend = tekst.indexOf(" ");
+            int iend = tekst.lastIndexOf("  ");
             String marka = tekst.substring(0, iend);
-            String model = tekst.substring(iend + 1);
+            String model = tekst.substring(iend + 2);
             CallableStatement cstmt = con.prepareCall("select * from samochody where id_klienta = ? and marka = ? and model = ?");
             cstmt.setInt(1, idKlienta);
             cstmt.setString(2, marka);
@@ -165,9 +165,9 @@ public class KlienciController implements Initializable {
         try {
             Connection con = getConnection();
             String tekst = wybierzSamochodP.getSelectionModel().getSelectedItem().toString();
-            int iend = tekst.indexOf(" ");
+            int iend = tekst.lastIndexOf("  ");
             String marka = tekst.substring(0, iend);
-            String model = tekst.substring(iend + 1);
+            String model = tekst.substring(iend + 2);
             CallableStatement cstmt = con.prepareCall("select * from samochody where id_klienta = ? and marka = ? and model = ?");
             cstmt.setInt(1, idKlienta);
             cstmt.setString(2, marka);
@@ -189,9 +189,9 @@ public class KlienciController implements Initializable {
         try {
             Connection con = getConnection();
             String tekst = wybierzSamochodD.getSelectionModel().getSelectedItem().toString();
-            int iend = tekst.indexOf(" ");
+            int iend = tekst.lastIndexOf("  ");
             String marka = tekst.substring(0, iend);
-            String model = tekst.substring(iend + 1);
+            String model = tekst.substring(iend + 2);
             CallableStatement cstmt = con.prepareCall("select * from samochody where id_klienta = ? and marka = ? and model = ?");
             cstmt.setInt(1, idKlienta);
             cstmt.setString(2, marka);
@@ -396,11 +396,11 @@ public class KlienciController implements Initializable {
                             wybierzMarke.getItems().add(rs.getString("marka"));
                         }
                         wybierzMarke.setValue("Wybierz marke");
-                        wybierzSamochodP.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                        wybierzSamochodP.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
                         wybierzSamochodP.setValue("Wybierz samochód");
-                        wybierzSamochodU.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                        wybierzSamochodU.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
                         wybierzSamochodU.setValue("Wybierz samochód");
-                        wybierzSamochodD.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                        wybierzSamochodD.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
                         wybierzSamochodD.setValue("Wybierz samochód");
 
                     }
@@ -611,9 +611,8 @@ public class KlienciController implements Initializable {
         try {
             Connection con = getConnection();
             CallableStatement cstmt = con.prepareCall("select su.*, s.marka, s.model, u.nazwa\n"
-                    + "                    from samochody s, samochody_uslugi su, uslugi u\n"
-                    + "                    where s.id_klienta = ? and s.id = su.id_samochodu and u.id = su.id_uslugi\n"
-                    + "                    order by su.data");
+                    + "from samochody s, samochody_uslugi su, uslugi u\n"
+                    + "where s.id_klienta = ? and s.id = su.id_samochodu and u.id = su.id_uslugi");
             cstmt.setInt(1, idKlienta);
 
             ResultSet rs = cstmt.executeQuery();
@@ -690,11 +689,11 @@ public class KlienciController implements Initializable {
                     wybierzMarke.getItems().add(rs.getString("marka"));
                 }
                 wybierzMarke.setValue("Wybierz marke");
-                wybierzSamochodP.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                wybierzSamochodP.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
                 wybierzSamochodP.setValue("Wybierz samochód");
-                wybierzSamochodU.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                wybierzSamochodU.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
                 wybierzSamochodU.setValue("Wybierz samochód");
-                wybierzSamochodD.getItems().add(rs.getString("marka") + " " + rs.getString("model"));
+                wybierzSamochodD.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
                 wybierzSamochodD.setValue("Wybierz samochód");
             }
             rs = cstmt.executeQuery("select * from uslugi");

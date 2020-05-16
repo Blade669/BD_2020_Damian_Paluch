@@ -1,11 +1,11 @@
 --------------------------------------------------------
---  File created - œroda-maja-13-2020   
+--  File created - sobota-maja-16-2020   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence DIAGNOZY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."DIAGNOZY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."DIAGNOZY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence FUNKCJA_SEQ
 --------------------------------------------------------
@@ -35,22 +35,22 @@
 --  DDL for Sequence PRZEGLADY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."PRZEGLADY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 27 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."PRZEGLADY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 67 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence SAMOCHODY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 141 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence SAMOCHODY_USLUGI_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence USLUGI_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 51 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Table DIAGNOZY
 --------------------------------------------------------
@@ -222,7 +222,12 @@
   TABLESPACE "USERS" ;
 REM INSERTING into C##WARSZTAT.DIAGNOZY
 SET DEFINE OFF;
-Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('29','24','cff',null,null,to_date('20/05/01','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('62','23','FF',null,null,to_date('20/04/30','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('63','23','FF',null,null,to_date('20/04/30','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('81','101',null,'RRRRRRRR','1',to_date('20/04/30','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('41','2','CC','FF','1',to_date('20/05/02','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('42','23','CC','DFGH','1',to_date('20/05/02','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('29','24','cff','FFFF','1',to_date('20/05/01','RR/MM/DD'));
 REM INSERTING into C##WARSZTAT.FUNKCJA
 SET DEFINE OFF;
 Insert into C##WARSZTAT.FUNKCJA (ID,NAZWA) values ('1','Mechanik');
@@ -247,9 +252,11 @@ Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUNKCJI) value
 REM INSERTING into C##WARSZTAT.PRZEGLADY
 SET DEFINE OFF;
 Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('8','2',to_date('20/05/08','RR/MM/DD'),to_date('25/05/23','RR/MM/DD'),'1',null,null);
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('10','2',to_date('06/05/25','RR/MM/DD'),null,null,null,null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('29','2',to_date('20/05/28','RR/MM/DD'),to_date('20/05/22','RR/MM/DD'),'1','POZYTYWNY','TTTTTT');
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('10','2',to_date('06/05/25','RR/MM/DD'),to_date('21/05/22','RR/MM/DD'),'1','POZYTYWNY','FFF');
 Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('9','24',to_date('20/05/14','RR/MM/DD'),to_date('15/05/14','RR/MM/DD'),'1',null,'fwsefsd');
 Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('12','2',to_date('06/05/25','RR/MM/DD'),null,null,null,null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('30','2',to_date('20/05/28','RR/MM/DD'),null,null,null,null);
 Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('7','2',to_date('55/11/11','RR/MM/DD'),null,null,null,null);
 REM INSERTING into C##WARSZTAT.SAMOCHODY
 SET DEFINE OFF;
@@ -258,17 +265,22 @@ Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) va
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('23','LEXUS','LFA','4679','2016','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('24','LEXUS','GS 430','g','2000','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('22','CHEVROLET','CORVETTE','5420','2010','2');
+Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('101','ALFA ROMEO','GULIA','3000','2019','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('43','TOYOTA','SUPRA','2980','1997','2');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('25','LEXUS','IS F','4600','2019','1');
+Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('121','ASTON MARTIN','DB9','5935','2008','1');
+Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('122','ALFA ROMEO','159','3489','2008','1');
 REM INSERTING into C##WARSZTAT.SAMOCHODY_USLUGI
 SET DEFINE OFF;
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('2','2','1','1',to_date('20/05/01','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('1','1','1','1',to_date('20/05/05','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('3','2','2','1',to_date('20/04/24','RR/MM/DD'));
+Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('43','2','1',null,to_date('20/06/04','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('23','1','2','1',to_date('20/04/29','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('21','2','23',null,to_date('30/05/11','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('24','1','23',null,to_date('20/04/29','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('25','2','23',null,to_date('20/05/05','RR/MM/DD'));
+Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('44','2','1',null,to_date('20/06/04','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('13','1','25',null,to_date('17/05/20','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('14','1','2',null,to_date('04/05/13','RR/MM/DD'));
 REM INSERTING into C##WARSZTAT.USLUGI
@@ -628,6 +640,11 @@ ALTER TRIGGER "C##WARSZTAT"."USLUGI_TRG" ENABLE;
         d_data           IN  diagnozy.data%TYPE
     );
 
+    PROCEDURE dodaj_usluge_admin (
+        u_nazwa  IN  uslugi.nazwa%TYPE,
+        u_opis   IN  uslugi.opis%TYPE
+    );
+
 END dodaj_dane;
 
 /
@@ -649,6 +666,20 @@ END dodaj_dane;
         k_imie      IN  klienci.imie%TYPE,
         k_nazwisko  IN  klienci.nazwisko%TYPE,
         k_nr_tel    IN  klienci.nr_tel%TYPE
+    );
+
+    PROCEDURE edytuj_uslugi (
+        u_id     IN  uslugi.id%TYPE,
+        u_nazwa  IN  uslugi.nazwa%TYPE,
+        u_opis   IN  uslugi.opis%TYPE
+    );
+
+    PROCEDURE edytuj_pracownikow (
+        p_id        IN  pracownicy.id%TYPE,
+        p_imie      IN  pracownicy.imie%TYPE,
+        p_nazwisko  IN  pracownicy.nazwisko%TYPE,
+        p_nr_tel    IN  pracownicy.nr_tel%TYPE,
+        p_adres     IN  pracownicy.adres%TYPE
     );
 
 END edytuj_dane;
@@ -684,6 +715,11 @@ END klient_rejestracja;
         m_login  IN  pracownicy_uzytkownicy.login%TYPE,
         m_haslo  IN  pracownicy_uzytkownicy.haslo%TYPE
     );
+    
+     PROCEDURE administrator_logowanie (
+        a_login  IN  pracownicy_uzytkownicy.login%TYPE,
+        a_haslo  IN  pracownicy_uzytkownicy.haslo%TYPE
+    );
 
 
 END logowanie;
@@ -714,6 +750,57 @@ END logowanie;
     );
 
 END obsluz_dane;
+
+/
+--------------------------------------------------------
+--  DDL for Package SZUKAJ_DANYCH
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE PACKAGE "C##WARSZTAT"."SZUKAJ_DANYCH" AS
+    PROCEDURE szukaj_diagnozy (
+        d_szukane       IN   diagnozy.uwagi_klienta%TYPE,
+        d_id_mechanika  IN   diagnozy.id_mechanika%TYPE,
+        d_wynik         OUT  SYS_REFCURSOR
+    );
+
+    PROCEDURE szukaj_przegladu (
+        p_szukane       IN   przeglady.uwagi%TYPE,
+        p_id_mechanika  IN   przeglady.id_mechanika%TYPE,
+        p_wynik         OUT  SYS_REFCURSOR
+    );
+
+    PROCEDURE szukaj_uslugi (
+        su_szukane       IN   VARCHAR2,
+        su_id_mechanika  IN   samochody_uslugi.id_mechanika%TYPE,
+        su_wynik         OUT  SYS_REFCURSOR
+    );
+
+    PROCEDURE szukaj_edycji_uslugi_admin (
+        ua_szukane  IN   VARCHAR2,
+        ua_wynik    OUT  SYS_REFCURSOR
+    );
+
+    PROCEDURE szukaj_pracownika (
+        pr_szukane  IN   VARCHAR2,
+        pr_wynik    OUT  SYS_REFCURSOR
+    );
+
+    PROCEDURE szukaj_diagnozy_admin (
+        da_szukane       IN   VARCHAR2,
+        da_wynik         OUT  SYS_REFCURSOR
+    );
+    
+    PROCEDURE szukaj_przegladu_admin (
+        pa_szukane       IN   VARCHAR2,
+        pa_wynik         OUT  SYS_REFCURSOR
+    );
+    
+    PROCEDURE szukaj_uslugi_admin (
+        su_szukane  IN   VARCHAR2,
+        su_wynik    OUT  SYS_REFCURSOR
+    );
+
+END szukaj_danych;
 
 /
 --------------------------------------------------------
@@ -813,6 +900,22 @@ END usun_dane;
         NULL;
     END dodaj_diagnoze;
 
+    PROCEDURE dodaj_usluge_admin (
+        u_nazwa  IN  uslugi.nazwa%TYPE,
+        u_opis   IN  uslugi.opis%TYPE
+    ) AS
+    BEGIN
+        INSERT INTO uslugi (
+            nazwa,
+            opis
+        ) VALUES (
+            u_nazwa,
+            u_opis
+        );
+
+        NULL;
+    END dodaj_usluge_admin;
+
 END dodaj_dane;
 
 /
@@ -859,6 +962,42 @@ END dodaj_dane;
 
         NULL;
     END edytuj_dane_klienta;
+
+    PROCEDURE edytuj_uslugi (
+        u_id     IN  uslugi.id%TYPE,
+        u_nazwa  IN  uslugi.nazwa%TYPE,
+        u_opis   IN  uslugi.opis%TYPE
+    ) AS
+    BEGIN
+        UPDATE uslugi
+        SET
+            uslugi.nazwa = u_nazwa,
+            uslugi.opis = u_opis
+        WHERE
+            uslugi.id = u_id;
+
+        NULL;
+    END edytuj_uslugi;
+
+    PROCEDURE edytuj_pracownikow (
+        p_id        IN  pracownicy.id%TYPE,
+        p_imie      IN  pracownicy.imie%TYPE,
+        p_nazwisko  IN  pracownicy.nazwisko%TYPE,
+        p_nr_tel    IN  pracownicy.nr_tel%TYPE,
+        p_adres     IN  pracownicy.adres%TYPE
+    ) AS
+    BEGIN
+        UPDATE pracownicy
+        SET
+            pracownicy.imie = p_imie,
+            pracownicy.nazwisko = p_nazwisko,
+            pracownicy.nr_tel = p_nr_tel,
+            pracownicy.adres = p_adres
+        WHERE
+            id = p_id;
+
+        NULL;
+    END edytuj_pracownikow;
 
 END edytuj_dane;
 
@@ -955,6 +1094,27 @@ END klient_rejestracja;
         WHEN no_data_found THEN
             raise_application_error(-20000, 'Bledne dane!');
     END mechanik_logowanie;
+    
+        PROCEDURE administrator_logowanie (
+        a_login  IN  pracownicy_uzytkownicy.login%TYPE,
+        a_haslo  IN  pracownicy_uzytkownicy.haslo%TYPE
+    ) AS
+        zmienna VARCHAR2(1);
+    BEGIN
+        SELECT
+            '1'
+        INTO zmienna
+        FROM
+            pracownicy_uzytkownicy
+        WHERE
+                pracownicy_uzytkownicy.login = a_login
+            AND pracownicy_uzytkownicy.haslo = a_haslo
+            AND id_funkcji = 2;
+
+    EXCEPTION
+        WHEN no_data_found THEN
+            raise_application_error(-20000, 'Bledne dane!');
+    END administrator_logowanie;
 
 END logowanie;
 
@@ -1019,6 +1179,198 @@ END obsluz_dane;
 
 /
 --------------------------------------------------------
+--  DDL for Package Body SZUKAJ_DANYCH
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."SZUKAJ_DANYCH" AS
+
+    PROCEDURE szukaj_diagnozy (
+        d_szukane       IN   diagnozy.uwagi_klienta%TYPE,
+        d_id_mechanika  IN   diagnozy.id_mechanika%TYPE,
+        d_wynik         OUT  SYS_REFCURSOR
+    ) AS
+    BEGIN
+        OPEN d_wynik FOR SELECT
+                             d.*,
+                             s.marka,
+                             s.model
+                         FROM
+                             diagnozy   d,
+                             samochody  s
+                         WHERE
+                                 s.id = d.id_samochodu
+                             AND d.id_mechanika = d_id_mechanika
+                             AND ( ( instr(upper(d.uwagi_mechanika), upper(d_szukane), 1) ) > 0
+                                   OR ( instr(upper(s.marka), upper(d_szukane), 1) ) > 0
+                                   OR ( instr(upper(s.model), upper(d_szukane), 1) ) > 0
+                                   OR ( instr(to_char(d.data, 'YYYY-MM-DD'), d_szukane, 1) > 0 ) );
+
+        NULL;
+    END szukaj_diagnozy;
+
+    PROCEDURE szukaj_przegladu (
+        p_szukane       IN   przeglady.uwagi%TYPE,
+        p_id_mechanika  IN   przeglady.id_mechanika%TYPE,
+        p_wynik         OUT  SYS_REFCURSOR
+    ) AS
+    BEGIN
+        OPEN p_wynik FOR SELECT
+                             p.*,
+                             s.marka,
+                             s.model
+                         FROM
+                             przeglady  p,
+                             samochody  s
+                         WHERE
+                                 s.id = p.id_samochodu
+                             AND p.id_mechanika = p_id_mechanika
+                             AND ( ( instr(upper(s.marka), upper(p_szukane), 1) ) > 0
+                                   OR ( instr(upper(s.model), upper(p_szukane), 1) ) > 0
+                                   OR ( instr(upper(p.wynik), upper(p_szukane), 1) ) > 0
+                                   OR ( instr(to_char(p.data, 'YYYY-MM-DD'), p_szukane, 1) > 0 )
+                                   OR ( instr(to_char(p.data_waznosci, 'YYYY-MM-DD'), p_szukane, 1) > 0 ) );
+
+        NULL;
+    END szukaj_przegladu;
+
+    PROCEDURE szukaj_uslugi (
+        su_szukane       IN   VARCHAR2,
+        su_id_mechanika  IN   samochody_uslugi.id_mechanika%TYPE,
+        su_wynik         OUT  SYS_REFCURSOR
+    ) AS
+    BEGIN
+        OPEN su_wynik FOR SELECT
+                              su.*,
+                              s.marka,
+                              s.model,
+                              u.nazwa
+                          FROM
+                              samochody_uslugi  su,
+                              samochody         s,
+                              uslugi            u
+                          WHERE
+                                  s.id = su.id_samochodu
+                              AND su.id_mechanika = su_id_mechanika
+                              AND su.id_uslugi = u.id
+                              AND ( ( instr(upper(s.marka), upper(su_szukane), 1) ) > 0
+                                    OR ( instr(upper(s.model), upper(su_szukane), 1) ) > 0
+                                    OR ( instr(upper(u.nazwa), upper(su_szukane), 1) ) > 0
+                                    OR ( instr(to_char(su.data, 'YYYY-MM-DD'), su_szukane, 1) > 0 ) );
+
+        NULL;
+    END szukaj_uslugi;
+
+    PROCEDURE szukaj_edycji_uslugi_admin (
+        ua_szukane  IN   VARCHAR2,
+        ua_wynik    OUT  SYS_REFCURSOR
+    ) AS
+    BEGIN
+        OPEN ua_wynik FOR SELECT
+                              *
+                          FROM
+                              uslugi
+                          WHERE
+                              ( instr(upper(nazwa), upper(ua_szukane), 1) ) > 0
+                              OR ( instr(upper(opis), upper(ua_szukane), 1) ) > 0;
+
+        NULL;
+    END szukaj_edycji_uslugi_admin;
+
+    PROCEDURE szukaj_pracownika (
+        pr_szukane  IN   VARCHAR2,
+        pr_wynik    OUT  SYS_REFCURSOR
+    ) AS
+    BEGIN
+        OPEN pr_wynik FOR SELECT
+                              *
+                          FROM
+                              pracownicy
+                          WHERE
+                                  id_uzytkownika = 1
+                              AND ( ( instr(upper(imie), upper(pr_szukane), 1) ) > 0
+                                    OR ( instr(upper(nazwisko), upper(pr_szukane), 1) ) > 0
+                                    OR ( instr(nr_tel, pr_szukane, 1) > 0
+                                         OR ( instr(upper(adres), upper(pr_szukane), 1) ) > 0 ) );
+
+        NULL;
+    END szukaj_pracownika;
+
+    PROCEDURE szukaj_diagnozy_admin (
+        da_szukane  IN   VARCHAR2,
+        da_wynik    OUT  SYS_REFCURSOR
+    ) AS
+    BEGIN
+        OPEN da_wynik FOR SELECT
+                              d.*,
+                              s.marka,
+                              s.model
+                          FROM
+                              diagnozy   d,
+                              samochody  s
+                          WHERE
+                                  s.id = d.id_samochodu
+                              AND ( ( instr(upper(d.uwagi_mechanika), upper(da_szukane), 1) ) > 0
+                                    OR ( instr(upper(s.marka), upper(da_szukane), 1) ) > 0
+                                    OR ( instr(upper(s.model), upper(da_szukane), 1) ) > 0
+                                    OR ( instr(upper(d.uwagi_klienta), upper(da_szukane), 1) ) > 0
+                                    OR ( instr(to_char(d.data, 'YYYY-MM-DD'), da_szukane, 1) > 0 ) );
+
+        NULL;
+    END szukaj_diagnozy_admin;
+
+    PROCEDURE szukaj_przegladu_admin (
+        pa_szukane  IN   VARCHAR2,
+        pa_wynik    OUT  SYS_REFCURSOR
+    ) AS
+    BEGIN
+        OPEN pa_wynik FOR SELECT
+                              p.*,
+                              s.marka,
+                              s.model
+                          FROM
+                              przeglady  p,
+                              samochody  s
+                          WHERE
+                                  s.id = p.id_samochodu
+                              AND ( ( instr(upper(s.marka), upper(pa_szukane), 1) ) > 0
+                                    OR ( instr(upper(s.model), upper(pa_szukane), 1) ) > 0
+                                    OR ( instr(upper(p.wynik), upper(pa_szukane), 1) ) > 0
+                                    OR ( instr(upper(p.uwagi), upper(pa_szukane), 1) ) > 0
+                                    OR ( instr(to_char(p.data, 'YYYY-MM-DD'), pa_szukane, 1) > 0 )
+                                    OR ( instr(to_char(p.data_waznosci, 'YYYY-MM-DD'), pa_szukane, 1) > 0 ) );
+
+        NULL;
+    END szukaj_przegladu_admin;
+
+    PROCEDURE szukaj_uslugi_admin (
+        su_szukane  IN   VARCHAR2,
+        su_wynik    OUT  SYS_REFCURSOR
+    ) AS
+    BEGIN
+        OPEN su_wynik FOR SELECT
+                              su.*,
+                              s.marka,
+                              s.model,
+                              u.nazwa
+                          FROM
+                              samochody_uslugi  su,
+                              samochody         s,
+                              uslugi            u
+                          WHERE
+                                  s.id = su.id_samochodu
+                              AND su.id_uslugi = u.id
+                              AND ( ( instr(upper(s.marka), upper(su_szukane), 1) ) > 0
+                                    OR ( instr(upper(s.model), upper(su_szukane), 1) ) > 0
+                                    OR ( instr(upper(u.nazwa), upper(su_szukane), 1) ) > 0
+                                    OR ( instr(to_char(su.data, 'YYYY-MM-DD'), su_szukane, 1) > 0 ) );
+
+        NULL;
+    END szukaj_uslugi_admin;
+
+END szukaj_danych;
+
+/
+--------------------------------------------------------
 --  DDL for Package Body USUN_DANE
 --------------------------------------------------------
 
@@ -1039,64 +1391,16 @@ END usun_dane;
 
 /
 --------------------------------------------------------
---  Constraints for Table PRZEGLADY
+--  Constraints for Table SAMOCHODY
 --------------------------------------------------------
 
-  ALTER TABLE "C##WARSZTAT"."PRZEGLADY" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."PRZEGLADY" MODIFY ("ID_SAMOCHODU" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."PRZEGLADY" ADD CONSTRAINT "PRZEGLADY_PK" PRIMARY KEY ("ID")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "USERS"  ENABLE;
-  ALTER TABLE "C##WARSZTAT"."PRZEGLADY" MODIFY ("DATA" NOT NULL ENABLE);
---------------------------------------------------------
---  Constraints for Table PRACOWNICY_UZYTKOWNICY
---------------------------------------------------------
-
-  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("ID_FUNKCJI" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("LOGIN" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("HASLO" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" ADD CONSTRAINT "PRACOWNICY_UZYTKOWNICY_PK" PRIMARY KEY ("ID")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "USERS"  ENABLE;
-  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" ADD CONSTRAINT "PRACOWNICY_UZYTKOWNICY_UK1" UNIQUE ("LOGIN")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "USERS"  ENABLE;
---------------------------------------------------------
---  Constraints for Table KLIENCI_UZYTKOWNICY
---------------------------------------------------------
-
-  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" MODIFY ("LOGIN" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" MODIFY ("HASLO" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" ADD CONSTRAINT "KLIENCI_KONTA_PK" PRIMARY KEY ("ID")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "USERS"  ENABLE;
-  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" ADD CONSTRAINT "KLIENCI_KONTA_UK1" UNIQUE ("LOGIN")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "USERS"  ENABLE;
---------------------------------------------------------
---  Constraints for Table FUNKCJA
---------------------------------------------------------
-
-  ALTER TABLE "C##WARSZTAT"."FUNKCJA" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."FUNKCJA" MODIFY ("NAZWA" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."FUNKCJA" ADD CONSTRAINT "FUNKCJA_PK" PRIMARY KEY ("ID")
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("POJ_SILNIKA" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("ID_KLIENTA" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("MARKA" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("MODEL" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("ROK" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" ADD CONSTRAINT "SAMOCHODY_PK" PRIMARY KEY ("ID")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
@@ -1115,20 +1419,6 @@ END usun_dane;
   TABLESPACE "USERS"  ENABLE;
   ALTER TABLE "C##WARSZTAT"."USLUGI" MODIFY ("NAZWA" NOT NULL ENABLE);
   ALTER TABLE "C##WARSZTAT"."USLUGI" MODIFY ("OPIS" NOT NULL ENABLE);
---------------------------------------------------------
---  Constraints for Table SAMOCHODY_USLUGI
---------------------------------------------------------
-
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" MODIFY ("ID_USLUGI" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" MODIFY ("ID_SAMOCHODU" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" ADD CONSTRAINT "SAMOCHODY_USLUGI_PK" PRIMARY KEY ("ID")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "USERS"  ENABLE;
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" MODIFY ("DATA" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table PRACOWNICY
 --------------------------------------------------------
@@ -1152,35 +1442,6 @@ END usun_dane;
   TABLESPACE "USERS"  ENABLE;
   ALTER TABLE "C##WARSZTAT"."PRACOWNICY" MODIFY ("ID_UZYTKOWNIKA" NOT NULL ENABLE);
 --------------------------------------------------------
---  Constraints for Table DIAGNOZY
---------------------------------------------------------
-
-  ALTER TABLE "C##WARSZTAT"."DIAGNOZY" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."DIAGNOZY" MODIFY ("ID_SAMOCHODU" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."DIAGNOZY" ADD CONSTRAINT "DIAGNOZY_PK" PRIMARY KEY ("ID")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "USERS"  ENABLE;
-  ALTER TABLE "C##WARSZTAT"."DIAGNOZY" MODIFY ("DATA" NOT NULL ENABLE);
---------------------------------------------------------
---  Constraints for Table SAMOCHODY
---------------------------------------------------------
-
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("POJ_SILNIKA" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("ID_KLIENTA" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("ID" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("MARKA" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("MODEL" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" MODIFY ("ROK" NOT NULL ENABLE);
-  ALTER TABLE "C##WARSZTAT"."SAMOCHODY" ADD CONSTRAINT "SAMOCHODY_PK" PRIMARY KEY ("ID")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "USERS"  ENABLE;
---------------------------------------------------------
 --  Constraints for Table KLIENCI
 --------------------------------------------------------
 
@@ -1195,6 +1456,97 @@ END usun_dane;
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS"  ENABLE;
   ALTER TABLE "C##WARSZTAT"."KLIENCI" ADD CONSTRAINT "KLIENCI_UK1" UNIQUE ("ID_UZYTKOWNIKA")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PRACOWNICY_UZYTKOWNICY
+--------------------------------------------------------
+
+  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("ID_FUNKCJI" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("LOGIN" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" MODIFY ("HASLO" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" ADD CONSTRAINT "PRACOWNICY_UZYTKOWNICY_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "C##WARSZTAT"."PRACOWNICY_UZYTKOWNICY" ADD CONSTRAINT "PRACOWNICY_UZYTKOWNICY_UK1" UNIQUE ("LOGIN")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table FUNKCJA
+--------------------------------------------------------
+
+  ALTER TABLE "C##WARSZTAT"."FUNKCJA" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."FUNKCJA" MODIFY ("NAZWA" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."FUNKCJA" ADD CONSTRAINT "FUNKCJA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table DIAGNOZY
+--------------------------------------------------------
+
+  ALTER TABLE "C##WARSZTAT"."DIAGNOZY" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."DIAGNOZY" MODIFY ("ID_SAMOCHODU" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."DIAGNOZY" ADD CONSTRAINT "DIAGNOZY_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "C##WARSZTAT"."DIAGNOZY" MODIFY ("DATA" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PRZEGLADY
+--------------------------------------------------------
+
+  ALTER TABLE "C##WARSZTAT"."PRZEGLADY" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."PRZEGLADY" MODIFY ("ID_SAMOCHODU" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."PRZEGLADY" ADD CONSTRAINT "PRZEGLADY_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "C##WARSZTAT"."PRZEGLADY" MODIFY ("DATA" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SAMOCHODY_USLUGI
+--------------------------------------------------------
+
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" MODIFY ("ID_USLUGI" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" MODIFY ("ID_SAMOCHODU" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" ADD CONSTRAINT "SAMOCHODY_USLUGI_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "C##WARSZTAT"."SAMOCHODY_USLUGI" MODIFY ("DATA" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table KLIENCI_UZYTKOWNICY
+--------------------------------------------------------
+
+  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" MODIFY ("LOGIN" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" MODIFY ("HASLO" NOT NULL ENABLE);
+  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" ADD CONSTRAINT "KLIENCI_KONTA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "C##WARSZTAT"."KLIENCI_UZYTKOWNICY" ADD CONSTRAINT "KLIENCI_KONTA_UK1" UNIQUE ("LOGIN")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
