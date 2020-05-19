@@ -10,13 +10,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.AdministratorzyController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@darkTheme.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.AdministratorzyController">
   <tabs>
       <Tab text="Zarządzanie usługami">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="edycjaUslug" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="673.0">
+                  <TableView fx:id="edycjaUslug" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="673.0" stylesheets="@css.css">
                     <columns>
                       <TableColumn fx:id="nazwaU" prefWidth="241.0" text="Nazwa" />
                       <TableColumn fx:id="opisU" minWidth="0.0" prefWidth="430.0" text="Opis" />
@@ -27,9 +27,9 @@
                   <TextField fx:id="nazwaD" layoutX="14.0" layoutY="291.0" prefHeight="25.0" prefWidth="200.0" />
                   <Label layoutX="96.0" layoutY="274.0" text="Nazwa" />
                   <Button layoutX="166.0" layoutY="432.0" mnemonicParsing="false" onAction="#actionDodajUsluge" text="Dodaj" />
-                  <TextField fx:id="nazwaE" layoutX="487.0" layoutY="291.0" prefHeight="25.0" prefWidth="200.0" />
-                  <TextArea fx:id="opisE" layoutX="487.0" layoutY="344.0" prefHeight="75.0" prefWidth="200.0" wrapText="true" />
-                  <TextArea fx:id="opisD" layoutX="14.0" layoutY="344.0" prefHeight="75.0" prefWidth="200.0" />
+                  <TextField fx:id="nazwaE" disable="true" layoutX="487.0" layoutY="291.0" prefHeight="25.0" prefWidth="200.0" />
+                  <TextArea fx:id="opisE" disable="true" layoutX="487.0" layoutY="344.0" prefHeight="75.0" prefWidth="200.0" wrapText="true" />
+                  <TextArea fx:id="opisD" layoutX="14.0" layoutY="344.0" prefHeight="75.0" prefWidth="200.0" wrapText="true" />
                   <Label layoutX="569.0" layoutY="274.0" text="Nazwa" />
                   <Label layoutX="575.0" layoutY="327.0" text="Opis" />
                   <Label layoutX="102.0" layoutY="327.0" text="Opis" />
@@ -73,10 +73,10 @@
                <children>
                   <TableView fx:id="diagnozy" layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="671.0">
                     <columns>
-                      <TableColumn fx:id="markaD" text="Marka" />
+                      <TableColumn fx:id="markaD" prefWidth="85.0" text="Marka" />
                       <TableColumn fx:id="modelD" prefWidth="100.0" text="Model" />
-                        <TableColumn fx:id="uwagiD" prefWidth="205.0" text="Uwagi klienta" />
-                        <TableColumn fx:id="uwagiMechD" prefWidth="205.0" text="Uwagi mechanika" />
+                        <TableColumn fx:id="uwagiD" prefWidth="207.0" text="Uwagi klienta" />
+                        <TableColumn fx:id="uwagiMechD" prefWidth="207.0" text="Uwagi mechanika" />
                         <TableColumn fx:id="dataD" prefWidth="70.0" text="Data" />
                     </columns>
                   </TableView>
@@ -114,8 +114,8 @@
                     <columns>
                       <TableColumn fx:id="markaU" prefWidth="110.0" text="Marka" />
                       <TableColumn fx:id="modelU" prefWidth="130.0" text="Model" />
-                        <TableColumn fx:id="uslugaU" prefWidth="354.0" text="Usługa" />
-                        <TableColumn fx:id="dataU" prefWidth="75.0" text="Data" />
+                        <TableColumn fx:id="uslugaU" prefWidth="359.0" text="Usługa" />
+                        <TableColumn fx:id="dataU" prefWidth="70.0" text="Data" />
                     </columns>
                   </TableView>
                   <TextField fx:id="szukajUslugi" layoutX="178.0" layoutY="410.0" />

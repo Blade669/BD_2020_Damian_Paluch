@@ -1,0 +1,153 @@
+.root {
+    -fx-base: #111;
+    -fx-accent: darkgray ;
+    -fx-default-button: #7f878f ;
+    -fx-focus-color: -fx-accent;
+    -fx-faint-focus-color: #efefef22;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-focused-text-base-color : ladder(
+        -fx-selection-bar,
+        -fx-light-text-color 45%,
+        -fx-dark-text-color 46%,
+        -fx-dark-text-color 59%,
+        -fx-mid-text-color 60%
+        );
+    -fx-focused-mark-color : -fx-focused-text-base-color ;   
+
+}
+.text-input:focused {
+    -fx-highlight-text-fill: ladder(
+        -fx-highlight-fill,
+        -fx-light-text-color 45%,
+        -fx-dark-text-color  46%,
+        -fx-dark-text-color  59%,
+        -fx-mid-text-color   60%
+        );
+}
+
+.label{
+    -fx-text-fill: lightgray;
+}
+.text-field, .text-area, .date-picker, .combo-box{
+    -fx-border-style: solid;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: transparent;
+}
+.separator *.line { 
+    -fx-background-color: #3C3C3C;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
+
+.scroll-bar{
+    -fx-background-color: derive(-fx-base,45%)
+}
+
+.button:default {
+    -fx-base: -fx-accent ;
+} 
+
+.table-view{
+    -fx-background-color: derive(-fx-base, 10%);
+    -fx-selection-bar-non-focused: derive(-fx-base, 85%);
+}
+
+.table-view .column-header .label{
+    -fx-font-weight: none;
+}
+
+.table-view:focused .table-row-cell:focused {
+    -fx-border-color: derive(-fx-base, 20%);
+    -fx-background-insets: 0 0 0 0;
+    -fx-table-cell-border-color: transparent;
+}
+
+.combo-table-view{
+    -fx-selection-bar: -fx-accent;
+    -fx-selection-bar-non-focused: -fx-accent;
+}
+
+.table-row-cell:even{
+    -fx-table-cell-border-color: transparent;
+    -fx-control-inner-background: derive(-fx-base, 23%);
+}
+
+.table-row-cell:odd{
+    -fx-control-inner-background: derive(-fx-base, 0%);
+}
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background: darkgray ;
+
+}
+.table-row-cell:odd:filled:selected {
+    -fx-background: darkgray ;
+}
+
+
+.dialog-pane .button:default {
+    -fx-text-fill: white;
+    -fx-background-color: #1A1A1A;
+    -fx-border-color: #333333;
+    -fx-border-radius: 2px;
+    -fx-border-width: 1px;
+
+}
+
+.dialog-pane .button:hover {
+    -fx-background-color: #353535;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-border-color: #4D4D4D;
+}
+
+.dialog-pane .button:pressed {
+    -fx-background-color: #191919;
+    -fx-text-fill: #ffffff;
+}
+
+.date-picker > .text-field {
+    -fx-background-color:
+        linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
+    -fx-background-insets: 1 0 1 1;
+    -fx-background-radius: 2 0 0 2;
+}
+
+.date-picker:focused > .text-field,
+.date-picker > .text-field:focused {
+    -fx-background-color:
+        -fx-control-inner-background,
+        -fx-faint-focus-color,
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
+    -fx-background-insets: 1 0 1 1, 1 0 1 1, 3 2 3 3;
+    -fx-background-radius: 2 0 0 2, 1 0 0 1, 0;
+}
+
+.date-picker-popup > * > .week-number-cell {
+    -fx-text-fill: white;
+}
+.combo-box-popup .list-cell:selected {    
+    -fx-background-color: #6E6D6B;    
+    -fx-text-fill: white;
+}
+.combo-box-popup .list-cell:hover {    
+    -fx-background-color: black;    
+    -fx-text-fill: white;
+}
+
+.date-cell.selected {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+.date-cell:hover {
+    -fx-background-color: #2B2B2B;
+    -fx-text-fill: white;
+}
+.date-picker-popup > * > .today:focused {
+    -fx-cell-focus-inner-border: black;}

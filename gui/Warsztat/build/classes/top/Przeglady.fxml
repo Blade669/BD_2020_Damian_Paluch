@@ -9,19 +9,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.PrzegladyController">
+<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="700.0" stylesheets="@darkTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.PrzegladyController">
    <children>
-      <TextField layoutX="46.0" layoutY="83.0" />
-      <TextField layoutX="46.0" layoutY="133.0" />
-      <DatePicker layoutX="364.0" layoutY="158.0" />
-      <RadioButton layoutX="412.0" layoutY="63.0" mnemonicParsing="false" text="Pozytywny" />
-      <RadioButton layoutX="412.0" layoutY="87.0" mnemonicParsing="false" text="Negatywny" />
-      <TextArea layoutX="351.0" layoutY="208.0" prefHeight="144.0" prefWidth="200.0" />
-      <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" text="Zapisz" />
+      <TextField fx:id="wlasciciel" layoutX="28.0" layoutY="203.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="samochod" layoutX="28.0" layoutY="266.0" prefHeight="25.0" prefWidth="250.0" />
+      <DatePicker fx:id="data" layoutX="436.0" layoutY="154.0" />
+      <RadioButton fx:id="pozytywny" layoutX="484.0" layoutY="72.0" mnemonicParsing="false" onAction="#actionRadioPozytywny" text="Pozytywny" />
+      <RadioButton fx:id="negatywny" layoutX="484.0" layoutY="100.0" mnemonicParsing="false" onAction="#actionRadioNegatywny" text="Negatywny" />
+      <TextArea fx:id="uwagi" layoutX="402.0" layoutY="203.0" prefHeight="150.0" prefWidth="250.0" />
+      <Button layoutX="602.0" layoutY="362.0" mnemonicParsing="false" onAction="#actionZapiszPrzeglad" text="Zapisz" />
       <Accordion />
-      <Label layoutX="95.0" layoutY="63.0" text="Właściciel" />
-      <Label layoutX="92.0" layoutY="117.0" text="Samochód" />
-      <Label layoutX="414.0" layoutY="137.0" text="Data ważności" />
-      <Label layoutX="435.0" layoutY="192.0" text="Uwagi" />
+      <Label layoutX="128.0" layoutY="186.0" text="Właściciel" />
+      <Label layoutX="126.0" layoutY="249.0" text="Samochód" />
+      <Label layoutX="485.0" layoutY="137.0" text="Data ważności" />
+      <Label layoutX="506.0" layoutY="186.0" text="Uwagi" />
+      <Button layoutX="632.0" layoutY="432.0" mnemonicParsing="false" onAction="#actionPowrot" text="Powrót" />
    </children>
 </AnchorPane>

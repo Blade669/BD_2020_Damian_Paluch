@@ -1,11 +1,11 @@
 --------------------------------------------------------
---  File created - sobota-maja-16-2020   
+--  File created - wtorek-maja-19-2020   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence DIAGNOZY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."DIAGNOZY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."DIAGNOZY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 181 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence FUNKCJA_SEQ
 --------------------------------------------------------
@@ -15,12 +15,12 @@
 --  DDL for Sequence KLIENCI_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."KLIENCI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."KLIENCI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence KLIENCI_UZYTKOWNICY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."KLIENCI_UZYTKOWNICY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."KLIENCI_UZYTKOWNICY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 150 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence PRACOWNICY_SEQ
 --------------------------------------------------------
@@ -35,22 +35,22 @@
 --  DDL for Sequence PRZEGLADY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."PRZEGLADY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 67 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."PRZEGLADY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 127 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence SAMOCHODY_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 141 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 181 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence SAMOCHODY_USLUGI_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."SAMOCHODY_USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 121 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence USLUGI_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "C##WARSZTAT"."USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 51 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "C##WARSZTAT"."USLUGI_SEQ"  MINVALUE 1 MAXVALUE 2147483647 INCREMENT BY 1 START WITH 71 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Table DIAGNOZY
 --------------------------------------------------------
@@ -222,71 +222,59 @@
   TABLESPACE "USERS" ;
 REM INSERTING into C##WARSZTAT.DIAGNOZY
 SET DEFINE OFF;
-Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('62','23','FF',null,null,to_date('20/04/30','RR/MM/DD'));
-Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('63','23','FF',null,null,to_date('20/04/30','RR/MM/DD'));
-Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('81','101',null,'RRRRRRRR','1',to_date('20/04/30','RR/MM/DD'));
-Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('41','2','CC','FF','1',to_date('20/05/02','RR/MM/DD'));
-Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('42','23','CC','DFGH','1',to_date('20/05/02','RR/MM/DD'));
-Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('29','24','cff','FFFF','1',to_date('20/05/01','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('175','25','Auto nie odpala',null,null,to_date('20/05/29','RR/MM/DD'));
+Insert into C##WARSZTAT.DIAGNOZY (ID,ID_SAMOCHODU,UWAGI_KLIENTA,UWAGI_MECHANIKA,ID_MECHANIKA,DATA) values ('171','101',null,null,null,to_date('20/05/28','RR/MM/DD'));
 REM INSERTING into C##WARSZTAT.FUNKCJA
 SET DEFINE OFF;
 Insert into C##WARSZTAT.FUNKCJA (ID,NAZWA) values ('1','Mechanik');
 Insert into C##WARSZTAT.FUNKCJA (ID,NAZWA) values ('2','Administrator');
 REM INSERTING into C##WARSZTAT.KLIENCI
 SET DEFINE OFF;
-Insert into C##WARSZTAT.KLIENCI (ID,IMIE,NAZWISKO,NR_TEL,ID_UZYTKOWNIKA) values ('1','Piotr','Szmul','795374658','1');
+Insert into C##WARSZTAT.KLIENCI (ID,IMIE,NAZWISKO,NR_TEL,ID_UZYTKOWNIKA) values ('1','Piotr','Szmul','795374653','1');
 Insert into C##WARSZTAT.KLIENCI (ID,IMIE,NAZWISKO,NR_TEL,ID_UZYTKOWNIKA) values ('2','Karolina','Kasprzyk','675843946','2');
 REM INSERTING into C##WARSZTAT.KLIENCI_UZYTKOWNICY
 SET DEFINE OFF;
-Insert into C##WARSZTAT.KLIENCI_UZYTKOWNICY (ID,LOGIN,HASLO) values ('1','klient','klient');
+Insert into C##WARSZTAT.KLIENCI_UZYTKOWNICY (ID,LOGIN,HASLO) values ('1','klient','klient1');
 Insert into C##WARSZTAT.KLIENCI_UZYTKOWNICY (ID,LOGIN,HASLO) values ('2','klient2','klient2');
-Insert into C##WARSZTAT.KLIENCI_UZYTKOWNICY (ID,LOGIN,HASLO) values ('25','fff','ffff');
 REM INSERTING into C##WARSZTAT.PRACOWNICY
 SET DEFINE OFF;
 Insert into C##WARSZTAT.PRACOWNICY (ID,IMIE,NAZWISKO,NR_TEL,ADRES,ID_UZYTKOWNIKA) values ('1','Wojciech','Skrzypek','756473846','Rzeszow Podwislocze 12','1');
 Insert into C##WARSZTAT.PRACOWNICY (ID,IMIE,NAZWISKO,NR_TEL,ADRES,ID_UZYTKOWNIKA) values ('2','Karolina','Szpila','657483759','Lezajsk Rynek 4','2');
 REM INSERTING into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY
 SET DEFINE OFF;
-Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUNKCJI) values ('1','m','m','1');
-Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUNKCJI) values ('2','administrator','administrator','2');
+Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUNKCJI) values ('1','mechanik','mechanik1','1');
+Insert into C##WARSZTAT.PRACOWNICY_UZYTKOWNICY (ID,LOGIN,HASLO,ID_FUNKCJI) values ('2','administrator','administrator1','2');
 REM INSERTING into C##WARSZTAT.PRZEGLADY
 SET DEFINE OFF;
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('8','2',to_date('20/05/08','RR/MM/DD'),to_date('25/05/23','RR/MM/DD'),'1',null,null);
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('29','2',to_date('20/05/28','RR/MM/DD'),to_date('20/05/22','RR/MM/DD'),'1','POZYTYWNY','TTTTTT');
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('10','2',to_date('06/05/25','RR/MM/DD'),to_date('21/05/22','RR/MM/DD'),'1','POZYTYWNY','FFF');
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('9','24',to_date('20/05/14','RR/MM/DD'),to_date('15/05/14','RR/MM/DD'),'1',null,'fwsefsd');
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('12','2',to_date('06/05/25','RR/MM/DD'),null,null,null,null);
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('30','2',to_date('20/05/28','RR/MM/DD'),null,null,null,null);
-Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('7','2',to_date('55/11/11','RR/MM/DD'),null,null,null,null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('109','2',to_date('20/05/21','RR/MM/DD'),null,null,null,null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('29','2',to_date('20/05/28','RR/MM/DD'),to_date('20/05/22','RR/MM/DD'),'1','POZYTYWNY',null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('10','2',to_date('20/05/25','RR/MM/DD'),to_date('21/05/22','RR/MM/DD'),'1','POZYTYWNY',null);
+Insert into C##WARSZTAT.PRZEGLADY (ID,ID_SAMOCHODU,DATA,DATA_WAZNOSCI,ID_MECHANIKA,WYNIK,UWAGI) values ('108','2',to_date('20/05/21','RR/MM/DD'),null,null,null,null);
 REM INSERTING into C##WARSZTAT.SAMOCHODY
 SET DEFINE OFF;
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('1','LEXUS','IS 200','1988','1998','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('2','DODGE','VIPER','6198','2012','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('23','LEXUS','LFA','4679','2016','1');
-Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('24','LEXUS','GS 430','g','2000','1');
+Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('24','LEXUS','GS 430','4290','2000','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('22','CHEVROLET','CORVETTE','5420','2010','2');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('101','ALFA ROMEO','GULIA','3000','2019','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('43','TOYOTA','SUPRA','2980','1997','2');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('25','LEXUS','IS F','4600','2019','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('121','ASTON MARTIN','DB9','5935','2008','1');
+Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('141','NISSAN','SKYLINE R34','3489','1996','1');
 Insert into C##WARSZTAT.SAMOCHODY (ID,MARKA,MODEL,POJ_SILNIKA,ROK,ID_KLIENTA) values ('122','ALFA ROMEO','159','3489','2008','1');
 REM INSERTING into C##WARSZTAT.SAMOCHODY_USLUGI
 SET DEFINE OFF;
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('2','2','1','1',to_date('20/05/01','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('1','1','1','1',to_date('20/05/05','RR/MM/DD'));
-Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('3','2','2','1',to_date('20/04/24','RR/MM/DD'));
-Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('43','2','1',null,to_date('20/06/04','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('23','1','2','1',to_date('20/04/29','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('21','2','23',null,to_date('30/05/11','RR/MM/DD'));
 Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('24','1','23',null,to_date('20/04/29','RR/MM/DD'));
-Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('25','2','23',null,to_date('20/05/05','RR/MM/DD'));
-Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('44','2','1',null,to_date('20/06/04','RR/MM/DD'));
-Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('13','1','25',null,to_date('17/05/20','RR/MM/DD'));
-Insert into C##WARSZTAT.SAMOCHODY_USLUGI (ID,ID_USLUGI,ID_SAMOCHODU,ID_MECHANIKA,DATA) values ('14','1','2',null,to_date('04/05/13','RR/MM/DD'));
 REM INSERTING into C##WARSZTAT.USLUGI
 SET DEFINE OFF;
 Insert into C##WARSZTAT.USLUGI (ID,NAZWA,OPIS) values ('1','Wymiana 2 opon','Usluga obejmuje zdjecie kol z jednej osi, wymiane opon i ponowne zalozenie.');
 Insert into C##WARSZTAT.USLUGI (ID,NAZWA,OPIS) values ('2','Wymiana oleju','Usluga obejmuje wymiane oleju z filtrem oleju.');
+Insert into C##WARSZTAT.USLUGI (ID,NAZWA,OPIS) values ('51','Ustawienie geometrii kó³','W ka¿dym kole jest ustawiana zbie¿noœæ i k¹ty pochylenia.');
 --------------------------------------------------------
 --  DDL for Index DIAGNOZY_PK
 --------------------------------------------------------
@@ -428,6 +416,90 @@ Insert into C##WARSZTAT.USLUGI (ID,NAZWA,OPIS) values ('2','Wymiana oleju','Uslu
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS" ;
 --------------------------------------------------------
+--  DDL for Trigger BLEDNA_DATA_DIAGNOZY
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."BLEDNA_DATA_DIAGNOZY" 
+before insert or update on diagnozy
+for each row
+begin
+if :new.data < CURRENT_TIMESTAMP THEN
+RAISE_APPLICATION_ERROR( -20006, 'Data z przeszlosci' );
+end if;
+end;
+/
+ALTER TRIGGER "C##WARSZTAT"."BLEDNA_DATA_DIAGNOZY" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger BLEDNA_DATA_PRZEGLADU
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."BLEDNA_DATA_PRZEGLADU" 
+before insert or update on przeglady
+for each row
+begin
+if :new.data < CURRENT_TIMESTAMP THEN
+RAISE_APPLICATION_ERROR( -20006, 'Data z przeszlosci' );
+end if;
+end;
+/
+ALTER TRIGGER "C##WARSZTAT"."BLEDNA_DATA_PRZEGLADU" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger BLEDNA_DATA_USLUGI
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."BLEDNA_DATA_USLUGI" 
+before insert or update on samochody_uslugi
+for each row
+begin
+if :new.data < CURRENT_TIMESTAMP THEN
+RAISE_APPLICATION_ERROR( -20006, 'Data z przeszlosci' );
+end if;
+end;
+/
+ALTER TRIGGER "C##WARSZTAT"."BLEDNA_DATA_USLUGI" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger DATA_W_WEEKEND_DIAGNOZY
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."DATA_W_WEEKEND_DIAGNOZY" 
+before insert or update on diagnozy
+for each row
+begin
+IF TO_CHAR(:NEW.DATA,'d') > 5 THEN
+RAISE_APPLICATION_ERROR( -20007, 'Nie pracujemy w weekend' );
+end if;
+end;
+/
+ALTER TRIGGER "C##WARSZTAT"."DATA_W_WEEKEND_DIAGNOZY" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger DATA_W_WEEKEND_PRZEGLADY
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."DATA_W_WEEKEND_PRZEGLADY" 
+before insert or update on przeglady
+for each row
+begin
+IF TO_CHAR(:NEW.DATA,'d') > 5 THEN
+RAISE_APPLICATION_ERROR( -20007, 'Nie pracujemy w weekend' );
+end if;
+end;
+/
+ALTER TRIGGER "C##WARSZTAT"."DATA_W_WEEKEND_PRZEGLADY" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger DATA_W_WEEKEND_USLUGI
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."DATA_W_WEEKEND_USLUGI" 
+before insert or update on samochody_uslugi
+for each row
+begin
+IF TO_CHAR(:NEW.DATA,'d') > 5 THEN
+RAISE_APPLICATION_ERROR( -20007, 'Nie pracujemy w weekend' );
+end if;
+end;
+/
+ALTER TRIGGER "C##WARSZTAT"."DATA_W_WEEKEND_USLUGI" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger DIAGNOZY_TRG
 --------------------------------------------------------
 
@@ -461,6 +533,26 @@ BEGIN
 END;
 /
 ALTER TRIGGER "C##WARSZTAT"."FUNKCJA_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger HASLO
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."HASLO" BEFORE
+    INSERT ON klienci_uzytkownicy
+    FOR EACH ROW
+BEGIN
+    IF length(:new.haslo) < 6 THEN
+        raise_application_error(-20002, 'Haslo musi zawierac przynajmniej 6 znakow');
+    END IF;
+
+    IF regexp_INSTR(:new.haslo, '[[:digit:]]') = 0 THEN
+        raise_application_error(-20003, 'Haslo musi zawierac cyfre');
+    END IF;
+
+    NULL;
+END;
+/
+ALTER TRIGGER "C##WARSZTAT"."HASLO" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger KLIENCI_TRG
 --------------------------------------------------------
@@ -496,6 +588,40 @@ END;
 /
 ALTER TRIGGER "C##WARSZTAT"."KLIENCI_UZYTKOWNICY_TRG" ENABLE;
 --------------------------------------------------------
+--  DDL for Trigger KROTKI_LOGIN
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."KROTKI_LOGIN" BEFORE
+    INSERT ON KLIENCI_uzytkownicy
+    FOR EACH ROW
+BEGIN
+    IF length(:new.login) < 6 THEN
+        raise_application_error(-20001, 'Login musi zawieraæ przynajmniej 6 znaków');
+    END IF;
+
+    NULL;
+
+end;
+/
+ALTER TRIGGER "C##WARSZTAT"."KROTKI_LOGIN" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger KROTKI_NUMER
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."KROTKI_NUMER" BEFORE
+    INSERT ON KLIENCI
+    FOR EACH ROW
+BEGIN
+    IF  length(:new.nr_tel) < 9 THEN
+        raise_application_error(-20004, 'Numer telefonu musi zawierac 9 cyfr');
+    END IF;
+
+    NULL;
+
+end;
+/
+ALTER TRIGGER "C##WARSZTAT"."KROTKI_NUMER" ENABLE;
+--------------------------------------------------------
 --  DDL for Trigger PRACOWNICY_TRG
 --------------------------------------------------------
 
@@ -522,7 +648,9 @@ FOR EACH ROW
 BEGIN
   <<COLUMN_SEQUENCES>>
   BEGIN
-    NULL;
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT PRACOWNICY_UZYTKOWNICY_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
   END COLUMN_SEQUENCES;
 END;
 /
@@ -537,28 +665,13 @@ FOR EACH ROW
 BEGIN
   <<COLUMN_SEQUENCES>>
   BEGIN
-    NULL;
-  END COLUMN_SEQUENCES;
-END;
-/
-ALTER TRIGGER "C##WARSZTAT"."PRZEGLADY_TRG" ENABLE;
---------------------------------------------------------
---  DDL for Trigger PRZEGLADY_TRG1
---------------------------------------------------------
-
-  CREATE OR REPLACE EDITIONABLE TRIGGER "C##WARSZTAT"."PRZEGLADY_TRG1" 
-BEFORE INSERT ON PRZEGLADY 
-FOR EACH ROW 
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
     IF INSERTING AND :NEW.ID IS NULL THEN
       SELECT PRZEGLADY_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
     END IF;
   END COLUMN_SEQUENCES;
 END;
 /
-ALTER TRIGGER "C##WARSZTAT"."PRZEGLADY_TRG1" ENABLE;
+ALTER TRIGGER "C##WARSZTAT"."PRZEGLADY_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger SAMOCHODY_TRG
 --------------------------------------------------------
@@ -610,6 +723,32 @@ BEGIN
 END;
 /
 ALTER TRIGGER "C##WARSZTAT"."USLUGI_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Package CZY_MOZNA
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE PACKAGE "C##WARSZTAT"."CZY_MOZNA" AS
+    FUNCTION czy_mozna_diagnozy (
+        d_data IN VARCHAR2
+    ) RETURN NUMBER;
+
+    FUNCTION czy_mozna_przeglady (
+        p_data IN VARCHAR2
+    ) RETURN NUMBER;
+
+    FUNCTION czy_mozna_uslugi (
+        u_data IN VARCHAR2
+    ) RETURN NUMBER;
+
+    PROCEDURE czy_mozna_samochod (
+        s_marka       IN  samochody.marka%TYPE,
+        s_model       IN  samochody.model%TYPE,
+        s_id_klienta  IN  samochody.id_klienta%TYPE
+    ) ;
+
+END czy_mozna;
+
+/
 --------------------------------------------------------
 --  DDL for Package DODAJ_DANE
 --------------------------------------------------------
@@ -682,6 +821,18 @@ END dodaj_dane;
         p_adres     IN  pracownicy.adres%TYPE
     );
 
+    PROCEDURE edytuj_diagnoze (
+        d_id               IN  diagnozy.id%TYPE,
+        d_uwagi_mechanika  IN  diagnozy.uwagi_mechanika%TYPE
+    );
+
+    PROCEDURE edytuj_przeglad (
+        p_id             IN  przeglady.id%TYPE,
+        p_data_waznosci  IN  przeglady.data_waznosci%TYPE,
+        p_wynik          IN  przeglady.wynik%TYPE,
+        p_uwagi          IN  przeglady.uwagi%TYPE
+    );
+
 END edytuj_dane;
 
 /
@@ -691,11 +842,12 @@ END edytuj_dane;
 
   CREATE OR REPLACE EDITIONABLE PACKAGE "C##WARSZTAT"."KLIENT_REJESTRACJA" AS
     PROCEDURE rejestruj_klienta (
-        ku_login    IN  klienci_uzytkownicy.login%TYPE,
-        ku_haslo    IN  klienci_uzytkownicy.haslo%TYPE,
-        k_imie      IN  klienci.imie%TYPE,
-        k_nazwisko  IN  klienci.nazwisko%TYPE,
-        k_nr_tel    IN  klienci.nr_tel%TYPE
+        ku_login          IN  klienci_uzytkownicy.login%TYPE,
+        ku_haslo          IN  klienci_uzytkownicy.haslo%TYPE,
+        ku_powtorz_haslo  IN  klienci_uzytkownicy.haslo%TYPE,
+        k_imie            IN  klienci.imie%TYPE,
+        k_nazwisko        IN  klienci.nazwisko%TYPE,
+        k_nr_tel          IN  klienci.nr_tel%TYPE
     );
 
 END klient_rejestracja;
@@ -813,6 +965,108 @@ END szukaj_danych;
     );
 
 END usun_dane;
+
+/
+--------------------------------------------------------
+--  DDL for Package WALIDACJA
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE PACKAGE "C##WARSZTAT"."WALIDACJA" AS
+    FUNCTION czy_puste (
+        sprawdz VARCHAR2
+    ) RETURN NUMBER;
+
+END walidacja;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body CZY_MOZNA
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."CZY_MOZNA" AS
+
+    FUNCTION czy_mozna_diagnozy (
+        d_data IN VARCHAR2
+    ) RETURN NUMBER AS
+        licznik NUMBER;
+    BEGIN
+        SELECT
+            COUNT(data)
+        INTO licznik
+        FROM
+            diagnozy
+        WHERE
+            to_char(CAST(diagnozy.data AS TIMESTAMP), 'YYYY/MM/DD') = to_char(CAST(d_data AS TIMESTAMP), 'YYYY/MM/DD');
+
+        IF licznik >= 3 THEN
+            RETURN 1;
+        ELSE
+            RETURN 0;
+        END IF;
+    END czy_mozna_diagnozy;
+
+    FUNCTION czy_mozna_przeglady (
+        p_data IN VARCHAR2
+    ) RETURN NUMBER AS
+        licznik NUMBER;
+    BEGIN
+        SELECT
+            COUNT(data)
+        INTO licznik
+        FROM
+            przeglady
+        WHERE
+            to_char(CAST(data AS TIMESTAMP), 'YYYY/MM/DD') = to_char(CAST(p_data AS TIMESTAMP), 'YYYY/MM/DD');
+
+        IF licznik >= 10 THEN
+            RETURN 1;
+        ELSE
+            RETURN 0;
+        END IF;
+    END czy_mozna_przeglady;
+
+    FUNCTION czy_mozna_uslugi (
+        u_data IN VARCHAR2
+    ) RETURN NUMBER AS
+        licznik NUMBER;
+    BEGIN
+        SELECT
+            COUNT(data)
+        INTO licznik
+        FROM
+            samochody_uslugi
+        WHERE
+            to_char(CAST(data AS TIMESTAMP), 'YYYY/MM/DD') = to_char(CAST(u_data AS TIMESTAMP), 'YYYY/MM/DD');
+
+        IF licznik >= 15 THEN
+            RETURN 1;
+        ELSE
+            RETURN 0;
+        END IF;
+    END czy_mozna_uslugi;
+
+    PROCEDURE czy_mozna_samochod (
+        s_marka       IN  samochody.marka%TYPE,
+        s_model       IN  samochody.model%TYPE,
+        s_id_klienta  IN  samochody.id_klienta%TYPE
+    ) AS
+        licznik NUMBER;
+    BEGIN
+        SELECT
+            count(*)
+        INTO licznik
+        FROM
+            samochody
+        WHERE
+                marka = upper(s_marka)
+            AND model = upper(s_model)
+            AND id_klienta = s_id_klienta;
+
+        IF licznik > 0 THEN
+            raise_application_error(-20008, 'Samochod istnieje w bazie');
+        END IF;
+        end czy_mozna_samochod;
+    END czy_mozna;
 
 /
 --------------------------------------------------------
@@ -999,6 +1253,38 @@ END dodaj_dane;
         NULL;
     END edytuj_pracownikow;
 
+    PROCEDURE edytuj_diagnoze (
+        d_id               IN  diagnozy.id%TYPE,
+        d_uwagi_mechanika  IN  diagnozy.uwagi_mechanika%TYPE
+    ) AS
+    BEGIN
+        UPDATE diagnozy
+        SET
+            diagnozy.uwagi_mechanika = d_uwagi_mechanika
+        WHERE
+            id = d_id;
+
+        NULL;
+    END edytuj_diagnoze;
+
+    PROCEDURE edytuj_przeglad (
+        p_id             IN  przeglady.id%TYPE,
+        p_data_waznosci  IN  przeglady.data_waznosci%TYPE,
+        p_wynik          IN  przeglady.wynik%TYPE,
+        p_uwagi          IN  przeglady.uwagi%TYPE
+    ) AS
+    BEGIN
+        UPDATE przeglady
+        SET
+            przeglady.data_waznosci = p_data_waznosci,
+            przeglady.wynik = upper(p_wynik),
+            przeglady.uwagi = p_uwagi
+        WHERE
+            przeglady.id = p_id;
+
+        NULL;
+    END edytuj_przeglad;
+
 END edytuj_dane;
 
 /
@@ -1006,45 +1292,47 @@ END edytuj_dane;
 --  DDL for Package Body KLIENT_REJESTRACJA
 --------------------------------------------------------
 
-  CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."KLIENT_REJESTRACJA" AS PROCEDURE rejestruj_klienta (
-    ku_login    IN  klienci_uzytkownicy.login%TYPE,
-    ku_haslo    IN  klienci_uzytkownicy.haslo%TYPE,
-    k_imie      IN  klienci.imie%TYPE,
-    k_nazwisko  IN  klienci.nazwisko%TYPE,
-    k_nr_tel    IN  klienci.nr_tel%TYPE
-) IS 
-    zmienna NUMBER;
-BEGIN
-    INSERT INTO klienci_uzytkownicy (
-        login,
-        haslo
-    ) VALUES (
-        ku_login,
-        ku_haslo
-    );
+  CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."KLIENT_REJESTRACJA" AS
 
-    SELECT
-        id
-    INTO zmienna
-    FROM
-        klienci_uzytkownicy
-        where login = ku_login and haslo = ku_haslo;
+    PROCEDURE rejestruj_klienta (
+        ku_login          IN  klienci_uzytkownicy.login%TYPE,
+        ku_haslo          IN  klienci_uzytkownicy.haslo%TYPE,
+        ku_powtorz_haslo  IN  klienci_uzytkownicy.haslo%TYPE,
+        k_imie            IN  klienci.imie%TYPE,
+        k_nazwisko        IN  klienci.nazwisko%TYPE,
+        k_nr_tel          IN  klienci.nr_tel%TYPE
+    ) IS
+        zmienna NUMBER;
+    BEGIN
+        IF ( ku_haslo ) LIKE ku_powtorz_haslo THEN
+            INSERT INTO klienci_uzytkownicy (
+                login,
+                haslo
+            ) VALUES (
+                ku_login,
+                ku_haslo
+            ) RETURNING id INTO zmienna;
 
-    INSERT INTO klienci (
-        imie,
-        nazwisko,
-        nr_tel,
-        id_uzytkownika
-    ) VALUES (
-        k_imie,
-        k_nazwisko,
-        k_nr_tel,
-        zmienna
-    );
+            INSERT INTO klienci (
+                imie,
+                nazwisko,
+                nr_tel,
+                id_uzytkownika
+            ) VALUES (
+                initcap(k_imie),
+                initcap(k_nazwisko),
+                k_nr_tel,
+                zmienna
+            );
 
-    COMMIT;
-    NULL;
-END rejestruj_klienta;
+            COMMIT;
+        ELSE
+            raise_application_error(-20005, 'Hasla sie roznia');
+        END IF;
+
+        NULL;
+    END rejestruj_klienta;
+
 END klient_rejestracja;
 
 /
@@ -1071,7 +1359,7 @@ END klient_rejestracja;
 
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20000, 'Bledne dane!');
+            raise_application_error(-20000, 'Bledne dane logowania');
     END klient_logowanie;
 
     PROCEDURE mechanik_logowanie (
@@ -1092,7 +1380,7 @@ END klient_rejestracja;
 
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20000, 'Bledne dane!');
+            raise_application_error(-20000, 'Bledne dane logowania');
     END mechanik_logowanie;
     
         PROCEDURE administrator_logowanie (
@@ -1113,7 +1401,7 @@ END klient_rejestracja;
 
     EXCEPTION
         WHEN no_data_found THEN
-            raise_application_error(-20000, 'Bledne dane!');
+            raise_application_error(-20000, 'Bledne dane logowania');
     END administrator_logowanie;
 
 END logowanie;
@@ -1290,7 +1578,7 @@ END obsluz_dane;
                               AND ( ( instr(upper(imie), upper(pr_szukane), 1) ) > 0
                                     OR ( instr(upper(nazwisko), upper(pr_szukane), 1) ) > 0
                                     OR ( instr(nr_tel, pr_szukane, 1) > 0
-                                         OR ( instr(upper(adres), upper(pr_szukane), 1) ) > 0 ) );
+                                    OR ( instr(upper(adres), upper(pr_szukane), 1) ) > 0 ) );
 
         NULL;
     END szukaj_pracownika;
@@ -1388,6 +1676,26 @@ END szukaj_danych;
     END usun_samochod;
 
 END usun_dane;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body WALIDACJA
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE PACKAGE BODY "C##WARSZTAT"."WALIDACJA" AS
+
+    FUNCTION czy_puste (
+        sprawdz VARCHAR2
+    ) RETURN NUMBER AS
+    BEGIN
+        IF length(sprawdz) > 0 THEN
+            RETURN 1;
+        ELSE
+            RETURN 0;
+        END IF;
+    END czy_puste;
+
+END walidacja;
 
 /
 --------------------------------------------------------

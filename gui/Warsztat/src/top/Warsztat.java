@@ -27,7 +27,7 @@ public class Warsztat extends Application {
         SceneMenager.addScene("diagnozy", "/top/Diagnozy.fxml");
         
         SceneMenager.renderScene("logowanie");
-    
+
     }
 
     public static void main(String[] args) {

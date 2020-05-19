@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.text.ParseException;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -30,6 +31,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -38,6 +40,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import oracle.jdbc.OracleTypes;
+import static top.KlienciController.czyLiczba;
 import static top.Polaczenie.getConnection;
 import static top.SceneMenager.renderScene;
 
@@ -133,6 +136,28 @@ public class AdministratorzyController implements Initializable {
     private int idUslugi = 0;
     private int idPracownika = 0;
 
+    private void alertInformacja(String tekst, String blad) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(tekst);
+        alert.setContentText(blad);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/top/darkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        alert.showAndWait();
+    }
+
+    private void alertBlad(String tekst, String blad) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(tekst);
+        alert.setContentText(blad);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/top/darkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        alert.showAndWait();
+    }
+
     @FXML
     private void actionSzukajEdycjiUslugi(ActionEvent event) throws ParseException, IOException {
 
@@ -145,7 +170,7 @@ public class AdministratorzyController implements Initializable {
             stmt.registerOutParameter(2, OracleTypes.CURSOR);
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getObject(2);
-            uslugi.getItems().clear();
+            edycjaUslug.getItems().clear();
             while (rs.next()) {
                 Uslugi nowa = new Uslugi(rs.getInt(1), rs.getString(2), rs.getString(3));
                 edycjaUslug.getItems().add(nowa);
@@ -158,11 +183,12 @@ public class AdministratorzyController implements Initializable {
 
     @FXML
     private void actionEdytujUsluge(ActionEvent event) throws ParseException, IOException {
-
+        nazwaE.setDisable(false);
+        opisE.setDisable(false);
         try {
             Connection con = getConnection();
             PreparedStatement pstmt = con.prepareStatement("select * from uslugi where id = ?");
-            pstmt.setInt(1, uslugi.getSelectionModel().getSelectedItem().getId());
+            pstmt.setInt(1, edycjaUslug.getSelectionModel().getSelectedItem().getId());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 nazwaE.setText(rs.getString(2));
@@ -175,63 +201,62 @@ public class AdministratorzyController implements Initializable {
     }
 
     @FXML
-    private void actionZapiszUsluge(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_uslugi(?,?,?)");
-            cstmt.setInt(1, idUslugi);
-            cstmt.setString(2, nazwaE.getText());
-            cstmt.setString(3, opisE.getText());
-            cstmt.executeQuery();
-            uzupelnijUslugi();
+    private void actionZapiszUsluge(ActionEvent event) throws ParseException, IOException, SQLException {
+        nazwaE.setStyle("-fx-border-color: transparent");
+        opisE.setStyle("-fx-border-color: transparent");
+        if (idUslugi != 0 && sprawdzBledyEdycjaUslugi()) {
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_uslugi(?,?,?)");
+                cstmt.setInt(1, idUslugi);
+                cstmt.setString(2, nazwaE.getText());
+                cstmt.setString(3, opisE.getText());
+                cstmt.executeQuery();
+                uzupelnijEdycjeUslug();
 
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Dodaj diagnoze");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                alertInformacja("Edytuj usługe", "Operacja powiodła się");
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Dodaj diagnoze");
-            bad.setHeaderText("Wprowadzono błędne dane");
-            bad.showAndWait();
+            } catch (SQLException ex) {
+                alertBlad("Edytuj usługe", "Operacja nie powiodła się");
+            }
         }
     }
 
     @FXML
-    private void actionDodajUsluge(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_usluge_admin(?,?)");
-            cstmt.setString(1, nazwaD.getText());
-            cstmt.setString(2, opisD.getText());
-            cstmt.executeQuery();
-            uzupelnijUslugi();
+    private void actionDodajUsluge(ActionEvent event) throws ParseException, IOException, SQLException {
+        nazwaD.setStyle("-fx-border-color: transparent");
+        opisD.setStyle("-fx-border-color: transparent");
+        if (sprawdzBledyDodajUsluge()) {
+            try {
 
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Dodaj diagnoze");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_usluge_admin(?,?)");
+                cstmt.setString(1, nazwaD.getText());
+                cstmt.setString(2, opisD.getText());
+                cstmt.executeQuery();
+                uzupelnijEdycjeUslug();
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Dodaj diagnoze");
-            bad.setHeaderText("Wprowadzono błędne dane");
-            bad.showAndWait();
+                alertInformacja("Dodaj usługe", "Operacja powiodła się");
+
+            } catch (SQLException ex) {
+                alertBlad("Dodaj usługe", "Operacja nie powiodła się");
+            }
         }
     }
 
     @FXML
     private void actionEdytujPracownika(ActionEvent event) throws ParseException, IOException {
-        idPracownika = pracownicy.getSelectionModel().getSelectedItem().getId();
-        imieE.setText(pracownicy.getSelectionModel().getSelectedItem().getImie());
-        nazwiskoE.setText(pracownicy.getSelectionModel().getSelectedItem().getNazwisko());
-        nrTelE.setText(Long.toString(pracownicy.getSelectionModel().getSelectedItem().getNr_tel()));
-        adresE.setText(pracownicy.getSelectionModel().getSelectedItem().getAdres());
-        imieE.setDisable(false);
-        nazwiskoE.setDisable(false);
-        nrTelE.setDisable(false);
-        adresE.setDisable(false);
+        if (pracownicy.getSelectionModel().getSelectedIndex() != - 1) {
+            idPracownika = pracownicy.getSelectionModel().getSelectedItem().getId();
+            imieE.setText(pracownicy.getSelectionModel().getSelectedItem().getImie());
+            nazwiskoE.setText(pracownicy.getSelectionModel().getSelectedItem().getNazwisko());
+            nrTelE.setText(Long.toString(pracownicy.getSelectionModel().getSelectedItem().getNr_tel()));
+            adresE.setText(pracownicy.getSelectionModel().getSelectedItem().getAdres());
+            imieE.setDisable(false);
+            nazwiskoE.setDisable(false);
+            nrTelE.setDisable(false);
+            adresE.setDisable(false);
+        }
     }
 
     @FXML
@@ -279,7 +304,7 @@ public class AdministratorzyController implements Initializable {
             System.out.println("cd");
         }
     }
-    
+
     @FXML
     private void actionSzukajPrzegladu(ActionEvent event) throws ParseException, IOException {
 
@@ -303,7 +328,6 @@ public class AdministratorzyController implements Initializable {
         }
     }
 
-    
     @FXML
     private void actionSzukajUslugi(ActionEvent event) throws ParseException, IOException {
 
@@ -328,29 +352,108 @@ public class AdministratorzyController implements Initializable {
     }
 
     @FXML
-    private void actionZapiszPracownika(ActionEvent event) throws ParseException, IOException {
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_pracownikow(?,?,?,?,?)");
-            cstmt.setInt(1, idPracownika);
-            cstmt.setString(2, imieE.getText());
-            cstmt.setString(3, nazwiskoE.getText());
-            cstmt.setString(4, nrTelE.getText());
-            cstmt.setString(5, adresE.getText());
-            cstmt.executeQuery();
-            uzupelnijPracownikow();
+    private void actionZapiszPracownika(ActionEvent event) throws ParseException, IOException, SQLException {
+        imieE.setStyle("-fx-border-color: transparent");
+        nazwiskoE.setStyle("-fx-border-color: transparent");
+        nrTelE.setStyle("-fx-border-color: transparent");
+        adresE.setStyle("-fx-border-color: transparent");
+        if (idPracownika != 0 && sprawdzBledyEdytujPracownika()) {
+            try {
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_pracownikow(?,?,?,?,?)");
+                cstmt.setInt(1, idPracownika);
+                cstmt.setString(2, imieE.getText());
+                cstmt.setString(3, nazwiskoE.getText());
+                cstmt.setString(4, nrTelE.getText());
+                cstmt.setString(5, adresE.getText());
+                cstmt.executeQuery();
+                uzupelnijPracownikow();
 
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Dodaj diagnoze");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+                alertInformacja("Dodaj diagnoze", "Operacja powiodła się");
 
-        } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Dodaj diagnoze");
-            bad.setHeaderText("Wprowadzono błędne dane");
-            bad.showAndWait();
+            } catch (SQLException ex) {
+                alertBlad("Dodaj diagnoze", "Operacja nie powiodła się");
+            }
         }
+    }
+
+    private boolean sprawdzDane(TextField tf) throws SQLException {
+        Connection con = getConnection();
+        CallableStatement cstmt = con.prepareCall("{? = call walidacja.czy_puste(?)}");
+        cstmt.registerOutParameter(1, Types.NUMERIC);
+        cstmt.setString(2, tf.getText());
+        cstmt.executeQuery();
+        if (cstmt.getInt(1) == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean sprawdzDane(TextArea ta) throws SQLException {
+        Connection con = getConnection();
+        CallableStatement cstmt = con.prepareCall("{? = call walidacja.czy_puste(?)}");
+        cstmt.registerOutParameter(1, Types.NUMERIC);
+        cstmt.setString(2, ta.getText());
+        cstmt.executeQuery();
+        if (cstmt.getInt(1) == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean sprawdzBledyDodajUsluge() throws SQLException {
+        boolean blad = true;
+        if (sprawdzDane(nazwaD)) {
+            nazwaD.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(opisD)) {
+            opisD.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+
+        return blad;
+    }
+
+    private boolean sprawdzBledyEdycjaUslugi() throws SQLException {
+        boolean blad = true;
+        if (!nazwaE.isDisabled()) {
+            if (sprawdzDane(nazwaE)) {
+                nazwaE.setStyle("-fx-border-color: red");
+                blad = false;
+            }
+            if (sprawdzDane(opisE)) {
+                opisE.setStyle("-fx-border-color: red");
+                blad = false;
+            }
+        }
+
+        return blad;
+    }
+
+    private boolean sprawdzBledyEdytujPracownika() throws SQLException {
+        boolean blad = true;
+        if (sprawdzDane(imieE)) {
+            imieE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(nazwiskoE)) {
+            nazwiskoE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(nrTelE)) {
+            nrTelE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(adresE)) {
+            adresE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (czyLiczba(nrTel.getText())) {
+            nrTelE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        return blad;
     }
 
     private void uzupelnijEdycjeUslug() {
@@ -411,7 +514,7 @@ public class AdministratorzyController implements Initializable {
             ed.printStackTrace();
         }
     }
-    
+
     private void uzupelnijPrzeglady() {
         try {
             Connection con = getConnection();
@@ -432,7 +535,7 @@ public class AdministratorzyController implements Initializable {
             ed.printStackTrace();
         }
     }
-    
+
     private void uzupelnijUslugi() {
         try {
             Connection con = getConnection();
@@ -483,17 +586,21 @@ public class AdministratorzyController implements Initializable {
         uzupelnijDiagnozy();
         uzupelnijPrzeglady();
         uzupelnijUslugi();
-        
+
         wyloguj.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event t) {
                 if (wyloguj.isSelected()) {
                     try {
-                        Alert delete = new Alert(Alert.AlertType.CONFIRMATION);
-                        delete.setTitle("Wylogowywanie");
-                        delete.setHeaderText("Na pewno?");
-                        Optional<ButtonType> cos = delete.showAndWait();
-                        if (cos.get() == ButtonType.OK) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Wylogowywanie");
+                        alert.setHeaderText("Na pewno?");
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.getStylesheets().add(
+                                getClass().getResource("/top/darkTheme.css").toExternalForm());
+                        dialogPane.getStyleClass().add("alert");
+                        Optional<ButtonType> tak = alert.showAndWait();
+                        if (tak.get() == ButtonType.OK) {
                             renderScene("logowanie");
                         } else {
                             tabPane.getSelectionModel().selectFirst();

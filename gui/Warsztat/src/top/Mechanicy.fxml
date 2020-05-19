@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.MechanicyController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@darkTheme.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="top.MechanicyController">
   <tabs>
     <Tab text="Diagnozy">
       <content>
@@ -87,9 +87,9 @@
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="Edytuj dane">
+      <Tab fx:id="edycjaDanych" text="Edytuj dane">
         <content>
-          <AnchorPane fx:id="pierwsza" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane fx:id="edytujDane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TableView fx:id="diagnozyE" layoutX="14.0" layoutY="39.0" prefHeight="127.0" prefWidth="514.0">
                     <columns>
@@ -120,9 +120,8 @@
                   <Button layoutX="540.0" layoutY="141.0" mnemonicParsing="false" onAction="#actionSzukajDiagnozy" text="Szukaj" />
                   <Button layoutX="640.0" layoutY="141.0" mnemonicParsing="false" onAction="#actionPrzejdzDiagnoza" text="Edytuj" />
                   <Button layoutX="540.0" layoutY="287.0" mnemonicParsing="false" onAction="#actionSzukajPrzegladu" text="Szukaj" />
-                  <Button layoutX="640.0" layoutY="287.0" mnemonicParsing="false" text="Edytuj" />
-                  <Button layoutX="540.0" layoutY="432.0" mnemonicParsing="false" onAction="#actionSzukajUslugi" text="Szukaj" />
-                  <Button layoutX="640.0" layoutY="432.0" mnemonicParsing="false" text="Edytuj" />
+                  <Button layoutX="640.0" layoutY="287.0" mnemonicParsing="false" onAction="#actionPrzejdzPrzeglad" text="Edytuj" />
+                  <Button layoutX="540.0" layoutY="432.0" mnemonicParsing="false" onAction="#actionSzukajUslugi" prefHeight="25.0" prefWidth="150.0" text="Szukaj" />
                   <TextField fx:id="szukajPrzegladu" layoutX="540.0" layoutY="236.0" />
                   <TextField fx:id="szukajUslugi" layoutX="540.0" layoutY="381.0" />
                   <Label layoutX="246.0" layoutY="22.0" text="Diagnozy">

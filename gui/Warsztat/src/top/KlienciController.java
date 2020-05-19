@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -30,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -135,6 +137,34 @@ public class KlienciController implements Initializable {
     private int idSamochoduU;
     private int idSamochoduP;
     private int idUslugi;
+    private boolean poprawnaDiagnoza = true;
+    private boolean poprawnyPrzeglad = true;
+    private boolean poprawnaUsluga = true;
+    private boolean poprawnyDodajSamochod = true;
+    private boolean poprawneDane = true;
+    private boolean poprawnyEdytujSamochod = true;
+
+    private void alertInformacja(String tekst, String blad) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(tekst);
+        alert.setContentText(blad);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/top/darkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        alert.showAndWait();
+    }
+
+    private void alertBlad(String tekst, String blad) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(tekst);
+        alert.setContentText(blad);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/top/darkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        alert.showAndWait();
+    }
 
     @FXML
     private void actionIdSamochoduU(ActionEvent event) throws ParseException, IOException {
@@ -280,8 +310,12 @@ public class KlienciController implements Initializable {
     }
 
     @FXML
-    private void actionEdytujSamochod(ActionEvent event) throws ParseException, IOException {
-        if (!markaE.getText().isEmpty() && !modelE.getText().isEmpty() && !pojSilnikaE.getText().isEmpty() && !rokE.getText().isEmpty()) {
+    private void actionEdytujSamochod(ActionEvent event) throws ParseException, IOException, SQLException {
+        markaE.setStyle("-fx-border-color: transparent");
+        modelE.setStyle("-fx-border-color: transparent");
+        rokE.setStyle("-fx-border-color: transparent");
+        pojSilnikaE.setStyle("-fx-border-color: transparent");
+        if (sprawdzBledyEdytujSamochod()) {
             try {
                 Connection con = getConnection();
                 CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_samochod(?,?,?,?,?)");
@@ -298,16 +332,10 @@ public class KlienciController implements Initializable {
                 modelE.clear();
                 pojSilnikaE.clear();
                 rokE.clear();
-                Alert good = new Alert(Alert.AlertType.INFORMATION);
-                good.setTitle("Zmiana danych");
-                good.setHeaderText("Operacja powiodła się");
-                good.showAndWait();
+                alertInformacja("Zmiana danych", "Operacja powiodła się");
 
             } catch (SQLException ex) {
-                Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                bad.setTitle("Zmiana danych");
-                bad.setHeaderText("Operacja nie powiodła się");
-                bad.showAndWait();
+                alertBlad("Zmiana danych", "Operacja nie powiodła się");
             }
         }
     }
@@ -325,10 +353,9 @@ public class KlienciController implements Initializable {
             modelE.clear();
             pojSilnikaE.clear();
             rokE.clear();
-            Alert good = new Alert(Alert.AlertType.INFORMATION);
-            good.setTitle("Usuwanie samochodu");
-            good.setHeaderText("Operacja powiodła się");
-            good.showAndWait();
+            if (wybierzModel.getSelectionModel().getSelectedIndex() != -1) {
+                alertInformacja("Usuwanie samochodu", "Operacja powiodła się");
+            }
 
             cstmt = con.prepareCall("select * from samochody where id_klienta = ?");
             cstmt.setInt(1, idKlienta);
@@ -343,18 +370,19 @@ public class KlienciController implements Initializable {
             con.close();
 
         } catch (SQLException ex) {
-            Alert bad = new Alert(Alert.AlertType.INFORMATION);
-            bad.setTitle("Usuwanie samochodu");
-            bad.setHeaderText("Operacja nie powiodła się");
-            bad.showAndWait();
+            alertBlad("Usuwanie samochodu", "Nie można usunąć pojazdu posiadającego historię");
         }
 
     }
 
     @FXML
-    private void actionDodajSamochod(ActionEvent event) throws ParseException, IOException {
-        if (!markaDod.getText().isEmpty() && !modelDod.getText().isEmpty() && !pojSilnikaDod.getText().isEmpty() && !rokDod.getText().isEmpty()) {
-            if (pojSilnikaDod.getText().matches("^[0-9]+$") && rokDod.getText().matches("^[0-9]+$")) {
+    private void actionDodajSamochod(ActionEvent event) throws ParseException, IOException, SQLException {
+            markaDod.setStyle("-fx-border-color: transparent");
+            modelDod.setStyle("-fx-border-color: transparent");
+            rokDod.setStyle("-fx-border-color: transparent");
+            pojSilnikaDod.setStyle("-fx-border-color: transparent");
+            if (sprawdzBledyDodajSamochod()) {
+                if (czyMoznaSamochod(markaDod, modelDod)) {
                 try {
                     Connection con = getConnection();
                     CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_samochod(?,?,?,?,?)");
@@ -369,17 +397,11 @@ public class KlienciController implements Initializable {
                     modelDod.clear();
                     pojSilnikaDod.clear();
                     rokDod.clear();
-                    Alert good = new Alert(Alert.AlertType.INFORMATION);
-                    good.setTitle("Dodawanie samochodu");
-                    good.setHeaderText("Operacja powiodła się");
-                    good.showAndWait();
+                    alertInformacja("Dodawanie samochodu", "Operacja powiodła się");
 
                 } catch (SQLException ex) {
 
-                    Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                    bad.setTitle("Dodawanie samochodu");
-                    bad.setHeaderText("Operacja nie powiodła się");
-                    bad.showAndWait();
+                    alertBlad("Dodawanie samochodu", "Operacja nie powiodła się");
                 }
                 try {
                     Connection con = getConnection();
@@ -412,8 +434,12 @@ public class KlienciController implements Initializable {
     }
 
     @FXML
-    private void actionEdytujDane(ActionEvent event) throws ParseException, IOException {
-        if (!imieE.getText().isEmpty() && !nazwiskoE.getText().isEmpty() && !nrTelE.getText().isEmpty()) {
+    private void actionEdytujDane(ActionEvent event) throws ParseException, IOException, SQLException {
+        imieE.setStyle("-fx-border-color: transparent");
+        nazwiskoE.setStyle("-fx-border-color: transparent");
+        nrTelE.setStyle("-fx-border-color: transparent");
+
+        if (sprawdzBledyEdytujDane()) {
             try {
                 Connection con = getConnection();
                 CallableStatement cstmt = con.prepareCall("call edytuj_dane.edytuj_dane_klienta(?,?,?,?)");
@@ -423,16 +449,10 @@ public class KlienciController implements Initializable {
                 cstmt.setString(4, nrTelE.getText());
                 cstmt.executeQuery();
 
-                Alert good = new Alert(Alert.AlertType.INFORMATION);
-                good.setTitle("Zmiana danych");
-                good.setHeaderText("Operacja powiodła się");
-                good.showAndWait();
+                alertInformacja("Zmiana danych", "Operacja powiodła się");
 
             } catch (SQLException ex) {
-                Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                bad.setTitle("Zmiana danych");
-                bad.setHeaderText("Wprowadzono błędne dane");
-                bad.showAndWait();
+                alertBlad("Zmiana danych", "Wprowadzono błędne dane");
             }
         }
     }
@@ -445,195 +465,359 @@ public class KlienciController implements Initializable {
     }
 
     @FXML
-    private void actionDodajUsluge(ActionEvent event) throws ParseException, IOException {
-        if (!wybierzSamochodU.getSelectionModel().isEmpty() && !wybierzUsluge.getSelectionModel().isEmpty() && wybierzDateU.getValue() != null) {
-            try {
-                Connection con = getConnection();
-                CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_usluge(?,?,?)");
-                cstmt.setInt(1, idUslugi);
-                cstmt.setInt(2, idSamochoduU);
-                cstmt.setString(3, wybierzDateU.getValue().toString());
-                cstmt.executeQuery();
-
-                Alert good = new Alert(Alert.AlertType.INFORMATION);
-                good.setTitle("Dodaj usługę");
-                good.setHeaderText("Operacja powiodła się");
-                good.showAndWait();
-
-            } catch (SQLException ex) {
-                Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                bad.setTitle("Dodaj usługę");
-                bad.setHeaderText("Wprowadzono błędne dane");
-                bad.showAndWait();
+    private void actionDodajUsluge(ActionEvent event) throws ParseException, IOException, SQLException {
+        if (czyMoznaUsluge()) {
+            if (wybierzSamochodU.getSelectionModel().getSelectedIndex() == -1) {
+                wybierzSamochodU.setStyle("-fx-border-color: red;");
+            } else {
+                wybierzSamochodU.setStyle("-fx-border-color: transparent;");
+            }
+            if (wybierzUsluge.getSelectionModel().getSelectedIndex() == -1) {
+                wybierzUsluge.setStyle("-fx-border-color: red;");
+            } else {
+                wybierzUsluge.setStyle("-fx-border-color: transparent;");
             }
 
-            try {
-                Connection con = getConnection();
-                CallableStatement cstmt = con.prepareCall("select su.*, s.marka, s.model, u.nazwa\n"
-                        + "from samochody s, samochody_uslugi su, uslugi u\n"
-                        + "where s.id_klienta = ? and s.id = su.id_samochodu and u.id = su.id_uslugi and rownum = 1\n"
-                        + "order by su.id desc");
-                cstmt.setInt(1, idKlienta);
+            wybierzDateU.setStyle("-fx-border-color: transparent;");
 
-                ResultSet rs = cstmt.executeQuery();
-                while (rs.next()) {
-                    Samochody_uslugi nowa = new Samochody_uslugi(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8));
-                    uslugi.getItems().add(nowa);
-                }
+            if (sprawdzBledyUsluga() && !wybierzSamochodU.getSelectionModel().isEmpty() && !wybierzUsluge.getSelectionModel().isEmpty()) {
+                try {
+                    Connection con = getConnection();
+                    CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_usluge(?,?,?)");
+                    cstmt.setInt(1, idUslugi);
+                    cstmt.setInt(2, idSamochoduU);
+                    cstmt.setString(3, wybierzDateU.getValue().toString());
+                    cstmt.executeQuery();
 
-                con.close();
+                    alertInformacja("Dodaj usługę", "Operacja powiodła się");
 
-            } catch (SQLException ed) {
-                ed.printStackTrace();
-            }
-        }
-    }
-
-    @FXML
-    private void actionDodajPrzeglad(ActionEvent event) throws ParseException, IOException {
-        if (!wybierzSamochodP.getSelectionModel().isEmpty() && wybierzDateP.getValue() != null) {
-            try {
-                Connection con = getConnection();
-                CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_przeglad(?,?)");
-                cstmt.setInt(1, idSamochoduP);
-                cstmt.setString(2, wybierzDateP.getValue().toString());
-                cstmt.executeQuery();
-
-                Alert good = new Alert(Alert.AlertType.INFORMATION);
-                good.setTitle("Dodaj przegląd");
-                good.setHeaderText("Operacja powiodła się");
-                good.showAndWait();
-
-            } catch (SQLException ex) {
-                Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                bad.setTitle("Dodaj przegląd");
-                bad.setHeaderText("Wprowadzono błędne dane");
-                bad.showAndWait();
-            }
-
-            try {
-                Connection con = getConnection();
-                CallableStatement cstmt = con.prepareCall("select p.*, s.marka, s.model\n"
-                        + "from samochody s, przeglady p\n"
-                        + "where s.id = p.id_samochodu and s.id_klienta = ? and rownum = 1\n"
-                        + "order by p.id desc");
-                cstmt.setInt(1, idKlienta);
-                ResultSet rs = cstmt.executeQuery();
-
-                while (rs.next()) {
-                    Przeglady nowa = new Przeglady(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-                    przeglady.getItems().add(nowa);
-                }
-
-                con.close();
-
-            } catch (SQLException ed) {
-                ed.printStackTrace();
-            }
-        }
-    }
-
-    @FXML
-    private void actionDodajDiagnoze(ActionEvent event) throws ParseException, IOException {
-        if (!wybierzSamochodD.getSelectionModel().isEmpty() && wybierzDateD.getValue() != null) {
-            try {
-                Connection con = getConnection();
-                CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_diagnoze(?,?,?)");
-                cstmt.setInt(1, idSamochoduD);
-                cstmt.setString(2, uwagiKlienta.getText());
-                cstmt.setString(3, wybierzDateD.getValue().toString());
-                cstmt.executeQuery();
-
-                Alert good = new Alert(Alert.AlertType.INFORMATION);
-                good.setTitle("Dodaj diagnoze");
-                good.setHeaderText("Operacja powiodła się");
-                good.showAndWait();
-
-            } catch (SQLException ex) {
-                Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                bad.setTitle("Dodaj diagnoze");
-                bad.setHeaderText("Wprowadzono błędne dane");
-                bad.showAndWait();
-            }
-
-            try {
-                Connection con = getConnection();
-                CallableStatement cstmt = con.prepareCall("select d.*, s.marka, s.model\n"
-                        + "from diagnozy d, samochody s\n"
-                        + "where s.id = d.id_samochodu\n"
-                        + "and s.id_klienta = ? and rownum = 1\n"
-                        + "order by d.id desc");
-                cstmt.setInt(1, idKlienta);
-                ResultSet rs = cstmt.executeQuery();
-                while (rs.next()) {
-                    Diagnozy nowa = new Diagnozy(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8));
-                    diagnozy.getItems().add(nowa);
-                }
-
-                con.close();
-
-            } catch (SQLException ed) {
-                ed.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-        idKlienta = Klienci_uzytkownicy.getId();
-
-        wyloguj.setOnSelectionChanged(new EventHandler<Event>() {
-            @Override
-            public void handle(Event t) {
-                if (wyloguj.isSelected()) {
-                    try {
-                        Alert delete = new Alert(Alert.AlertType.CONFIRMATION);
-                        delete.setTitle("Wylogowywanie");
-                        delete.setHeaderText("Na pewno?");
-                        Optional<ButtonType> cos = delete.showAndWait();
-                        if (cos.get() == ButtonType.OK) {
-                            renderScene("logowanie");
-                        } else {
-                            tabPane.getSelectionModel().selectFirst();
-                        }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                } catch (SQLException ex) {
+                    if (ex.getErrorCode() == 20006) {
+                        alertBlad("Dodaj usługe", "Podano datę z przeszłości");
+                    } else if (ex.getErrorCode() == 20007) {
+                        alertBlad("Dodaj usługe", "Nie można umówić sie na weekend");
+                    } else {
+                        alertBlad("Dodaj usługe", "Operacja nie powiodła się");
                     }
                 }
-            }
-        });
+                uzupelnijUslugi();
 
-        markaU.setCellValueFactory(new PropertyValueFactory<>("marka"));
-        modelU.setCellValueFactory(new PropertyValueFactory<>("model"));
-        uslugaU.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
-        dataU.setCellValueFactory(new PropertyValueFactory<>("data"));
+            }
+        } else {
+            alertBlad("Dodaj usługe", "Tego dnia zapisanych jest za dużo wizyt");
+        }
+    }
+
+    @FXML
+    private void actionDodajPrzeglad(ActionEvent event) throws ParseException, IOException, SQLException {
+        if (czyMoznaPrzeglad()) {
+            if (wybierzSamochodP.getSelectionModel().getSelectedIndex() == -1) {
+                wybierzSamochodP.setStyle("-fx-border-color: red;");
+            } else {
+                wybierzSamochodP.setStyle("-fx-border-color: transparent;");
+            }
+
+            wybierzDateP.setStyle("-fx-border-color: transparent;");
+            if (sprawdzBledyPrzeglad() && !wybierzSamochodP.getSelectionModel().isEmpty()) {
+                try {
+                    Connection con = getConnection();
+                    CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_przeglad(?,?)");
+                    cstmt.setInt(1, idSamochoduP);
+                    cstmt.setString(2, wybierzDateP.getValue().toString());
+                    cstmt.executeQuery();
+
+                    alertInformacja("Dodaj przegląd", "Operacja powiodła się");
+
+                } catch (SQLException ex) {
+                    if (ex.getErrorCode() == 20006) {
+                        alertBlad("Dodaj przegląd", "Podano datę z przeszłości");
+                    } else if (ex.getErrorCode() == 20007) {
+                        alertBlad("Dodaj przegląd", "Nie można umówić sie na weekend");
+                    } else {
+                        alertBlad("Dodaj przegląd", "Operacja nie powiodła się");
+                    }
+                }
+                uzupelnijPrzeglady();
+
+            }
+        } else {
+            alertBlad("Dodaj przegląd", "Tego dnia zapisanych jest za dużo wizyt");
+        }
+    }
+
+    @FXML
+    private void actionDodajDiagnoze(ActionEvent event) throws ParseException, IOException, SQLException {
+        if (czyMoznaDiagnoze()) {
+            if (wybierzSamochodD.getSelectionModel().getSelectedIndex() == -1) {
+                wybierzSamochodD.setStyle("-fx-border-color: red;");
+            } else {
+                wybierzSamochodD.setStyle("-fx-border-color: transparent;");
+            }
+            wybierzDateD.setStyle("-fx-border-color: transparent;");
+            if (sprawdzBledyDiagnoza() && wybierzSamochodD.getSelectionModel().getSelectedIndex() != -1) {
+                try {
+                    Connection con = getConnection();
+                    CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_diagnoze(?,?,?)");
+                    cstmt.setInt(1, idSamochoduD);
+                    cstmt.setString(2, uwagiKlienta.getText());
+                    cstmt.setString(3, wybierzDateD.getValue().toString());
+                    cstmt.executeQuery();
+
+                    alertInformacja("Dodaj diagnoze", "Operacja powiodła się");
+
+                } catch (SQLException ex) {
+                    if (ex.getErrorCode() == 20006) {
+                        alertBlad("Dodaj diagnoze", "Podano datę z przeszłości");
+                    } else if (ex.getErrorCode() == 20007) {
+                        alertBlad("Dodaj diagnoze", "Nie można umówić sie na weekend");
+                    } else {
+                        alertBlad("Dodaj diagnoze", "Operacja nie powiodła się");
+                    }
+                }
+                uzupelnijDiagnozy();
+
+            }
+        } else {
+            alertBlad("Dodaj diagnoze", "Tego dnia zapisanych jest za dużo wizyt");
+        }
+    }
+
+    private boolean czyMoznaDiagnoze() throws SQLException {
+        Connection con = getConnection();
+        CallableStatement cstmt = con.prepareCall("{? = call czy_mozna.czy_mozna_diagnozy(?)}");
+        cstmt.registerOutParameter(1, Types.NUMERIC);
+        if (wybierzDateD.getValue() == null) {
+            cstmt.setString(2, "");
+        } else {
+            cstmt.setString(2, wybierzDateD.getValue().toString());
+        }
+        cstmt.executeQuery();
+        if (cstmt.getInt(1) == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean czyMoznaPrzeglad() throws SQLException {
+        Connection con = getConnection();
+        CallableStatement cstmt = con.prepareCall("{? = call czy_mozna.czy_mozna_przeglady(?)}");
+        cstmt.registerOutParameter(1, Types.NUMERIC);
+        if (wybierzDateP.getValue() == null) {
+            cstmt.setString(2, "");
+        } else {
+            cstmt.setString(2, wybierzDateP.getValue().toString());
+        }
+        cstmt.executeQuery();
+        if (cstmt.getInt(1) == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean czyMoznaUsluge() throws SQLException {
+        Connection con = getConnection();
+        CallableStatement cstmt = con.prepareCall("{? = call czy_mozna.czy_mozna_uslugi(?)}");
+        cstmt.registerOutParameter(1, Types.NUMERIC);
+        if (wybierzDateU.getValue() == null) {
+            cstmt.setString(2, "");
+        } else {
+            cstmt.setString(2, wybierzDateU.getValue().toString());
+        }
+        cstmt.executeQuery();
+        if (cstmt.getInt(1) == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean czyMoznaSamochod(TextField marka, TextField model) throws SQLException {
         try {
             Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("select su.*, s.marka, s.model, u.nazwa\n"
-                    + "from samochody s, samochody_uslugi su, uslugi u\n"
-                    + "where s.id_klienta = ? and s.id = su.id_samochodu and u.id = su.id_uslugi");
-            cstmt.setInt(1, idKlienta);
-
-            ResultSet rs = cstmt.executeQuery();
-            ObservableList<Samochody_uslugi> usluga = FXCollections.observableArrayList();
-            while (rs.next()) {
-                Samochody_uslugi nowa = new Samochody_uslugi(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8));
-                usluga.add(nowa);
+            CallableStatement cstmt = con.prepareCall("call czy_mozna.czy_mozna_samochod(?,?,?)");
+            cstmt.setString(1, marka.getText());
+            cstmt.setString(2, model.getText());
+            cstmt.setInt(3, idKlienta);
+            cstmt.executeQuery();
+            return true;
+        } catch (SQLException ex) {
+            if (ex.getErrorCode() == 20008) {
+                alertBlad("Dodawanie samochodu", "Podany samochód istnieje w bazie");
             }
-            uslugi.setItems(usluga);
+            return false;
+        }
+    }
+
+    private boolean sprawdzDane(TextField tf) throws SQLException {
+        Connection con = getConnection();
+        CallableStatement cstmt = con.prepareCall("{? = call walidacja.czy_puste(?)}");
+        cstmt.registerOutParameter(1, Types.NUMERIC);
+        cstmt.setString(2, tf.getText());
+        cstmt.executeQuery();
+        if (cstmt.getInt(1) == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean sprawdzDane(DatePicker dp) throws SQLException {
+        Connection con = getConnection();
+        CallableStatement cstmt = con.prepareCall("{? = call walidacja.czy_puste(?)}");
+        cstmt.registerOutParameter(1, Types.NUMERIC);
+        if (dp.getValue() == null) {
+            cstmt.setString(2, "");
+        } else {
+            cstmt.setString(2, dp.getValue().toString());
+        }
+        cstmt.executeQuery();
+        if (cstmt.getInt(1) == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean sprawdzBledyDiagnoza() throws SQLException {
+        if (sprawdzDane(wybierzDateD)) {
+            wybierzDateD.setStyle("-fx-border-color: red");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean sprawdzBledyPrzeglad() throws SQLException {
+        if (sprawdzDane(wybierzDateP)) {
+            wybierzDateP.setStyle("-fx-border-color: red");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean sprawdzBledyUsluga() throws SQLException {
+        if (sprawdzDane(wybierzDateU)) {
+            wybierzDateU.setStyle("-fx-border-color: red");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean sprawdzBledyDodajSamochod() throws SQLException {
+        boolean blad = true;
+        if (sprawdzDane(markaDod)) {
+            markaDod.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(modelDod)) {
+            modelDod.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(rokDod)) {
+            rokDod.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(pojSilnikaDod)) {
+            pojSilnikaDod.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (!czyLiczba(pojSilnikaDod.getText())) {
+            pojSilnikaDod.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (!czyLiczba(rokDod.getText())) {
+            rokDod.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        return blad;
+    }
+
+    private boolean sprawdzBledyEdytujDane() throws SQLException {
+        boolean blad = true;
+        if (sprawdzDane(imieE)) {
+            imieE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(nazwiskoE)) {
+            nazwiskoE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (sprawdzDane(nrTelE)) {
+            nrTelE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        if (!czyLiczba(nrTelE.getText())) {
+            nrTelE.setStyle("-fx-border-color: red");
+            blad = false;
+        }
+        return blad;
+    }
+
+    private boolean sprawdzBledyEdytujSamochod() throws SQLException {
+        boolean blad = true;
+        if (wybierzModel.getSelectionModel().getSelectedIndex() != -1) {
+
+            if (sprawdzDane(markaE)) {
+                markaE.setStyle("-fx-border-color: red");
+                blad = false;
+            }
+            if (sprawdzDane(modelE)) {
+                modelE.setStyle("-fx-border-color: red");
+                blad = false;
+            }
+            if (sprawdzDane(rokE)) {
+                rokE.setStyle("-fx-border-color: red");
+                blad = false;
+            }
+            if (sprawdzDane(pojSilnikaE)) {
+                pojSilnikaE.setStyle("-fx-border-color: red");
+                blad = false;
+            }
+            if (!czyLiczba(pojSilnikaE.getText())) {
+                pojSilnikaE.setStyle("-fx-border-color: red");
+                blad = false;
+            }
+            if (!czyLiczba(rokE.getText())) {
+                rokE.setStyle("-fx-border-color: red");
+                blad = false;
+            }
+            return blad;
+        }
+        return false;
+    }
+
+    public static boolean czyLiczba(String liczba) {
+        if (liczba == null) {
+            return false;
+        }
+        try {
+            long x = Long.parseLong(liczba);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
+    private void uzupelnijDiagnozy() {
+        try {
+            Connection con = getConnection();
+            CallableStatement cstmt = con.prepareCall("select d.*, s.marka, s.model\n"
+                    + "from diagnozy d, samochody s\n"
+                    + "where s.id = d.id_samochodu\n"
+                    + "and s.id_klienta = ?");
+            cstmt.setInt(1, idKlienta);
+            ResultSet rs = cstmt.executeQuery();
+            ObservableList<Diagnozy> diagnoza = FXCollections.observableArrayList();
+            while (rs.next()) {
+                Diagnozy nowa = new Diagnozy(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8));
+                diagnoza.add(nowa);
+            }
+            diagnozy.getItems().clear();
+            diagnozy.setItems(diagnoza);
             con.close();
 
         } catch (SQLException ed) {
             ed.printStackTrace();
         }
+    }
 
-        markaP.setCellValueFactory(new PropertyValueFactory<>("marka"));
-        modelP.setCellValueFactory(new PropertyValueFactory<>("model"));
-        wynikP.setCellValueFactory(new PropertyValueFactory<>("wynik"));
-        dataP.setCellValueFactory(new PropertyValueFactory<>("data"));
-        waznoscP.setCellValueFactory(new PropertyValueFactory<>("data_waznosci"));
-        uwagiP.setCellValueFactory(new PropertyValueFactory<>("uwagi"));
+    private void uzupelnijPrzeglady() {
         try {
             Connection con = getConnection();
             CallableStatement cstmt = con.prepareCall("select p.*, s.marka, s.model\n"
@@ -653,31 +837,81 @@ public class KlienciController implements Initializable {
         } catch (SQLException ed) {
             ed.printStackTrace();
         }
+    }
+
+    private void uzupelnijUslugi() {
+        try {
+            Connection con = getConnection();
+            CallableStatement cstmt = con.prepareCall("select su.*, s.marka, s.model, u.nazwa\n"
+                    + "from samochody s, samochody_uslugi su, uslugi u\n"
+                    + "where s.id_klienta = ? and s.id = su.id_samochodu and u.id = su.id_uslugi");
+            cstmt.setInt(1, idKlienta);
+
+            ResultSet rs = cstmt.executeQuery();
+            ObservableList<Samochody_uslugi> usluga = FXCollections.observableArrayList();
+            while (rs.next()) {
+                Samochody_uslugi nowa = new Samochody_uslugi(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                usluga.add(nowa);
+            }
+            uslugi.setItems(usluga);
+            con.close();
+
+        } catch (SQLException ed) {
+            ed.printStackTrace();
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+        idKlienta = Klienci_uzytkownicy.getId();
+        uzupelnijDiagnozy();
+        uzupelnijPrzeglady();
+        uzupelnijUslugi();
+        wyloguj.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event t) {
+                if (wyloguj.isSelected()) {
+                    try {
+
+                        Alert wyloguj = new Alert(Alert.AlertType.CONFIRMATION);
+                        wyloguj.setTitle("Wylogowywanie");
+                        wyloguj.setHeaderText("Na pewno?");
+                        DialogPane dialogPane = wyloguj.getDialogPane();
+                        dialogPane.getStylesheets().add(
+                                getClass().getResource("/top/darkTheme.css").toExternalForm());
+                        dialogPane.getStyleClass().add("alert");
+                        Optional<ButtonType> tak = wyloguj.showAndWait();
+                        if (tak.get() == ButtonType.OK) {
+                            renderScene("logowanie");
+                        } else {
+                            tabPane.getSelectionModel().selectFirst();
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        markaU.setCellValueFactory(new PropertyValueFactory<>("marka"));
+        modelU.setCellValueFactory(new PropertyValueFactory<>("model"));
+        uslugaU.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
+        dataU.setCellValueFactory(new PropertyValueFactory<>("data"));
+
+        markaP.setCellValueFactory(new PropertyValueFactory<>("marka"));
+        modelP.setCellValueFactory(new PropertyValueFactory<>("model"));
+        wynikP.setCellValueFactory(new PropertyValueFactory<>("wynik"));
+        dataP.setCellValueFactory(new PropertyValueFactory<>("data"));
+        waznoscP.setCellValueFactory(new PropertyValueFactory<>("data_waznosci"));
+        uwagiP.setCellValueFactory(new PropertyValueFactory<>("uwagi"));
 
         markaD.setCellValueFactory(new PropertyValueFactory<>("marka"));
         modelD.setCellValueFactory(new PropertyValueFactory<>("model"));
         uwagiD.setCellValueFactory(new PropertyValueFactory<>("uwagi_klienta"));
         uwagiMechD.setCellValueFactory(new PropertyValueFactory<>("uwagi_mechanika"));
         dataD.setCellValueFactory(new PropertyValueFactory<>("data"));
-        try {
-            Connection con = getConnection();
-            CallableStatement cstmt = con.prepareCall("select d.*, s.marka, s.model\n"
-                    + "from diagnozy d, samochody s\n"
-                    + "where s.id = d.id_samochodu\n"
-                    + "and s.id_klienta = ?");
-            cstmt.setInt(1, idKlienta);
-            ResultSet rs = cstmt.executeQuery();
-            ObservableList<Diagnozy> diagnoza = FXCollections.observableArrayList();
-            while (rs.next()) {
-                Diagnozy nowa = new Diagnozy(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDate(6), rs.getString(7), rs.getString(8));
-                diagnoza.add(nowa);
-            }
-            diagnozy.setItems(diagnoza);
-            con.close();
 
-        } catch (SQLException ed) {
-            ed.printStackTrace();
-        }
 //uzupelnianie pol
         try {
             Connection con = getConnection();

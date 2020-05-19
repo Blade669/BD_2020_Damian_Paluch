@@ -1,17 +1,15 @@
 Do panelu klienta:
 1)klient
-  klient
-2)klient2
-  klient2
+  klient1
 
 Do panelu mechanika:
-1)m
-m
+1)mechanik
+mmechanik1
 
 Do panelu administratora:
 administrator
-administrator
+administrator1
 
 Do bazy:
-C##Warsztat
+C##warsztat
 admin

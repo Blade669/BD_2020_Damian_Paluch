@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package top;
-
+import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.Hashtable;
 import javafx.fxml.FXMLLoader;
@@ -33,10 +33,13 @@ public class SceneMenager {
             path=view.get(name);
             Parent root = FXMLLoader.load(SceneMenager.class.getResource(path));
             Scene scene = new Scene(root);
+            stage.getIcons().add(new Image("/top/2.png"));
             stage.setScene(scene);
+            
             stage.show();
             stage.setResizable(false);
             stage.setTitle("Warsztat");
+           
         } catch (IOException ex) {
             System.err.println("Nie znaleziono pliku XML");
         }catch(RuntimeException ex){

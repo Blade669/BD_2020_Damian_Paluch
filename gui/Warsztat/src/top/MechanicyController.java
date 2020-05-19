@@ -32,6 +32,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
@@ -57,11 +58,11 @@ public class MechanicyController implements Initializable {
     @FXML
     private Tab wyloguj;
     @FXML
+    private Tab edycjaDanych;
+    @FXML
     private TabPane tabPane;
     @FXML
-    private AnchorPane pierwsza;
-    @FXML
-    private AnchorPane druga;
+    private AnchorPane edytujDane;
     @FXML
     private TableColumn<?, ?> markaD;
     @FXML
@@ -155,11 +156,33 @@ public class MechanicyController implements Initializable {
     @FXML
     private TextField szukajUslugi;
     private int idMechanika;
-    private int idDiagnozy = -1;
-    private int idUslugi = -1;
-    private int idPrzegladu = -1;
+    private static int idDiagnozy;
+    private static int idUslugi = -1;
+    private static int idPrzegladu = -1;
     private String wynikP;
     private static int licznik = 0;
+
+    private void alertInformacja(String tekst, String blad) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(tekst);
+        alert.setContentText(blad);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/top/darkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        alert.showAndWait();
+    }
+
+    private void alertBlad(String tekst, String blad) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(tekst);
+        alert.setContentText(blad);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/top/darkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        alert.showAndWait();
+    }
 
     @FXML
     private void actionRadioPozytywny(ActionEvent event) throws ParseException, IOException {
@@ -177,9 +200,27 @@ public class MechanicyController implements Initializable {
 
     @FXML
     private void actionPrzejdzDiagnoza(ActionEvent event) throws ParseException, IOException {
-        Node newLoadedPane = FXMLLoader.load(getClass().getResource("/top/Diagnozy.fxml"));
 
+        if (diagnozyE.getSelectionModel().getSelectedIndex() != -1) {
+            idDiagnozy = diagnozyE.getSelectionModel().getSelectedItem().getId();
+            Node newLoadedPane = FXMLLoader.load(getClass().getResource("/top/Diagnozy.fxml"));
+            edytujDane.getChildren().clear();
+            edytujDane.getChildren().add(newLoadedPane);
+            edycjaDanych.setText("Edytuj diagnoze");
+            licznik++;
+        }
+    }
 
+    @FXML
+    private void actionPrzejdzPrzeglad(ActionEvent event) throws ParseException, IOException {
+        if (przegladyE.getSelectionModel().getSelectedIndex() != -1) {
+            idPrzegladu = przegladyE.getSelectionModel().getSelectedItem().getId();
+            Node newLoadedPane = FXMLLoader.load(getClass().getResource("/top/Przeglady.fxml"));
+            edytujDane.getChildren().clear();
+            edytujDane.getChildren().add(newLoadedPane);
+            edycjaDanych.setText("Edytuj przegląd");
+            licznik++;
+        }
     }
 
     @FXML
@@ -332,16 +373,10 @@ public class MechanicyController implements Initializable {
                 diagnozyE.getItems().clear();
                 uzupelnijDiagnozeE();
 
-                Alert good = new Alert(Alert.AlertType.INFORMATION);
-                good.setTitle("Zapisz diagnoze");
-                good.setHeaderText("Operacja powiodła się");
-                good.showAndWait();
+                alertInformacja("Zapisz diagnoze", "Operacja powiodła się");
 
             } catch (SQLException ex) {
-                Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                bad.setTitle("Zapisz diagnoze");
-                bad.setHeaderText("Wprowadzono błędne dane");
-                bad.showAndWait();
+                alertBlad("Zapisz diagnoze", "Wprowadzono błędne dane");
             }
 
         }
@@ -356,7 +391,6 @@ public class MechanicyController implements Initializable {
                 cstmt.setInt(1, idPrzegladu);
                 cstmt.setString(2, wybierzDateP.getValue().toString());
                 cstmt.setInt(3, idMechanika);
-                System.out.println(wynikP);
                 cstmt.setString(4, wynikP);
                 cstmt.setString(5, uwagiMechP.getText());
                 cstmt.executeQuery();
@@ -374,16 +408,10 @@ public class MechanicyController implements Initializable {
                 pozytywny.setSelected(false);
                 negatywny.setSelected(false);
 
-                Alert good = new Alert(Alert.AlertType.INFORMATION);
-                good.setTitle("Zapisz diagnoze");
-                good.setHeaderText("Operacja powiodła się");
-                good.showAndWait();
+                alertInformacja("Zapisz diagnoze", "Operacja powiodła się");
 
             } catch (SQLException ex) {
-                Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                bad.setTitle("Zapisz diagnoze");
-                bad.setHeaderText("Wprowadzono błędne dane");
-                bad.showAndWait();
+                alertBlad("Zapisz diagnoze", "Wprowadzono błędne dane");
             }
         }
     }
@@ -408,16 +436,10 @@ public class MechanicyController implements Initializable {
                 samochodU.clear();
                 usluga.clear();
 
-                Alert good = new Alert(Alert.AlertType.INFORMATION);
-                good.setTitle("Zapisz diagnoze");
-                good.setHeaderText("Operacja powiodła się");
-                good.showAndWait();
+                alertInformacja("Zapisz diagnoze", "Operacja powiodła się");
 
             } catch (SQLException ex) {
-                Alert bad = new Alert(Alert.AlertType.INFORMATION);
-                bad.setTitle("Zapisz diagnoze");
-                bad.setHeaderText("Wprowadzono błędne dane");
-                bad.showAndWait();
+                alertBlad("Zapisz diagnoze", "Wprowadzono błędne dane");
             }
         }
     }
@@ -603,11 +625,15 @@ public class MechanicyController implements Initializable {
             public void handle(Event t) {
                 if (wyloguj.isSelected()) {
                     try {
-                        Alert delete = new Alert(Alert.AlertType.CONFIRMATION);
-                        delete.setTitle("Wylogowywanie");
-                        delete.setHeaderText("Na pewno?");
-                        Optional<ButtonType> cos = delete.showAndWait();
-                        if (cos.get() == ButtonType.OK) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Wylogowywanie");
+                        alert.setHeaderText("Na pewno?");
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.getStylesheets().add(
+                                getClass().getResource("/top/darkTheme.css").toExternalForm());
+                        dialogPane.getStyleClass().add("alert");
+                        Optional<ButtonType> tak = alert.showAndWait();
+                        if (tak.get() == ButtonType.OK) {
                             licznik = 0;
                             renderScene("logowanie");
                         } else {
@@ -704,5 +730,13 @@ public class MechanicyController implements Initializable {
         uslugaUE.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         dataUE.setCellValueFactory(new PropertyValueFactory<>("data"));
 
+    }
+
+    public static int getIdDiagnozy() {
+        return idDiagnozy;
+    }
+
+    public static int getIdPrzegladu() {
+        return idPrzegladu;
     }
 }
