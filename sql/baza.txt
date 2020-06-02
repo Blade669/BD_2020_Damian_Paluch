@@ -286,7 +286,7 @@ REM INSERTING into C##WARSZTAT.USLUGI
 SET DEFINE OFF;
 Insert into C##WARSZTAT.USLUGI (ID,NAZWA,OPIS) values ('1','Wymiana 2 opon','Usluga obejmuje zdjecie kol z jednej osi, wymiane opon i ponowne zalozenie.');
 Insert into C##WARSZTAT.USLUGI (ID,NAZWA,OPIS) values ('2','Wymiana oleju','Usluga obejmuje wymiane oleju z filtrem oleju.');
-Insert into C##WARSZTAT.USLUGI (ID,NAZWA,OPIS) values ('51','Ustawienie geometrii kó³','W ka¿dym kole jest ustawiana zbie¿noœæ i k¹ty pochylenia.');
+Insert into C##WARSZTAT.USLUGI (ID,NAZWA,OPIS) values ('51','Ustawienie geometrii kÃ³Â³','W kaÂ¿dym kole jest ustawiana zbieÂ¿noÂœÃ¦ i kÂ¹ty pochylenia.');
 --------------------------------------------------------
 --  DDL for Index DIAGNOZY_PK
 --------------------------------------------------------
@@ -608,7 +608,7 @@ ALTER TRIGGER "C##WARSZTAT"."KLIENCI_UZYTKOWNICY_TRG" ENABLE;
     FOR EACH ROW
 BEGIN
     IF length(:new.login) < 6 THEN
-        raise_application_error(-20001, 'Login musi zawieraæ przynajmniej 6 znaków');
+        raise_application_error(-20001, 'Login musi zawieraÃ¦ przynajmniej 6 znakÃ³w');
     END IF;
 
     NULL;
