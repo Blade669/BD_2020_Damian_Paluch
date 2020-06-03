@@ -408,10 +408,10 @@ public class MechanicyController implements Initializable {
                 pozytywny.setSelected(false);
                 negatywny.setSelected(false);
 
-                alertInformacja("Zapisz diagnoze", "Operacja powiodła się");
+                alertInformacja("Zapisz przegląd", "Operacja powiodła się");
 
             } catch (SQLException ex) {
-                alertBlad("Zapisz diagnoze", "Wprowadzono błędne dane");
+                alertBlad("Zapisz przegląd", "Wprowadzono błędne dane");
             }
         }
     }
@@ -436,10 +436,10 @@ public class MechanicyController implements Initializable {
                 samochodU.clear();
                 usluga.clear();
 
-                alertInformacja("Zapisz diagnoze", "Operacja powiodła się");
+                alertInformacja("Zapisz usługe", "Operacja powiodła się");
 
             } catch (SQLException ex) {
-                alertBlad("Zapisz diagnoze", "Wprowadzono błędne dane");
+                alertBlad("Zapisz usługe", "Wprowadzono błędne dane");
             }
         }
     }

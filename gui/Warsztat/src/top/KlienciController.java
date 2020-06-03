@@ -326,7 +326,6 @@ public class KlienciController implements Initializable {
                 cstmt.setString(5, rokE.getText());
                 cstmt.executeQuery();
 
-                wybierzMarke.setValue("Wybierz marke");
                 wybierzModel.getItems().clear();
                 markaE.clear();
                 modelE.clear();
@@ -336,6 +335,30 @@ public class KlienciController implements Initializable {
 
             } catch (SQLException ex) {
                 alertBlad("Zmiana danych", "Operacja nie powiodła się");
+            }
+            try {
+                
+                wybierzSamochodP.getItems().clear();
+                wybierzSamochodU.getItems().clear();
+                wybierzSamochodD.getItems().clear();
+                Connection con = getConnection();
+                CallableStatement cstmt = con.prepareCall("select * from samochody where id_klienta = ?");
+                cstmt.setInt(1, idKlienta);
+                ResultSet rs = cstmt.executeQuery();
+                while (rs.next()) {
+                    if (!wybierzMarke.getItems().contains(rs.getString("marka"))) {
+                        wybierzMarke.getItems().add(rs.getString("marka"));
+                    }
+                    wybierzMarke.setValue("Wybierz marke");
+                    wybierzSamochodP.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
+                    wybierzSamochodP.setValue("Wybierz samochód");
+                    wybierzSamochodU.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
+                    wybierzSamochodU.setValue("Wybierz samochód");
+                    wybierzSamochodD.getItems().add(rs.getString("marka") + "  " + rs.getString("model"));
+                    wybierzSamochodD.setValue("Wybierz samochód");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
         }
     }
@@ -377,12 +400,12 @@ public class KlienciController implements Initializable {
 
     @FXML
     private void actionDodajSamochod(ActionEvent event) throws ParseException, IOException, SQLException {
-            markaDod.setStyle("-fx-border-color: transparent");
-            modelDod.setStyle("-fx-border-color: transparent");
-            rokDod.setStyle("-fx-border-color: transparent");
-            pojSilnikaDod.setStyle("-fx-border-color: transparent");
-            if (sprawdzBledyDodajSamochod()) {
-                if (czyMoznaSamochod(markaDod, modelDod)) {
+        markaDod.setStyle("-fx-border-color: transparent");
+        modelDod.setStyle("-fx-border-color: transparent");
+        rokDod.setStyle("-fx-border-color: transparent");
+        pojSilnikaDod.setStyle("-fx-border-color: transparent");
+        if (sprawdzBledyDodajSamochod()) {
+            if (czyMoznaSamochod(markaDod, modelDod)) {
                 try {
                     Connection con = getConnection();
                     CallableStatement cstmt = con.prepareCall("call dodaj_dane.dodaj_samochod(?,?,?,?,?)");

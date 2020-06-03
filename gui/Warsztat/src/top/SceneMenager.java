@@ -33,7 +33,7 @@ public class SceneMenager {
             path=view.get(name);
             Parent root = FXMLLoader.load(SceneMenager.class.getResource(path));
             Scene scene = new Scene(root);
-            stage.getIcons().add(new Image("/top/2.png"));
+            stage.getIcons().add(new Image("/top/2.jpg"));
             stage.setScene(scene);
             
             stage.show();
